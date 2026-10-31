@@ -25,18 +25,23 @@ SYSTEM_MATH = (
     "gợi mở tư duy (phương pháp Socratic). Luôn xưng hô thân thiện, gần gũi: 'tôi' và 'bạn' (ví dụ: 'Tôi và bạn cùng tóm tắt bài toán...', "
     "'Bây giờ tôi sẽ hướng dẫn bạn...', 'Như bạn thấy đấy...'). Giọng điệu ân cần, nhiệt tình, khích lệ và dễ hiểu, bằng tiếng Việt, "
     "văn bản thuần (không HTML). Tính toán số học chính xác tuyệt đối (đặc biệt khi thay số âm, lũy thừa, phân số, các giá trị biên của đoạn [a, b]: ví dụ đoạn [-2; 5/2] thì thay đúng x = -2 và x = 5/2, tuyệt đối không nhầm sang -5/2). Đọc kỹ đúng biểu thức cần tính (phân biệt rõ M + 2m với 2M + m). "
+    "ĐẶC BIỆT BẮT BUỘC: Nêu rõ tên định lý, tính chất toán học hoặc công thức giải cốt lõi vào trường 'theorem' (ví dụ: 'Định lý Viète', 'Bất đẳng thức Cauchy', 'Định lý Pythagore', 'Quy tắc đạo hàm hàm hợp'). "
+    "Trong mỗi bước giải ('steps'), bắt buộc chỉ rõ công thức hoặc định lý áp dụng trong bước đó vào trường 'concept' kèm biểu thức toán học kẹp trong $...$ (ví dụ: 'Đạo hàm hàm lũy thừa: $(x^n)\\' = n \\cdot x^{n-1}$', 'Công thức nghiệm: $\\Delta = b^2 - 4ac$'). "
+    "ĐẶC BIỆT BẮT BUỘC VỚI BÀI TOÁN HÌNH HỌC (Geometry): Đối với các bài toán hình học (tam giác, hình chữ nhật, hình thoi, hình thang, hình bình hành, hình vuông, đường tròn, hình chóp, khối hộp, hình trụ, hình nón, hình cầu...), BẮT BUỘC cung cấp trường 'graph' để vẽ hình minh họa (ví dụ: {\"type\": \"rhombus_circle\"}, {\"type\": \"triangle\"}, {\"type\": \"rectangle\"}, {\"type\": \"circle\"}, {\"type\": \"pyramid\"}, {\"type\": \"prism_box\"}, {\"type\": \"cylinder\"}, {\"type\": \"cone\"}, {\"type\": \"sphere\"} hoặc SVG: {\"svg\": \"<svg viewBox=\\\"0 0 400 220\\\" width=\\\"100%\\\">...</svg>\"}). "
     "Mọi công thức, biểu thức, phương trình và biến số ($x, y, a, b$) BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $x^2 - 5x + 6 = 0$, $\\frac{a}{2}$); "
     "TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. "
     "Tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn hoàn chỉnh, mượt mà, "
     "tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). "
     "Tiêu đề bước ('t') chỉ ghi ngắn gọn tên hành động (ví dụ: 'Tìm tập xác định', 'Tính đạo hàm và nghiệm', 'Tính giá trị tại các điểm', 'So sánh và kết luận'), KHÔNG ghi chữ 'Bước 1', 'Bước 2'. "
-    'Chỉ trả về JSON thuần không markdown: {"topic":"Algebra|Geometry|Calculus|Arithmetic","kind":"<tên dạng toán>","diff":1-3,'
-    '"steps":[{"t":"<tiêu đề bước ngắn gọn>","h":"<nội dung bước>"}],"ans":"<đáp số ngắn gọn>"}. Tối đa 8 bước.'
+    'Chỉ trả về JSON thuần không markdown: {"topic":"Algebra|Geometry|Calculus|Arithmetic","kind":"<tên dạng toán>","theorem":"<Tên định lý/nguyên lý cốt lõi>","graph":{"type":"<loại hình>"},"diff":1-3,'
+    '"steps":[{"t":"<tiêu đề bước ngắn gọn>","concept":"<Tên & công thức chuẩn áp dụng trong bước>","h":"<nội dung bước giải thích chi tiết>"}],"ans":"<đáp số ngắn gọn>"}. Tối đa 8 bước.'
 )
 
 SYSTEM_PHYSICS = (
     "Bạn là người bạn gia sư đồng hành thông minh (AdaptiveTutor AI). Giải bài tập Vật lý từng bước, phân tích hiện tượng, "
-    "tóm tắt đại lượng, đổi đơn vị chuẩn SI ($m, s, kg, J, W, \\Omega, V$), nêu rõ công thức và định luật áp dụng. "
+    "tóm tắt đại lượng, đổi đơn vị chuẩn SI ($m, s, kg, J, W, \\Omega, V$). "
+    "ĐẶC BIỆT BẮT BUỘC: Nêu rõ định luật vật lý hoặc nguyên lý chi phối bài toán vào trường 'theorem' (ví dụ: 'Định luật I Nhiệt động lực học', 'Định luật II Newton', 'Định luật bảo toàn cơ năng', 'Định luật Boyle - Mariotte', 'Định luật Ohm', 'Định lý biến thiên động năng', 'Công cơ học và công của ngoại lực'). "
+    "Trong mỗi bước giải ('steps'), bắt buộc chỉ rõ tên định luật hoặc công thức áp dụng trong bước đó vào trường 'concept' kèm công thức tổng quát kẹp trong $...$ (ví dụ: 'Định luật I Nhiệt động lực học: $\\Delta U = A + Q$', 'Công của ngoại lực: $A = F \\cdot s \\cdot \\cos\\alpha$', 'Công thức nhiệt lượng: $Q = m \\cdot c \\cdot \\Delta t$'). "
     "Luôn xưng hô thân thiện, gần gũi: 'tôi' và 'bạn' (ví dụ: 'Tôi và bạn cùng tóm tắt các đại lượng đề bài cho...', "
     "'Tôi sẽ cùng bạn phân tích hiện tượng này...', 'Bạn chú ý đổi đơn vị sang chuẩn SI nhé...'). "
     "Giọng điệu ân cần, nhiệt tình, khích lệ và dễ hiểu, bằng tiếng Việt, văn bản thuần (không HTML). "
@@ -44,21 +49,24 @@ SYSTEM_PHYSICS = (
     "TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Đơn vị đo có thể viết trong \\text{} (ví dụ $\\text{s}$, $\\text{kg}$) hoặc để ngoài $, "
     "tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn xuôi hoàn chỉnh, liền mạch, tự nhiên như sách giáo khoa, "
     "tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). "
-    'Chỉ trả về JSON thuần không markdown: {"topic":"Mechanics|Thermodynamics|Electromagnetism|Optics","kind":"<tên dạng bài>","diff":1-3,'
-    '"steps":[{"t":"<tiêu đề bước>","h":"<nội dung bước>"}],"ans":"<đáp số kèm đơn vị>"}. Tối đa 8 bước.'
+    'Chỉ trả về JSON thuần không markdown: {"topic":"Mechanics|Thermodynamics|Electromagnetism|Optics","kind":"<tên dạng bài>","theorem":"<Tên định luật vật lý cốt lõi của bài>","diff":1-3,'
+    '"steps":[{"t":"<tiêu đề bước>","concept":"<Tên & công thức chuẩn áp dụng trong bước>","h":"<nội dung bước giải thích chi tiết>"}],"ans":"<đáp số kèm đơn vị>"}. Tối đa 8 bước.'
 )
 
 SYSTEM_CHEMISTRY = (
     "Bạn là người bạn gia sư đồng hành thông minh (AdaptiveTutor AI). Giải bài tập Hóa học từng bước, phân tích hiện tượng hóa học, "
     "viết phương trình phản ứng (PTHH) kèm hệ số cân bằng, tóm tắt dữ kiện đề bài, tính số mol, bảo toàn nguyên tố / electron / khối lượng, "
-    "tính nồng độ hoặc khối lượng theo yêu cầu. Luôn xưng hô thân thiện, gần gũi: 'tôi' và 'bạn' (ví dụ: 'Tôi và bạn cùng viết phương trình phản ứng nhé...', "
+    "tính nồng độ hoặc khối lượng theo yêu cầu. "
+    "ĐẶC BIỆT BẮT BUỘC: Nêu rõ định luật hóa học hoặc nguyên lý chi phối vào trường 'theorem' (ví dụ: 'Định luật bảo toàn khối lượng', 'Định luật bảo toàn nguyên tố', 'Định luật bảo toàn electron', 'Định luật Avogadro'). "
+    "Trong mỗi bước giải ('steps'), bắt buộc chỉ rõ tên quy tắc hoặc công thức áp dụng trong bước đó vào trường 'concept' kèm công thức hóa học chuẩn kẹp trong $...$ (ví dụ: 'Công thức chuyển đổi số mol: $n = \\frac{m}{M}$', 'Nồng độ mol: $C_M = \\frac{n}{V}$', 'Phương trình phản ứng: $Fe + 2HCl \\to FeCl_2 + H_2\\uparrow$'). "
+    "Luôn xưng hô thân thiện, gần gũi: 'tôi' và 'bạn' (ví dụ: 'Tôi và bạn cùng viết phương trình phản ứng nhé...', "
     "'Bây giờ tôi sẽ cùng bạn tính số mol...'). Giọng điệu ân cần, nhiệt tình, khích lệ và dễ hiểu, bằng tiếng Việt, văn bản thuần (không HTML). "
     "Mọi công thức, PTHH và biến số BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $2Al + 6HCl \\to 2AlCl_3 + 3H_2\\uparrow$, "
     "$n_{Al} = \\frac{m}{M} = \\frac{5{,}4}{27} = 0{,}2\\text{ mol}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. "
     "Tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn hoàn chỉnh, mượt mà, "
     "tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). "
-    'Chỉ trả về JSON thuần không markdown: {"topic":"GeneralChem|InorganicChem|SolutionChem|OrganicChem","kind":"<tên dạng bài>","diff":1-3,'
-    '"steps":[{"t":"<tiêu đề bước>","h":"<nội dung bước>"}],"ans":"<đáp số kèm đơn vị>"}. Tối đa 8 bước.'
+    'Chỉ trả về JSON thuần không markdown: {"topic":"GeneralChem|InorganicChem|SolutionChem|OrganicChem","kind":"<tên dạng bài>","theorem":"<Tên định luật/nguyên lý hóa học cốt lõi>","diff":1-3,'
+    '"steps":[{"t":"<tiêu đề bước>","concept":"<Tên quy tắc/công thức hóa học áp dụng>","h":"<nội dung bước giải thích chi tiết>"}],"ans":"<đáp số kèm đơn vị>"}. Tối đa 8 bước.'
 )
 
 SYSTEM_TUTOR_MATH = (
@@ -300,14 +308,57 @@ def detect_graph(text, d=None):
             "title": "Sơ đồ tạo ảnh qua thấu kính"
         }
 
-    # 7. Tam giác vuông & Pytago
-    if re.search(r"tam giác|pytago|pitago|cạnh huyền|vuông tại|định lý pytago", str_txt):
-        return {
-            "type": "triangle",
-            "title": "Tam giác vuông và định lý Pytago"
-        }
+    # 7. Hình thoi
+    if re.search(r"hình\s*thoi|rhombus", str_txt):
+        if re.search(r"đường\s*tròn|trung\s*điểm|cùng\s*nằm\s*trên|nội\s*tiếp|chứng minh", str_txt):
+            return {"type": "rhombus_circle", "title": "Hình thoi và đường tròn đi qua các trung điểm"}
+        return {"type": "rhombus", "title": "Sơ đồ hình thoi và hai đường chéo vuông góc"}
 
-    # 8. Đường tròn
+    # 8. Hình chóp không gian
+    if re.search(r"hình\s*chóp|chóp\s*tam\s*giác|chóp\s*tứ\s*giác|chóp\s*đều|\bs\.[a-z]{3,4}\b", str_txt):
+        return {"type": "pyramid", "title": "Mô hình hình chóp trong không gian S.ABCD"}
+
+    # 9. Khối hộp / Lập phương / Lăng trụ
+    if re.search(r"hình\s*hộp|lập\s*phương|lăng\s*trụ|khối\s*hộp|[a-z]{4}\.[a-z]{4}", str_txt):
+        return {"type": "prism_box", "title": "Mô hình khối hộp không gian ABCD.A'B'C'D'"}
+
+    # 10. Hình trụ
+    if re.search(r"hình\s*trụ|khối\s*trụ", str_txt):
+        return {"type": "cylinder", "title": "Khối tròn xoay: Hình trụ"}
+
+    # 11. Hình nón
+    if re.search(r"hình\s*nón|khối\s*nón|đường\s*sinh", str_txt):
+        return {"type": "cone", "title": "Khối tròn xoay: Hình nón"}
+
+    # 12. Hình cầu / Mặt cầu
+    if re.search(r"hình\s*cầu|mặt\s*cầu", str_txt):
+        return {"type": "sphere", "title": "Mặt cầu và khối cầu tâm O bán kính R"}
+
+    # 13. Hình vuông
+    if re.search(r"hình\s*vuông", str_txt):
+        return {"type": "square", "title": "Sơ đồ hình vuông ABCD và tính chất đối xứng"}
+
+    # 14. Hình chữ nhật
+    if re.search(r"hình\s*chữ\s*nhật|chữ\s*nhật", str_txt):
+        return {"type": "rectangle", "title": "Sơ đồ hình chữ nhật ABCD và các đường chéo"}
+
+    # 15. Hình bình hành
+    if re.search(r"hình\s*bình\s*hành", str_txt):
+        return {"type": "parallelogram", "title": "Sơ đồ hình bình hành ABCD và giao điểm đường chéo"}
+
+    # 16. Hình thang
+    if re.search(r"hình\s*thang|thang\s*cân|thang\s*vuông", str_txt):
+        return {"type": "trapezoid", "title": "Sơ đồ hình thang ABCD và đường cao"}
+
+    # 17. Tiếp tuyến đường tròn
+    if re.search(r"tiếp\s*tuyến|tiếp\s*xúc", str_txt) and re.search(r"đường\s*tròn|hình\s*tròn|\(o\)", str_txt):
+        return {"type": "circle_tangent", "title": "Sơ đồ đường tròn và hai tiếp tuyến cắt nhau"}
+
+    # 18. Tam giác nội tiếp / ngoại tiếp đường tròn
+    if re.search(r"nội\s*tiếp|ngoại\s*tiếp", str_txt) and re.search(r"đường\s*tròn|\(o\)", str_txt):
+        return {"type": "circle_triangle", "title": "Sơ đồ tam giác nội tiếp đường tròn tâm O"}
+
+    # 19. Đường tròn
     if re.search(r"đường tròn|hình tròn|bán kính|đường kính|tâm o\b", str_txt):
         r_m = re.search(r"(?:r\s*=\s*|bán kính\s*(?:là|:)?\s*)(\d+(?:[.,]\d+)?)\s*(cm|m|mm)?", str_txt, re.I)
         return {
@@ -317,18 +368,46 @@ def detect_graph(text, d=None):
             "rUnit": r_m.group(2) if (r_m and r_m.group(2)) else "cm"
         }
 
-    # 9. Parabol
+    # 20. Tam giác vuông & Pytago
+    if re.search(r"tam\s*giác\s*vuông|pytago|pitago|cạnh\s*huyền|vuông\s*tại|định\s*lý\s*pytago", str_txt):
+        return {
+            "type": "triangle",
+            "title": "Tam giác vuông và định lý Pytago"
+        }
+
+    # 21. Tam giác cân & đều
+    if re.search(r"tam\s*giác\s*cân|tam\s*giác\s*đều|cân\s*tại", str_txt):
+        return {
+            "type": "triangle_iso",
+            "title": "Sơ đồ tam giác cân / tam giác đều ABC"
+        }
+
+    # 22. Tam giác thường / tổng quát
+    if re.search(r"tam\s*giác", str_txt):
+        return {
+            "type": "triangle_general",
+            "title": "Sơ đồ tam giác ABC và các đường đặc biệt (đường cao, trung tuyến)"
+        }
+
+    # 23. Parabol
     if re.search(r"parabol|parabola|hàm số bậc hai|x\^2|x²|đỉnh parabol", str_txt):
         return {
             "type": "parabola",
             "title": "Đồ thị Parabol hàm số bậc hai"
         }
 
-    # 10. Mạch điện & Định luật Ohm
+    # 24. Mạch điện & Định luật Ohm
     if re.search(r"mạch điện|mạch nối tiếp|mạch song song|điện trở|định luật ohm|định luật ôm|\bhiệu điện thế\b|\bcường độ dòng điện\b|\b\u03a9\b|\bohm\b|\bu\s*=\s*\d+|\bi\s*=\s*\d+", str_txt):
         return {
             "type": "circuit",
             "title": "Sơ đồ đoạn mạch điện"
+        }
+
+    # 25. Fallback hình học chung nếu bài thuộc môn Hình học (Geometry)
+    if d and (d.get("topic") == "Geometry" or d.get("topic") == "Hình học"):
+        return {
+            "type": "triangle_general",
+            "title": "Mô hình hình học minh họa trực quan"
         }
 
     return None
@@ -340,10 +419,17 @@ def parse(raw, text, default_topic="Algebra"):
         raise ValueError("No JSON found")
     d = json.loads(fix_json_latex(m.group(0)))
     e = lambda s: html.escape(str(s))
-    steps = [
-        {"t": e(s.get("t", "Bước")), "h": format_step_content(s.get("h", ""))}
-        for s in d.get("steps", [])
-    ][:8]
+    steps = []
+    for s in d.get("steps", []):
+        st = {
+            "t": e(s.get("t", "Bước")),
+            "h": format_step_content(s.get("h", ""))
+        }
+        c = s.get("concept") or s.get("theorem")
+        if c:
+            st["concept"] = str(c).strip()
+        steps.append(st)
+    steps = steps[:8]
     if not steps:
         raise ValueError("empty")
     valid_topics = (
@@ -356,9 +442,11 @@ def parse(raw, text, default_topic="Algebra"):
         topic = default_topic
     
     graph = d.get("graph") or detect_graph(text, d)
+    theorem = d.get("theorem") or d.get("law") or d.get("principle") or ""
     return {
         "topic": topic,
         "kind": e(d.get("kind", "Bài tập tự luận")),
+        "theorem": str(theorem).strip() if theorem else "",
         "diff": min(3, max(1, int(d.get("diff", 2)))),
         "eq": text,
         "steps": steps,

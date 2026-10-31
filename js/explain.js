@@ -274,6 +274,74 @@ function noServerMode() {
     return Boolean((typeof STATIC_HOST !== "undefined" && STATIC_HOST) || (typeof location !== "undefined" && location.protocol === "file:") || noBackend);
 }
 
+/* Tra cứu định lý, định luật và công thức chuẩn cho 36 dạng bài tập liên môn (kế thừa từ solver.js) */
+function resolveTheorem(r, rawText) {
+  const theorems = (typeof window !== "undefined" && window.TOPIC_THEOREMS) ? window.TOPIC_THEOREMS : (typeof TOPIC_THEOREMS !== "undefined" ? TOPIC_THEOREMS : {});
+  if (r && r.theorem && String(r.theorem).trim()) {
+    return String(r.theorem).trim();
+  }
+  const label = (r && r.label) || "";
+  if (label && theorems[label]) {
+    return theorems[label];
+  }
+  const str = ((r && r.kind ? r.kind + " " : "") + (rawText || "") + " " + ((r && r.eq) || "")).toLowerCase();
+  if (/nhiệt\s*động|nội\s*năng|\\delta\s*u/i.test(str)) {
+    return "Định luật I Nhiệt động lực học ($\\Delta U = A + Q$)";
+  }
+  if (/công\s*(?:của)?\s*(?:lực|ngoại\s*lực)|a\s*=\s*f/i.test(str)) {
+    return "Công cơ học của ngoại lực ($A = F \\cdot s \\cdot \\cos\\alpha$) & Định lý động năng";
+  }
+  if (/biến\s*thiên\s*động\s*năng/i.test(str)) {
+    return "Định lý biến thiên động năng ($W_{đ2} - W_{đ1} = A_{\\text{ngoại lực}}$)";
+  }
+  if (/bảo\s*toàn\s*cơ\s*năng/i.test(str)) {
+    return "Định luật bảo toàn cơ năng trong trọng trường ($W = W_đ + W_t = \\text{const}$)";
+  }
+  if (/rơi\s*tự\s*do/i.test(str)) {
+    return theorems.freefall;
+  }
+  if (/newton|định\s*luật\s*2|định\s*luật\s*ii/i.test(str)) {
+    return theorems.newton2;
+  }
+  if (/khí\s*lí\s*tưởng|boyle|đẳng\s*nhiệt/i.test(str)) {
+    return theorems.gas_law;
+  }
+  if (/ohm|ôm|điện\s*trở/i.test(str)) {
+    return theorems.ohm;
+  }
+  if (/thấu\s*kính/i.test(str)) {
+    return theorems.lens;
+  }
+  if (/khúc\s*xạ/i.test(str)) {
+    return theorems.refraction;
+  }
+  if (/số\s*mol|khối\s*lượng\s*mol/i.test(str)) {
+    return theorems.chem_mol;
+  }
+  if (/bảo\s*toàn\s*khối\s*lượng/i.test(str)) {
+    return theorems.chem_mass_cons;
+  }
+  if (/axit|bazơ|trung\s*hòa/i.test(str)) {
+    return "Bản chất phản ứng trung hòa axit - bazơ ($H^+ + OH^- \\to H_2O$)";
+  }
+  if (/vi-ét|viète|bậc\s*hai|x\^2|x²/i.test(str)) {
+    return theorems.quad;
+  }
+  if (/pytago|pitago|tam\s*giác\s*vuông/i.test(str)) {
+    return theorems.geom;
+  }
+  if (/đạo\s*hàm/i.test(str)) {
+    return theorems.deriv;
+  }
+  if (/nguyên\s*hàm|tích\s*phân/i.test(str)) {
+    return theorems.integ;
+  }
+  if (r && r.topic && theorems[r.topic]) {
+    return theorems[r.topic];
+  }
+  return "";
+}
+
 /* Hiển thị lời giải: giải ngay các dạng cơ bản & kết nối AI máy chủ cho dạng tự luận hoặc ảnh chụp (Cách 1) */
 async function render(raw, imgData = null) {
     imgData = imgData || window.CURRENT_IMAGE;
@@ -304,10 +372,10 @@ async function render(raw, imgData = null) {
         </div>
     </div>`;
 
-const CLIENT_SYS_MATH = "Bạn là người bạn gia sư Toán học Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi, khích lệ như hai người bạn cùng tiến bộ (tuyệt đối không xưng thầy, cô, em, học sinh). Giải bài toán từng bước, chặt chẽ, suy luận logic, gợi mở tư duy (phương pháp Socratic), bằng tiếng Việt, văn bản thuần (không HTML). Tính toán số học chính xác tuyệt đối (đặc biệt khi thay số âm, lũy thừa, phân số, các giá trị biên của đoạn [a, b]: ví dụ đoạn [-2; 5/2] thì thay đúng x = -2 và x = 5/2, tuyệt đối không nhầm sang -5/2). Đọc kỹ đúng biểu thức cần tính (phân biệt rõ M + 2m với 2M + m). Mọi công thức, biểu thức, phương trình và biến số ($x, y, a, b$) BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $x^2 - 5x + 6 = 0$, $\\frac{a}{2}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn hoàn chỉnh, mượt mà, giải thích gần gũi xưng tôi và bạn, tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). Tiêu đề bước ('t') chỉ ghi ngắn gọn tên hành động (ví dụ: 'Tìm tập xác định', 'Tính đạo hàm và nghiệm', 'Tính giá trị tại các điểm', 'So sánh và kết luận'), KHÔNG ghi chữ 'Bước 1', 'Bước 2'. Chỉ trả về JSON thuần không markdown: {\"topic\":\"Algebra|Geometry|Calculus|Arithmetic\",\"kind\":\"<tên dạng toán>\",\"diff\":1-3,\"steps\":[{\"t\":\"<tiêu đề bước ngắn gọn>\",\"h\":\"<nội dung bước>\"}],\"ans\":\"<đáp số ngắn gọn>\"}. Tối đa 8 bước.";
-const CLIENT_SYS_CHEMISTRY = "Bạn là người bạn gia sư Hóa học Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi, khích lệ (tuyệt đối không xưng thầy, cô, em, học sinh). Giải bài tập Hóa học từng bước, phân tích hiện tượng hóa học, viết phương trình phản ứng (PTHH) kèm hệ số cân bằng, tóm tắt dữ kiện đề bài, tính số mol, bảo toàn nguyên tố / electron / khối lượng, tính nồng độ hoặc khối lượng theo yêu cầu, bằng tiếng Việt, văn bản thuần (không HTML). Mọi công thức, PTHH và biến số BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $2Al + 6HCl \\to 2AlCl_3 + 3H_2\\uparrow$, $n_{Al} = \\frac{m}{M} = \\frac{5{,}4}{27} = 0{,}2\\text{ mol}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn hoàn chỉnh, mượt mà, giải thích gần gũi xưng tôi và bạn, tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). Chỉ trả về JSON thuần không markdown: {\"topic\":\"GeneralChem|InorganicChem|SolutionChem|OrganicChem\",\"kind\":\"<tên dạng bài>\",\"diff\":1-3,\"steps\":[{\"t\":\"<tiêu đề bước>\",\"h\":\"<nội dung bước>\"}],\"ans\":\"<đáp số kèm đơn vị>\"}. Tối đa 8 bước.";
+const CLIENT_SYS_MATH = "Bạn là người bạn gia sư Toán học Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi, khích lệ như hai người bạn cùng tiến bộ (tuyệt đối không xưng thầy, cô, em, học sinh). Giải bài toán từng bước, chặt chẽ, suy luận logic, gợi mở tư duy (phương pháp Socratic), bằng tiếng Việt, văn bản thuần (không HTML). Tính toán số học chính xác tuyệt đối (đặc biệt khi thay số âm, lũy thừa, phân số, các giá trị biên của đoạn [a, b]: ví dụ đoạn [-2; 5/2] thì thay đúng x = -2 và x = 5/2, tuyệt đối không nhầm sang -5/2). Đọc kỹ đúng biểu thức cần tính (phân biệt rõ M + 2m với 2M + m). ĐẶC BIỆT BẮT BUỘC: Nêu rõ tên định lý, tính chất toán học hoặc công thức giải cốt lõi vào trường 'theorem' (ví dụ: 'Định lý Viète', 'Bất đẳng thức Cauchy', 'Định lý Pythagore', 'Quy tắc đạo hàm hàm hợp'). Trong mỗi bước giải ('steps'), bắt buộc chỉ rõ công thức hoặc định lý áp dụng trong bước đó vào trường 'concept' kèm biểu thức toán học kẹp trong $...$ (ví dụ: 'Đạo hàm hàm lũy thừa: $(x^n)\\' = n \\cdot x^{n-1}$', 'Công thức nghiệm: $\\Delta = b^2 - 4ac$'). ĐẶC BIỆT BẮT BUỘC VỚI BÀI TOÁN HÌNH HỌC (Geometry): Đối với các bài toán hình học (tam giác, hình chữ nhật, hình thoi, hình thang, hình bình hành, hình vuông, đường tròn, hình chóp, khối hộp, hình trụ, hình nón, hình cầu...), BẮT BUỘC cung cấp trường 'graph' để vẽ hình minh họa trực quan (ví dụ: {\"type\": \"rhombus_circle\"}, {\"type\": \"triangle\"}, {\"type\": \"rectangle\"}, {\"type\": \"circle\"}, {\"type\": \"pyramid\"}, {\"type\": \"prism_box\"}, {\"type\": \"cylinder\"}, {\"type\": \"cone\"}, {\"type\": \"sphere\"} hoặc SVG: {\"svg\": \"<svg viewBox=\\\"0 0 400 220\\\" width=\\\"100%\\\">...</svg>\"}). Mọi công thức, biểu thức, phương trình và biến số ($x, y, a, b$) BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $x^2 - 5x + 6 = 0$, $\\frac{a}{2}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn hoàn chỉnh, mượt mà, giải thích gần gũi xưng tôi và bạn, tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). Tiêu đề bước ('t') chỉ ghi ngắn gọn tên hành động (ví dụ: 'Tìm tập xác định', 'Tính đạo hàm và nghiệm', 'Tính giá trị tại các điểm', 'So sánh và kết luận'), KHÔNG ghi chữ 'Bước 1', 'Bước 2'. Chỉ trả về JSON thuần không markdown: {\"topic\":\"Algebra|Geometry|Calculus|Arithmetic\",\"kind\":\"<tên dạng toán>\",\"theorem\":\"<Tên định lý/nguyên lý cốt lõi>\",\"graph\":{\"type\":\"<loại hình>\"},\"diff\":1-3,\"steps\":[{\"t\":\"<tiêu đề bước ngắn gọn>\",\"concept\":\"<Tên & công thức chuẩn áp dụng trong bước>\",\"h\":\"<nội dung bước>\"}],\"ans\":\"<đáp số ngắn gọn>\"}. Tối đa 8 bước.";
+const CLIENT_SYS_CHEMISTRY = "Bạn là người bạn gia sư Hóa học Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi, khích lệ (tuyệt đối không xưng thầy, cô, em, học sinh). Giải bài tập Hóa học từng bước, phân tích hiện tượng hóa học, viết phương trình phản ứng (PTHH) kèm hệ số cân bằng, tóm tắt dữ kiện đề bài, tính số mol, bảo toàn nguyên tố / electron / khối lượng, tính nồng độ hoặc khối lượng theo yêu cầu, bằng tiếng Việt, văn bản thuần (không HTML). ĐẶC BIỆT BẮT BUỘC: Nêu rõ định luật hóa học hoặc nguyên lý chi phối vào trường 'theorem' (ví dụ: 'Định luật bảo toàn khối lượng', 'Định luật bảo toàn nguyên tố', 'Định luật bảo toàn electron', 'Định luật Avogadro'). Trong mỗi bước giải ('steps'), bắt buộc chỉ rõ tên quy tắc hoặc công thức áp dụng trong bước đó vào trường 'concept' kèm công thức hóa học chuẩn kẹp trong $...$ (ví dụ: 'Công thức chuyển đổi số mol: $n = \\frac{m}{M}$', 'Nồng độ mol: $C_M = \\frac{n}{V}$', 'Phương trình phản ứng: $Fe + 2HCl \\to FeCl_2 + H_2\\uparrow$'). Mọi công thức, PTHH và biến số BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $2Al + 6HCl \\to 2AlCl_3 + 3H_2\\uparrow$, $n_{Al} = \\frac{m}{M} = \\frac{5{,}4}{27} = 0{,}2\\text{ mol}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn hoàn chỉnh, mượt mà, giải thích gần gũi xưng tôi và bạn, tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). Chỉ trả về JSON thuần không markdown: {\"topic\":\"GeneralChem|InorganicChem|SolutionChem|OrganicChem\",\"kind\":\"<tên dạng bài>\",\"theorem\":\"<Tên định luật/nguyên lý hóa học cốt lõi>\",\"diff\":1-3,\"steps\":[{\"t\":\"<tiêu đề bước>\",\"concept\":\"<Tên quy tắc/công thức hóa học áp dụng>\",\"h\":\"<nội dung bước>\"}],\"ans\":\"<đáp số kèm đơn vị>\"}. Tối đa 8 bước.";
 const CLIENT_SYS_TUTOR_CHEMISTRY = "Bạn là người bạn gia sư Hóa học Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi (tuyệt đối không xưng thầy, cô, em, học sinh). Nhiệm vụ của bạn là giải đáp thắc mắc, phân tích hiện tượng hóa học, cơ chế phản ứng, các định luật bảo toàn (khối lượng, nguyên tố, điện tích, electron), cách đổi đơn vị và tính toán nồng độ mol/phần trăm. Luôn viết PTHH và công thức Hóa học bằng định dạng LaTeX chuẩn kẹp giữa dấu $...$. Giọng điệu đồng hành, khoa học, chuẩn xác, dễ hiểu.";
-const CLIENT_SYS_PHYSICS = "Bạn là người bạn gia sư Vật lý Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi, khích lệ (tuyệt đối không xưng thầy, cô, em, học sinh). Giải bài tập Vật lý từng bước, phân tích hiện tượng, tóm tắt đại lượng, đổi đơn vị chuẩn SI ($m, s, kg, J, W, \\Omega, V$), nêu rõ công thức và định luật áp dụng, bằng tiếng Việt, văn bản thuần (không HTML). Mọi công thức, biểu thức tính toán và biến số ($v, a, t, m, k, T, F, s...$) BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $v = v_0 + at$, $F = m \\cdot a$, $A = F \\cdot s$, $\\pi \\approx 3{,}14$, $T = 2\\pi \\sqrt{\\frac{m}{k}}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Đơn vị đo có thể viết trong \\text{} (ví dụ $\\text{s}$, $\\text{kg}$) hoặc để ngoài $, tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn xuôi hoàn chỉnh, liền mạch, tự nhiên như sách giáo khoa, giải thích gần gũi xưng tôi và bạn, tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). Chỉ trả về JSON thuần không markdown: {\"topic\":\"Mechanics|Thermodynamics|Electromagnetism|Optics\",\"kind\":\"<tên dạng bài>\",\"diff\":1-3,\"steps\":[{\"t\":\"<tiêu đề bước>\",\"h\":\"<nội dung bước>\"}],\"ans\":\"<đáp số kèm đơn vị>\"}. Tối đa 8 bước.";
+const CLIENT_SYS_PHYSICS = "Bạn là người bạn gia sư Vật lý Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi, khích lệ (tuyệt đối không xưng thầy, cô, em, học sinh). Giải bài tập Vật lý từng bước, phân tích hiện tượng, tóm tắt đại lượng, đổi đơn vị chuẩn SI ($m, s, kg, J, W, \\Omega, V$), bằng tiếng Việt, văn bản thuần (không HTML). ĐẶC BIỆT BẮT BUỘC: Nêu rõ định luật vật lý hoặc nguyên lý chi phối bài toán vào trường 'theorem' (ví dụ: 'Định luật I Nhiệt động lực học', 'Định luật II Newton', 'Định luật bảo toàn cơ năng', 'Định luật Boyle - Mariotte', 'Định luật Ohm', 'Định lý biến thiên động năng', 'Công cơ học và công của ngoại lực'). Trong mỗi bước giải ('steps'), bắt buộc chỉ rõ tên định luật hoặc công thức áp dụng trong bước đó vào trường 'concept' kèm công thức tổng quát kẹp trong $...$ (ví dụ: 'Định luật I Nhiệt động lực học: $\\Delta U = A + Q$', 'Công của ngoại lực: $A = F \\cdot s \\cdot \\cos\\alpha$', 'Công thức nhiệt lượng: $Q = m \\cdot c \\cdot \\Delta t$'). Mọi công thức, biểu thức tính toán và biến số ($v, a, t, m, k, T, F, s...$) BẮT BUỘC kẹp trong MỘT cặp dấu $...$ (inline math, ví dụ $v = v_0 + at$, $F = m \\cdot a$, $A = F \\cdot s$, $\\pi \\approx 3{,}14$, $T = 2\\pi \\sqrt{\\frac{m}{k}}$); TUYỆT ĐỐI KHÔNG dùng $$ trong các bước giải. Không được bỏ quên dấu $ quanh công thức. Đơn vị đo có thể viết trong \\text{} (ví dụ $\\text{s}$, $\\text{kg}$) hoặc để ngoài $, tuyệt đối không chèn dấu $ vào bên trong \\text{}. Trong mỗi bước ('h'), hãy viết thành các câu văn xuôi hoàn chỉnh, liền mạch, tự nhiên như sách giáo khoa, giải thích gần gũi xưng tôi và bạn, tuyệt đối không tự ý ngắt dòng (\\n) ở giữa câu, trước/sau công thức hoặc trước dấu chấm, dấu phẩy. Mỗi dấu gạch chéo ngược trong JSON phải được viết đôi (\\\\frac). Chỉ trả về JSON thuần không markdown: {\"topic\":\"Mechanics|Thermodynamics|Electromagnetism|Optics\",\"kind\":\"<tên dạng bài>\",\"theorem\":\"<Tên định luật vật lý cốt lõi của bài>\",\"diff\":1-3,\"steps\":[{\"t\":\"<tiêu đề bước>\",\"concept\":\"<Tên & công thức chuẩn áp dụng trong bước>\",\"h\":\"<nội dung bước>\"}],\"ans\":\"<đáp số kèm đơn vị>\"}. Tối đa 8 bước.";
 const CLIENT_SYS_TUTOR_MATH = "Bạn là người bạn gia sư Toán học Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi (tuyệt đối không xưng thầy, cô, em, học sinh). Nhiệm vụ của bạn là giải đáp thắc mắc, phân tích bản chất định lý, hướng dẫn tư duy từng bước cho bạn học. Luôn viết công thức Toán học bằng định dạng LaTeX chuẩn kẹp giữa dấu $...$. Giọng điệu đồng hành, gợi mở, chuẩn xác, khích lệ bạn học cùng tiến bộ.";
 const CLIENT_SYS_TUTOR_PHYSICS = "Bạn là người bạn gia sư Vật lý Việt Nam (AdaptiveTutor AI). Luôn xưng 'tôi' và gọi người học là 'bạn' thân thiện, gần gũi (tuyệt đối không xưng thầy, cô, em, học sinh). Nhiệm vụ của bạn là giải thích bản chất hiện tượng vật lý, phân tích các lực và quá trình, lưu ý đặc biệt việc đổi đơn vị chuẩn SI ($m, s, kg, J, W, \\Omega, V...$), và chỉ rõ điều kiện áp dụng định luật. Luôn viết công thức Toán & Vật lý bằng định dạng LaTeX chuẩn kẹp giữa $...$. Giọng điệu đồng hành, trực quan, dễ hiểu.";
 
@@ -320,7 +388,7 @@ const CLIENT_SYS_TUTOR_PHYSICS = "Bạn là người bạn gia sư Vật lý Vi�
     } else {
         // 2. Gửi đề bài lên backend (kèm API key và ảnh nếu có, giảm timeout xuống 4s nếu không có backend)
         const clientKey = typeof getClientGeminiKey === "function" ? getClientGeminiKey() : "";
-        const apiTimeout = (typeof BACKEND !== "undefined" && BACKEND) ? 25000 : 4000;
+        const apiTimeout = (typeof BACKEND !== "undefined" && BACKEND) ? 25000 : (noServerMode() ? 1000 : 4000);
         const solvePayload = { text: raw, subject: sub, key: clientKey };
         if (hasImage) {
             solvePayload.image = { mimeType: imgData.mimeType, data: imgData.data };
@@ -468,11 +536,27 @@ const CLIENT_SYS_TUTOR_PHYSICS = "Bạn là người bạn gia sư Vật lý Vi�
       </div>
     </div>` : "";
 
-    o.innerHTML = `<div class="card"><div class="row"><span class="ms" style="color:var(--sec)">verified</span><h3>Đã nhận diện bài tập ${detectedSubject}</h3></div><div class="row"><span class="chip g">Độ tin cậy: ${r.conf ? (r.conf * 100).toFixed(1) : "98.5"}%</span><span class="chip p">${TN[r.topic] || r.topic} · ${r.kind || "Bài chuẩn"}</span><span class="chip">Cấp ${S.cur.diff}: ${["", "Cơ bản", "Trung bình", "Nâng cao"][S.cur.diff]}</span>${r.uploaded_image ? `<span class="chip p"><span class="ms" style="font-size:13px">photo_camera</span> AI Vision</span>` : ""}</div>${imgPreviewHtml}<div class="math" style="color:var(--pri);font-size:${r.eq.length > 40 ? 15 : 24}px;${r.eq.length > 40 ? "white-space:normal;text-align:left" : ""}">${cleanMathHtml(esc(r.eq))}</div></div>
+    const mainTheorem = resolveTheorem(r, raw);
+    const theoremBannerHtml = mainTheorem ? `
+    <div class="theorem-banner">
+      <span class="ms tb-icon">menu_book</span>
+      <div style="flex:1">
+        <div class="tb-label">📚 Định lý / Cơ sở khoa học áp dụng:</div>
+        <div class="tb-body">${cleanMathHtml(esc(mainTheorem))}</div>
+      </div>
+    </div>` : "";
+
+    o.innerHTML = `<div class="card"><div class="row"><span class="ms" style="color:var(--sec)">verified</span><h3>Đã nhận diện bài tập ${detectedSubject}</h3></div><div class="row"><span class="chip g">Độ tin cậy: ${r.conf ? (r.conf * 100).toFixed(1) : "98.5"}%</span><span class="chip p">${TN[r.topic] || r.topic} · ${r.kind || "Bài chuẩn"}</span><span class="chip">Cấp ${S.cur.diff}: ${["", "Cơ bản", "Trung bình", "Nâng cao"][S.cur.diff]}</span>${r.uploaded_image ? `<span class="chip p"><span class="ms" style="font-size:13px">photo_camera</span> AI Vision</span>` : ""}</div>${imgPreviewHtml}<div class="math" style="color:var(--pri);font-size:${r.eq.length > 40 ? 15 : 24}px;${r.eq.length > 40 ? "white-space:normal;text-align:left" : ""}">${cleanMathHtml(esc(r.eq))}</div>${theoremBannerHtml}</div>
  <div class="row"><h2>Lời giải từng bước</h2><span class="sp"></span><span class="chip p">${r.steps.length} bước</span><button id="tg" style="padding:6px 12px">Thu gọn / Mở rộng</button></div>
  ${r.steps.map((s, i) => {
     const rawT = (s && s.t) ? String(s.t).trim() : "";
-    return `<div class="step ${i == 2 ? "cur" : ""}"><div class="dot"><span class="ms" style="font-size:16px">check</span></div><div class="sbody"><div class="hd" tabindex="0" role="button"><span>Bước ${i + 1}: ${esc(cleanT)}</span><span class="ms">expand_less</span></div><div class="bd">${cleanMathHtml(s.h)}</div></div></div>`;
+    const cleanT = rawT.replace(/^Bước\s*\d+\s*[:.-]\s*/i, "") || `Bước ${i + 1}`;
+    const rawConcept = (s && (s.concept || s.theorem)) ? String(s.concept || s.theorem).trim() : "";
+    const hasConceptHtml = /<div class="concept"/i.test(s.h || "");
+    const conceptBox = (rawConcept && !hasConceptHtml)
+      ? `<div class="concept"><span class="ms" style="font-size:16px;color:var(--pri);margin-right:6px;vertical-align:-2px">lightbulb</span><b>Công thức / Định lý áp dụng:</b> ${cleanMathHtml(esc(rawConcept))}</div>`
+      : "";
+    return `<div class="step ${i == 2 ? "cur" : ""}"><div class="dot"><span class="ms" style="font-size:16px">check</span></div><div class="sbody"><div class="hd" tabindex="0" role="button"><span>Bước ${i + 1}: ${esc(cleanT)}</span><span class="ms">expand_less</span></div><div class="bd">${conceptBox}${cleanMathHtml(s.h)}</div></div></div>`;
   }).join("")}
  ${r.graph ? `
  <div class="card" style="padding:16px">

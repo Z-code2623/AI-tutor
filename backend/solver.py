@@ -44,6 +44,48 @@ META = {
     "chem_molar_mass": ("GeneralChem", "Khối lượng mol M", 1),
 }
 
+TOPIC_THEOREMS = {
+    # 12 Dạng Toán học
+    "linear": "Quy tắc chuyển vế và phép biến đổi tương đương ($ax + b = c \\iff x = \\frac{c - b}{a}$)",
+    "quad": "Công thức nghiệm phương trình bậc 2 & Định lý Viète ($\\Delta = b^2 - 4ac$)",
+    "circle": "Công thức chu vi và diện tích hình tròn ($C = 2\\pi r$, $S = \\pi r^2$)",
+    "deriv": "Bảng đạo hàm cơ bản & Quy tắc tính đạo hàm đa thức ($(x^n)' = n x^{n-1}$)",
+    "arith": "Các phép toán số học & Phương pháp giải toán đố",
+    "system": "Phương pháp thế & Phương pháp cộng đại số giải hệ phương trình",
+    "ineq": "Tính chất bất đẳng thức & Liên hệ giữa thứ tự và phép toán",
+    "percent": "Công thức tính tỉ số phần trăm ($p\\% \\times N = \\frac{p}{100} \\times N$)",
+    "frac": "Quy tắc quy đồng mẫu số và các phép tính phân số",
+    "gcd": "Thuật toán Euclid tìm ước chung lớn nhất (ƯCLN)",
+    "geom": "Định lý Pythagore trong tam giác vuông ($c^2 = a^2 + b^2$)",
+    "integ": "Bảng nguyên hàm cơ bản & Định lý cơ bản của Giải tích ($\\int x^n dx = \\frac{x^{n+1}}{n+1} + C$)",
+    # 12 Dạng Vật lý
+    "kinematics": "Chuyển động thẳng biến đổi đều ($v = v_0 + at$, $s = v_0 t + \\frac{1}{2}at^2$, $v^2 - v_0^2 = 2as$)",
+    "freefall": "Định luật rơi tự do ($v = gt$, $h = \\frac{1}{2}gt^2$, $v = \\sqrt{2gh}$)",
+    "newton2": "Định luật II Newton ($\\vec{F} = m \\cdot \\vec{a} \\iff F = m \\cdot a$)",
+    "work_power": "Công cơ học & Công suất ($A = F \\cdot s \\cdot \\cos\\alpha$, $P = \\frac{A}{t} = F \\cdot v$)",
+    "energy": "Định luật bảo toàn cơ năng trong trọng trường ($W = W_đ + W_t = \\frac{1}{2}mv^2 + mgh = \\text{const}$)",
+    "gas_law": "Định luật Boyle - Mariotte cho quá trình đẳng nhiệt ($p_1 V_1 = p_2 V_2$)",
+    "thermal": "Định luật I Nhiệt động lực học & Phương trình cân bằng nhiệt ($Q = m \\cdot c \\cdot \\Delta t$, $Q_{\\text{tỏa}} = Q_{\\text{thu}}$)",
+    "ohm": "Định luật Ohm cho đoạn mạch ($I = \\frac{U}{R} \\iff U = I \\cdot R$)",
+    "elec_power": "Định luật Joule - Lenz & Công suất điện ($P = U \\cdot I = I^2 R$, $A = P \\cdot t$)",
+    "coulomb": "Định luật Cu-lông về tương tác tĩnh điện ($F = k \\cdot \\frac{|q_1 q_2|}{r^2}$)",
+    "lens": "Công thức thấu kính mỏng & Số phóng đại ảnh ($\\frac{1}{f} = \\frac{1}{d} + \\frac{1}{d'}$, $k = -\\frac{d'}{d}$)",
+    "refraction": "Định luật khúc xạ ánh sáng Snell - Descartes ($n_1 \\sin i = n_2 \\sin r$)",
+    # 12 Dạng Hóa học
+    "chem_mol": "Công thức chuyển đổi số mol và khối lượng ($n = \\frac{m}{M} \\iff m = n \\times M$)",
+    "chem_gas": "Định luật Avogadro & Thể tích mol chất khí ở đktc ($V = n \\times 22{,}4\\text{ lít}$)",
+    "chem_conc_mol": "Công thức nồng độ mol của dung dịch ($C_M = \\frac{n}{V}$)",
+    "chem_conc_pct": "Công thức nồng độ phần trăm dung dịch ($C\\% = \\frac{m_{ct}}{m_{dd}} \\times 100\\%$)",
+    "chem_ph": "Chỉ số pH và tích số ion của nước ($pH = -\\log[H^+]$, $[H^+][OH^-] = 10^{-14}$)",
+    "chem_eq": "Định luật bảo toàn nguyên tố & Cân bằng phương trình hóa học",
+    "chem_metal_acid": "Dãy hoạt động hóa học của kim loại ($M + nHCl \\to MCl_n + \\frac{n}{2}H_2\\uparrow$)",
+    "chem_mass_cons": "Định luật bảo toàn khối lượng Lomonosov - Lavoisier ($\\sum m_{\\text{tham gia}} = \\sum m_{\\text{sản phẩm}}$)",
+    "chem_yield": "Công thức hiệu suất phản ứng hóa học ($H\\% = \\frac{m_{\\text{thực tế}}}{m_{\\text{lý thuyết}}} \\times 100\\%$)",
+    "chem_precip": "Điều kiện xảy ra phản ứng trao đổi ion trong dung dịch (tạo chất kết tủa)",
+    "chem_elem_pct": "Phần trăm khối lượng của nguyên tố trong hợp chất ($\\%m_A = \\frac{x \\cdot M_A}{M_{A_x B_y}} \\times 100\\%$)",
+    "chem_molar_mass": "Xác định kim loại qua khối lượng mol nguyên tử ($M = \\frac{m}{n}$)",
+}
+
 f = lambda n: str(int(round(n))) if abs(float(n) - round(float(n))) < 1e-5 else str(round(n, 3))
 sg = lambda n: f"− {f(-n)}" if n < 0 else f"+ {f(n)}"
 co = lambda s: 1 if s in ("", "+") else -1 if s == "-" else int(s)
@@ -121,13 +163,24 @@ def parse_poly(expr):
         e = expand_parens(e)
         if e is None: return None
 
-    if not re.fullmatch(r"[0-9x^+\-*./]+", e) or "^-" in e or "**" in e: return None
+    if not re.fullmatch(rf"[0-9a-zA-Z^+\-*./]+", e) or "^-" in e or "**" in e: return None
     if e[0] not in "+-": e = "+" + e
+    vm = re.search(r"[a-zA-Z]", e)
+    v = vm.group(0).lower() if vm else "x"
+    term_re = re.compile(rf"^(\d+(?:\.\d+)?)?\*?({v}(?:\^(\d+))?)?$")
     out = {}
-    for sign, body in re.findall(r"([+-])([^+-]*)", e):
-        m = _TERM.fullmatch(body)
+    for sign, body in re.findall(r"([+-])([^+-]+)", e):
+        den = Fraction(1)
+        if "/" in body:
+            parts = body.split("/")
+            if len(parts) != 2: return None
+            body = parts[0]
+            try: den = Fraction(parts[1])
+            except Exception: return None
+            if den == 0: return None
+        m = term_re.fullmatch(body)
         if not body or not m or not (m.group(1) or m.group(2)): return None
-        c = Fraction(m.group(1)) if m.group(1) else Fraction(1)
+        c = (Fraction(m.group(1)) if m.group(1) else Fraction(1)) / den
         n = (int(m.group(3)) if m.group(3) else 1) if m.group(2) else 0
         if n > 20: return None
         out[n] = out.get(n, 0) + (c if sign == "+" else -c)
@@ -142,13 +195,13 @@ def _coef(q):
     q = Fraction(q)
     return str(q.numerator) if q.denominator == 1 else f"{q.numerator}/{q.denominator}"
 
-def fmt_poly(poly):
+def fmt_poly(poly, v="x"):
     parts = []
     for n in sorted(poly, reverse=True):
         q = poly[n]
         if q == 0: continue
         num, den = abs(q.numerator), q.denominator
-        var = "" if n == 0 else ("x" if n == 1 else f"x^{n}")
+        var = "" if n == 0 else (v if n == 1 else f"{v}^{n}")
         body = (str(num) if (num != 1 or n == 0) else "") + var + (f"/{den}" if den != 1 else "")
         parts.append(("−" if q < 0 else "+", body))
     if not parts: return "0"
@@ -180,22 +233,24 @@ def safe_arith(text):
 def poly_equation(t):
     if t.count("=") != 1: return None
     l, r = t.split("=")
+    vm = re.search(r"[a-zA-Z]", t)
+    v = vm.group(0).lower() if vm else "x"
     L, R = parse_poly(l), parse_poly(r)
     if L is None or R is None: return None
     P = poly_sub(L, R); deg = max(P) if P else 0
     if deg > 2: return None
     a, b, c = P.get(2, Fraction(0)), P.get(1, Fraction(0)), P.get(0, Fraction(0))
-    eq = f"{fmt_poly(P) if P else '0'} = 0"
+    eq = f"{fmt_poly(P, v) if P else '0'} = 0"
     steps = [
-        {"t": "Đưa về dạng chuẩn", "h": math_(eq) + concept("Quy tắc chuyển vế", "Chuyển toàn bộ các hạng tử về vế trái và đổi dấu để đưa phương trình về dạng tổng quát $ax^2 + bx + c = 0$.")}
+        {"t": "Đưa về dạng chuẩn", "h": math_(eq) + concept("Quy tắc chuyển vế", f"Chuyển toàn bộ các hạng tử về vế trái và đổi dấu để đưa phương trình về dạng tổng quát $a{v}^2 + b{v} + c = 0$.")}
     ]
     if deg == 0:
-        ans = "Vô số nghiệm (mọi x đều thỏa)" if not P else "Vô nghiệm"
+        ans = f"Vô số nghiệm (mọi {v} đều thỏa)" if not P else "Vô nghiệm"
         steps.append({"t": "Kết luận", "h": ok(ans)}); return ans, steps
     if deg == 1:
-        x = -c / b; ans = f"x = {_coef(x)}"
+        x = -c / b; ans = f"{v} = {_coef(x)}"
         steps += [
-            {"t": "Giải phương trình bậc nhất", "h": math_(f"x = \\frac{{-c}}{{b}} = \\frac{{{_coef(-c)}}}{{{_coef(b)}}} = {_coef(x)}") + concept("Nghiệm phương trình bậc nhất", "Phương trình dạng $bx + c = 0$ ($b \\neq 0$) luôn có nghiệm duy nhất $x = -c/b$.")},
+            {"t": "Giải phương trình bậc nhất", "h": math_(f"{v} = \\frac{{-c}}{{b}} = \\frac{{{_coef(-c)}}}{{{_coef(b)}}} = {_coef(x)}") + concept("Nghiệm phương trình bậc nhất", f"Phương trình dạng $b{v} + c = 0$ ($b \\neq 0$) luôn có nghiệm duy nhất ${v} = -c/b$.")},
             {"t": "Kết luận", "h": ok(ans)}
         ]
         return ans, steps
@@ -211,26 +266,35 @@ def poly_equation(t):
         return ans, steps
     sq = math.isqrt(int(d)) if d.denominator == 1 and d >= 0 else None
     if d == 0:
-        x1 = -b / (2 * a); ans = f"x = {_coef(x1)}"
-        steps.append({"t": "Nghiệm kép", "h": math_(f"x_1 = x_2 = -\\frac{{b}}{{2a}} = {_coef(x1)}") + ok(ans)})
+        x1 = -b / (2 * a); ans = f"{v} = {_coef(x1)}"
+        steps.append({"t": "Nghiệm kép", "h": math_(f"{v}_1 = {v}_2 = -\\frac{{b}}{{2a}} = {_coef(x1)}") + ok(ans)})
     elif sq is not None and sq * sq == d:
         x1, x2 = sorted([(-b + sq) / (2 * a), (-b - sq) / (2 * a)])
-        ans = f"x₁ = {_coef(x1)}, x₂ = {_coef(x2)}"
-        steps.append({"t": "Tính hai nghiệm phân biệt", "h": math_(f"x = \\frac{{-b \\pm \\sqrt{{\\Delta}}}}{{2a}} \\implies x_1 = {_coef(x1)}, \\; x_2 = {_coef(x2)}") + ok(ans)})
+        ans = f"{v}₁ = {_coef(x1)}, {v}₂ = {_coef(x2)}"
+        steps.append({"t": "Tính hai nghiệm phân biệt", "h": math_(f"{v} = \\frac{{-b \\pm \\sqrt{{\\Delta}}}}{{2a}} \\implies {v}_1 = {_coef(x1)}, \\; {v}_2 = {_coef(x2)}") + ok(ans)})
     else:
         s = math.sqrt(float(d))
         x1, x2 = sorted([(-float(b) + s) / (2 * float(a)), (-float(b) - s) / (2 * float(a))])
-        ans = f"x₁ ≈ {f(x1)}, x₂ ≈ {f(x2)}"
+        ans = f"{v}₁ ≈ {f(x1)}, {v}₂ ≈ {f(x2)}"
         steps.append({"t": "Tính hai nghiệm phân biệt", "h": math_(f"x = \\frac{{-b \\pm \\sqrt{{\\Delta}}}}{{2a}} \\implies x_1 \\approx {f(x1)}, \\; x_2 \\approx {f(x2)}") + ok(ans)})
     return ans, steps
 
 
 def solve(text, label):
     topic, kind, diff = META.get(label, ("Algebra", "Bài tập", 1))
-    m = re.search(r"(?:^|\s)(-?\d*x(?:\^|\s|[+\-=]).*)$", text)
-    core = (m.group(1) if m else text).strip()
+    core = text.strip()
+    if any(c in core for c in [":", "\n"]):
+        core = re.split(r"[:\n]", core)[-1].strip()
+    elif re.search(r"biết\b", core, re.I):
+        core = re.split(r"biết\b", core, flags=re.I)[-1].strip()
+    elif re.search(r"\btrình\b", core, re.I):
+        core = re.split(r"\btrình\b", core, flags=re.I)[-1].strip()
+    elif re.search(r"\btoán\b", core, re.I):
+        core = re.split(r"\btoán\b", core, flags=re.I)[-1].strip()
     t = core.replace(" ", "").replace("−", "-").replace("²", "^2").lower()
-    res = {"topic": topic, "kind": kind, "diff": diff, "eq": core if label in ("linear", "quad", "system", "ineq") else text.strip(),
+    res = {"topic": topic, "kind": kind, "diff": diff, "label": label,
+           "theorem": TOPIC_THEOREMS.get(label, ""),
+           "eq": core if label in ("linear", "quad", "system", "ineq") else text.strip(),
            "steps": [], "ans": None, "graph": None, "valid": False}
     steps = res["steps"]
     t_lower = text.lower()
@@ -534,6 +598,13 @@ def solve(text, label):
         res["graph"] = {"type": "rhombus_circle", "a": a_val}
         return res
 
+    elif label in ("linear", "quad") and (pe := poly_equation(t)):
+        ans, st = pe; res.update(valid=True, ans=ans); steps += st
+        if pe and len(st) > 0:
+            if "bậc hai" in st[0]["h"]:
+                res.update(kind="Phương trình bậc 2", graph={"type": "parabola", "title": "Đồ thị Parabol phương trình bậc hai"})
+            else:
+                res.update(kind="Phương trình bậc 1")
     elif label == "linear" and (m := re.search(r"(-?\d*)x([+-]\d+)?=(-?\d+)$", t)) and co(m[1]):
         a, b, c = co(m[1]), int(m[2] or 0), int(m[3]); r = c - b; x = r / a
         res.update(valid=True, ans=f"x = {f(x)}", graph={"a": a, "b": b - c, "x": x})
@@ -542,11 +613,9 @@ def solve(text, label):
             {"t": "Chuyển vế đổi dấu", "h": math_(f"{f(a)}x = {f(r)}") + concept("Quy tắc chuyển vế", "Khi chuyển một hạng tử từ vế này sang vế kia của phương trình, ta phải đổi dấu của hạng tử đó.")},
             {"t": "Chia hệ số để tìm x", "h": math_(f"x = \\frac{{{f(r)}}}{{{f(a)}}} = {f(x)}") + ok(f"x = {f(x)}")}
         ]
-    elif label in ("linear", "quad") and (pe := poly_equation(t)):
-        ans, st = pe; res.update(valid=True, ans=ans); steps += st
     elif label == "circle" and (m := re.search(r"(?:r=|bánkính)(\d+(?:\.\d+)?)", text.lower().replace(" ", ""))):
         r = float(m[1]); ch = "chu vi" in text.lower(); v = 2 * math.pi * r if ch else math.pi * r * r
-        ans = f'{"C" if ch else "S"} ≈ {f(v)}'; res.update(valid=True, ans=ans)
+        ans = f'{"C" if ch else "S"} ≈ {f(v)}'; res.update(valid=True, ans=ans, graph={"type": "circle", "r": r, "title": f"Đường tròn bán kính r = {f(r)}"})
         steps += [
             {"t": "Xác định bán kính", "h": math_(f"r = {f(r)}")},
             {"t": "Áp dụng công thức", "h": math_("C = 2\\pi r" if ch else "S = \\pi r^2") + concept("Hình tròn", "Chu vi là độ dài đường biên: $C = 2\\pi r$. Diện tích là phần mặt phẳng giới hạn bởi đường tròn: $S = \\pi r^2$.")},
@@ -962,14 +1031,13 @@ def solve(text, label):
                 {"t": "Cân bằng số nguyên tử mỗi nguyên tố hai vế", "h": concept("Định luật bảo toàn số nguyên tử", desc)},
                 {"t": "Phương trình hóa học đã cân bằng hoàn chỉnh", "h": ok(math_(balanced_str))}
             ]
-
-        if res["valid"]:
-            res["ans"] = res["ans"] or ""
-            if not res.get("graph"):
-                try:
-                    import llm
-                    res["graph"] = llm.detect_graph(text, res)
-                except Exception:
-                    pass
+    if res["valid"]:
+        res["ans"] = res["ans"] or ""
+        if not res.get("graph"):
+            try:
+                import llm
+                res["graph"] = llm.detect_graph(text, res)
+            except Exception:
+                pass
     return res
 

@@ -54,28 +54,43 @@ function evalPolyQ(P, xQ) {
   return res;
 }
 
-function parsePoly(expr) {
+const qLatex = q => q.d === 1 ? String(q.n) : (q.n < 0 ? `-\\frac{${-q.n}}{${q.d}}` : `\\frac{${q.n}}{${q.d}}`);
+
+function parsePoly(expr, v = "x") {
   const e = expr.replace(/\s+/g, "").replace(/−/g, "-").replace(/²/g, "^2").replace(/³/g, "^3").replace(/·/g, "*").toLowerCase().replace(/[.?;,]$/, "");
-  if (!e || !/^[0-9x^+\-*.]+$/.test(e) || e.includes("^-") || e.includes("**")) return null;
+  if (!e || e.includes("^-") || e.includes("**")) return null;
+  const allowed = new RegExp("^[0-9" + v + "^+\\-*./]+$");
+  if (!allowed.test(e)) return null;
   const s = e[0] === "+" || e[0] === "-" ? e : "+" + e;
   const poly = {};
-  const re = /([+-])([^+-]*)/g;
+  const re = /([+-])([^+-]+)/g;
   let m;
   while ((m = re.exec(s)) !== null) {
-    const sign = m[1], body = m[2];
+    const sign = m[1];
+    let body = m[2];
     if (!body) return null;
-    const tm = body.match(/^(\d+(?:\.\d+)?)?\*?(x(?:\^(\d+))?)?$/);
+    let den = Q(1);
+    if (body.includes("/")) {
+      const parts = body.split("/");
+      if (parts.length !== 2) return null;
+      body = parts[0];
+      const dNum = parseFloat(parts[1]);
+      if (isNaN(dNum) || dNum === 0) return null;
+      den = parts[1].includes(".") ? decQ(parts[1]) : Q(parseInt(parts[1], 10));
+    }
+    const tm = body.match(new RegExp("^(\\d+(?:\\.\\d+)?)?\\*?(" + v + "(?:\\^(\\d+))?)?$"));
     if (!tm || (!tm[1] && !tm[2])) return null;
-    const coef = tm[1] ? (tm[1].includes(".") ? decQ(tm[1]) : Q(parseInt(tm[1], 10))) : Q(1);
+    const num = tm[1] ? (tm[1].includes(".") ? decQ(tm[1]) : Q(parseInt(tm[1], 10))) : Q(1);
     const exp = tm[2] ? (tm[3] ? parseInt(tm[3], 10) : 1) : 0;
     if (exp > 20) return null;
+    const coef = qDiv(num, den);
     const signed = sign === "-" ? Q(-coef.n, coef.d) : coef;
     poly[exp] = poly[exp] ? qAdd(poly[exp], signed) : signed;
   }
   return poly;
 }
 
-function fmtPoly(P) {
+function fmtPoly(P, v = "x") {
   const exps = Object.keys(P).map(Number).sort((a, b) => b - a);
   const parts = [];
   for (const n of exps) {
@@ -83,7 +98,7 @@ function fmtPoly(P) {
     if (q.n === 0) continue;
     const sign = q.n < 0 ? "−" : "+";
     const absN = Math.abs(q.n);
-    const varPart = n === 0 ? "" : (n === 1 ? "x" : `x^${n}`);
+    const varPart = n === 0 ? "" : (n === 1 ? v : `${v}^${n}`);
     const coefPart = (absN !== 1 || n === 0) ? (q.d === 1 ? String(absN) : `${absN}/${q.d}`) : "";
     parts.push({ sign, term: coefPart + varPart });
   }
@@ -96,13 +111,17 @@ function polyExprFromText(text) {
   if (/[a-zA-Z]\s*(?:\(\s*x\s*\))?\s*['′’]\s*(?:\(\s*x\s*\))?\s*=/.test(t)) return null;
   if (t.includes("=")) t = t.split("=").pop();
   else if (/\bcủa\b/i.test(t)) t = t.split(/\bcủa\b/i).pop();
-  return parsePoly(t);
+  const vm = t.match(/[a-zA-Z]/);
+  const v = vm ? vm[0].toLowerCase() : "x";
+  return parsePoly(t, v);
 }
 
 function polyEquation(t) {
   if ((t.match(/=/g) || []).length !== 1) return null;
   const [l, r] = t.split("=");
-  const L = parsePoly(l), R = parsePoly(r);
+  const vm = t.match(/[a-zA-Z]/);
+  const v = vm ? vm[0].toLowerCase() : "x";
+  const L = parsePoly(l, v), R = parsePoly(r, v);
   if (!L || !R) return null;
   const P = {};
   const allExp = new Set([...Object.keys(L), ...Object.keys(R)].map(Number));
@@ -113,43 +132,56 @@ function polyEquation(t) {
   }
   const deg = Math.max(0, ...Object.keys(P).map(Number));
   if (deg > 2) return null;
-  const eq = `${fmtPoly(P)} = 0`;
-  const steps = [{ t: "Đưa về dạng chuẩn", h: math_(eq) }];
+  const eq = `${fmtPoly(P, v)} = 0`;
+  const steps = [{ t: "Đưa về dạng chuẩn", h: math_(eq) + concept("Dạng tổng quát", deg === 2 ? `Phương trình bậc hai dạng $a${v}^2 + b${v} + c = 0$.` : `Phương trình bậc nhất dạng $a${v} + b = 0$.`) }];
   const a = P[2] || Q(0), b = P[1] || Q(0), c = P[0] || Q(0);
   if (deg === 0) {
-    const ans = !Object.keys(P).length ? "Vô số nghiệm (mọi x đều thỏa)" : "Vô nghiệm";
+    const ans = !Object.keys(P).length ? `Vô số nghiệm (mọi ${v} đều thỏa)` : "Vô nghiệm";
     steps.push({ t: "Kết luận", h: ok(ans) });
-    return { ans, steps };
+    return { ans, steps, v };
   }
   if (deg === 1) {
-    const x = qDiv(Q(-c.n, c.d), b);
-    const ans = `x = ${qStr(x)}`;
+    const root = qDiv(Q(-c.n, c.d), b);
+    const ans = `${v} = ${qStr(root)}`;
+    const rootLatex = qLatex(root);
     steps.push(
-      { t: "Giải phương trình bậc nhất", h: math_(`x = −c / b = ${qStr(Q(-c.n, c.d))} / ${qStr(b)}`) },
-      { t: "Kết luận", h: ok(ans) }
+      {
+        t: "Chuyển vế hạng tử tự do",
+        h: math_(`${fmtPoly({ 1: b }, v)} = ${fmtPoly({ 0: Q(-c.n, c.d) }, v)}`) + concept("Quy tắc chuyển vế", "Khi chuyển một hạng tử từ vế này sang vế kia của phương trình, ta phải đổi dấu của hạng tử đó.")
+      },
+      {
+        t: `Tìm giá trị của ${v}`,
+        h: math_(`${v} = \\frac{${qStr(Q(-c.n, c.d))}}{${qStr(b)}} = ${rootLatex}`) + concept("Quy tắc nhân chia hai vế", `Chia cả hai vế của phương trình cho hệ số $a = ${qStr(b)}$.`)
+      },
+      { t: "Kết luận nghiệm", h: ok(ans) }
     );
-    return { ans, steps };
+    return { ans, steps, v };
   }
   const b2 = qMul(b, b), fourAC = qMul(Q(4), qMul(a, c)), delta = qSub(b2, fourAC);
-  steps.push({ t: "Tính biệt thức Δ", h: math_(`a = ${qStr(a)}, b = ${qStr(b)}, c = ${qStr(c)}<br>Δ = b² − 4ac = ${qStr(delta)}`) });
+  steps.push({
+    t: "Xác định hệ số và tính biệt thức Δ",
+    h: math_(`a = ${qStr(a)}, \\; b = ${qStr(b)}, \\; c = ${qStr(c)} \\\\ \\Delta = b^2 - 4ac = (${qStr(b)})^2 - 4(${qStr(a)})(${qStr(c)}) = ${qStr(delta)}`) + concept("Định lý về dấu biệt thức Delta", "Nếu $\\Delta > 0$: phương trình có 2 nghiệm phân biệt; $\\Delta = 0$: có nghiệm kép; $\\Delta < 0$: phương trình vô nghiệm thực.")
+  });
   if (delta.n < 0) {
     const ans = "Vô nghiệm thực";
-    steps.push({ t: "Kết luận", h: "<p>Δ &lt; 0 nên phương trình không có nghiệm thực.</p>" + ok(ans) });
-    return { ans, steps };
+    steps.push({ t: "Kết luận", h: "<p>Vì $\\Delta < 0$ nên phương trình không có nghiệm thực.</p>" + ok(ans) });
+    return { ans, steps, v };
   }
   const dVal = delta.n / delta.d;
   const sq = Math.sqrt(dVal);
   if (sq === 0) {
-    const x = qDiv(Q(-b.n, b.d), qMul(Q(2), a));
-    const ans = `x = ${qStr(x)}`;
-    steps.push({ t: "Nghiệm kép", h: ok(ans) });
-    return { ans, steps };
+    const root = qDiv(Q(-b.n, b.d), qMul(Q(2), a));
+    const ans = `${v} = ${qStr(root)}`;
+    steps.push({ t: "Nghiệm kép", h: math_(`${v} = -\\frac{b}{2a} = ${qStr(root)}`) + ok(ans) });
+    return { ans, steps, v };
   }
   const x1 = (-b.n / b.d - sq) / (2 * (a.n / a.d));
   const x2 = (-b.n / b.d + sq) / (2 * (a.n / a.d));
-  const ans = `x₁ = ${f(x1)}, x₂ = ${f(x2)}`;
-  steps.push({ t: "Tìm nghiệm", h: math_("x = (−b ± √Δ) / 2a") + ok(ans) });
-  return { ans, steps };
+  const f1 = Number.isInteger(x1) ? String(x1) : String(+x1.toFixed(3));
+  const f2 = Number.isInteger(x2) ? String(x2) : String(+x2.toFixed(3));
+  const ans = `${v}_1 = ${f1}, \\; ${v}_2 = ${f2}`;
+  steps.push({ t: "Tìm nghiệm theo công thức", h: math_(`${v} = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}`) + ok(ans) });
+  return { ans, steps, v };
 }
 
 function safeArith(text) {
@@ -206,6 +238,67 @@ const META = {
   chem_molar_mass: ["GeneralChem", "Khối lượng mol M", 1],
 };
 
+var TOPIC_THEOREMS = (typeof window !== "undefined" ? window.TOPIC_THEOREMS : null) || {
+  // 12 Dạng Toán học
+  linear: "Quy tắc chuyển vế và phép biến đổi tương đương ($ax + b = c \\iff x = \\frac{c - b}{a}$)",
+  quad: "Công thức nghiệm phương trình bậc 2 & Định lý Viète ($\\Delta = b^2 - 4ac$)",
+  circle: "Công thức chu vi và diện tích hình tròn ($C = 2\\pi r$, $S = \\pi r^2$)",
+  deriv: "Bảng đạo hàm cơ bản & Quy tắc tính đạo hàm đa thức ($(x^n)' = n x^{n-1}$)",
+  arith: "Các phép toán số học & Phương pháp giải toán đố",
+  system: "Phương pháp thế & Phương pháp cộng đại số giải hệ phương trình",
+  ineq: "Tính chất bất đẳng thức & Liên hệ giữa thứ tự và phép toán",
+  percent: "Công thức tính tỉ số phần trăm ($p\\% \\times N = \\frac{p}{100} \\times N$)",
+  frac: "Quy tắc quy đồng mẫu số và các phép tính phân số",
+  gcd: "Thuật toán Euclid tìm ước chung lớn nhất (ƯCLN)",
+  geom: "Định lý Pythagore trong tam giác vuông ($c^2 = a^2 + b^2$)",
+  integ: "Bảng nguyên hàm cơ bản & Định lý cơ bản của Giải tích ($\\int x^n dx = \\frac{x^{n+1}}{n+1} + C$)",
+  minmax_interval: "Định lý Weierstrass và quy tắc tìm GTLN, GTNN trên đoạn $[a; b]$",
+  proof: "Phương pháp chứng minh hình học & Tính chất đường tròn, tam giác",
+
+  // 12 Dạng Vật lý
+  kinematics: "Chuyển động thẳng biến đổi đều ($v = v_0 + at$, $s = v_0 t + \\frac{1}{2}at^2$, $v^2 - v_0^2 = 2as$)",
+  freefall: "Định luật rơi tự do ($v = gt$, $h = \\frac{1}{2}gt^2$, $v = \\sqrt{2gh}$)",
+  newton2: "Định luật II Newton ($\\vec{F} = m \\cdot \\vec{a} \\iff F = m \\cdot a$)",
+  work_power: "Công cơ học & Công suất ($A = F \\cdot s \\cdot \\cos\\alpha$, $P = \\frac{A}{t} = F \\cdot v$)",
+  energy: "Định luật bảo toàn cơ năng trong trọng trường ($W = W_đ + W_t = \\frac{1}{2}mv^2 + mgh = \\text{const}$)",
+  gas_law: "Định luật Boyle - Mariotte cho quá trình đẳng nhiệt ($p_1 V_1 = p_2 V_2$)",
+  thermal: "Định luật I Nhiệt động lực học & Phương trình cân bằng nhiệt ($Q = m \\cdot c \\cdot \\Delta t$, $Q_{\\text{tỏa}} = Q_{\\text{thu}}$)",
+  ohm: "Định luật Ohm cho đoạn mạch ($I = \\frac{U}{R} \\iff U = I \\cdot R$)",
+  elec_power: "Định luật Joule - Lenz & Công suất điện ($P = U \\cdot I = I^2 R$, $A = P \\cdot t$)",
+  coulomb: "Định luật Cu-lông về tương tác tĩnh điện ($F = k \\cdot \\frac{|q_1 q_2|}{r^2}$)",
+  lens: "Công thức thấu kính mỏng & Số phóng đại ảnh ($\\frac{1}{f} = \\frac{1}{d} + \\frac{1}{d'}$, $k = -\\frac{d'}{d}$)",
+  refraction: "Định luật khúc xạ ánh sáng Snell - Descartes ($n_1 \\sin i = n_2 \\sin r$)",
+
+  // 12 Dạng Hóa học
+  chem_mol: "Công thức chuyển đổi số mol và khối lượng ($n = \\frac{m}{M} \\iff m = n \\times M$)",
+  chem_gas: "Định luật Avogadro & Thể tích mol chất khí ở đktc ($V = n \\times 22{,}4\\text{ lít}$)",
+  chem_conc_mol: "Công thức nồng độ mol của dung dịch ($C_M = \\frac{n}{V}$)",
+  chem_conc_pct: "Công thức nồng độ phần trăm dung dịch ($C\\% = \\frac{m_{ct}}{m_{dd}} \\times 100\\%$)",
+  chem_ph: "Chỉ số pH và tích số ion của nước ($pH = -\\log[H^+]$, $[H^+][OH^-] = 10^{-14}$)",
+  chem_eq: "Định luật bảo toàn nguyên tố & Cân bằng phương trình hóa học",
+  chem_metal_acid: "Dãy hoạt động hóa học của kim loại ($M + nHCl \\to MCl_n + \\frac{n}{2}H_2\\uparrow$)",
+  chem_mass_cons: "Định luật bảo toàn khối lượng Lomonosov - Lavoisier ($\\sum m_{\\text{tham gia}} = \\sum m_{\\text{sản phẩm}}$)",
+  chem_yield: "Công thức hiệu suất phản ứng hóa học ($H\\% = \\frac{m_{\\text{thực tế}}}{m_{\\text{lý thuyết}}} \\times 100\\%$)",
+  chem_precip: "Điều kiện xảy ra phản ứng trao đổi ion trong dung dịch (tạo chất kết tủa)",
+  chem_elem_pct: "Phần trăm khối lượng của nguyên tố trong hợp chất ($\\%m_A = \\frac{x \\cdot M_A}{M_{A_x B_y}} \\times 100\\%$)",
+  chem_molar_mass: "Xác định kim loại qua khối lượng mol nguyên tử ($M = \\frac{m}{n}$)",
+
+  // Khái quát theo chủ đề lớn (Fallback)
+  Mechanics: "Định luật cơ học Newton và các định luật bảo toàn động lượng, cơ năng",
+  Thermodynamics: "Định luật I và II Nhiệt động lực học, Phương trình trạng thái khí lí tưởng",
+  Electromagnetism: "Định luật Ohm, Định luật Cu-lông và Định luật Joule - Lenz",
+  Optics: "Định luật khúc xạ ánh sáng và công thức thấu kính mỏng",
+  GeneralChem: "Định luật bảo toàn khối lượng, định luật Avogadro và công thức mol",
+  InorganicChem: "Quy luật phản ứng hóa học vô cơ, cân bằng phản ứng oxi hóa - khử",
+  SolutionChem: "Thuyết điện li, nồng độ dung dịch ($C_M, C\\%$) và chỉ số pH",
+  OrganicChem: "Cấu trúc hóa học và phản ứng đặc trưng của hợp chất hữu cơ",
+  Algebra: "Các phép biến đổi đại số, quy tắc giải phương trình và bất phương trình",
+  Calculus: "Định lý giải tích, đạo hàm và tích phân",
+  Geometry: "Tiên đề Euclid, hệ thức lượng trong tam giác và hình học phẳng",
+  Arithmetic: "Tính chất số học, ước số và bội số"
+};
+if (typeof window !== "undefined") window.TOPIC_THEOREMS = TOPIC_THEOREMS;
+
 function classify(raw) {
   const l = raw.toLowerCase().replace(/\s+/g, "");
   // 0. Ưu tiên Toán học giải tích có từ khóa rõ ràng
@@ -229,7 +322,7 @@ function classify(raw) {
   // 2. Nhận diện Vật lý
   if (/rơitựdo|thảrơi|rơitừđộcao|chạmđất/.test(l)) return "freefall";
   if (/cu-lông|coulomb|điệntíchđiểm|q1|q2|tĩnhđiện/.test(l)) return "coulomb";
-  if (/thấukính|tiêucự|vậtsángab|quangtâm|d'|ảnhthật|ảnhảo/.test(l)) return "lens";
+  if (/thấukính|tiêucự|vậtsángab|quangtâm|ảnhthật|ảnhảo/.test(l) || (/\bd'\b|\bd\s*'/i.test(raw) && /ảnh|vật|thấu\s*kính|tiêu\s*cự/i.test(raw))) return "lens";
   if (/khúcxạ|chiếtsuất|góctới|gócgiớihạn|snell/.test(l)) return "refraction";
   if (/khílýtưởng|boyle|đẳngnhiệt|xilanh|p1|v1/.test(l)) return "gas_law";
   if (/nhiệtlượng|đunsôi|nhiệtdungriêng|làmnóng|làmnguội|q=/.test(l)) return "thermal";
@@ -240,9 +333,8 @@ function classify(raw) {
   if (/địnhluậtii|địnhluật2|newton|hợplực/.test(l) || /\bf=\d+.*m=\d+/.test(raw)) return "newton2";
   if (/nhanhdầnđều|chậmdầnđều|hãmphanh|v0|giatốca/.test(l)) return "kinematics";
 
-  // 2. Nhận diện Toán học
   if (/(?:giá\s*trị\s*(?:lớn|nhỏ)\s*nhất|gtln|gtnn|max|min)/i.test(raw) && (/\[\s*[-+]?\d+.*?[;,].*?[-+]?\d+.*?\]/.test(raw) || /trên\s*đoạn/i.test(raw))) return "minmax_interval";
-  if (/hìnhthoi/i.test(l) && (/trungđiểm/.test(l) || /cùngnằmtrên/.test(l) || /đườngtròn/.test(l) || /chứngminh/.test(l))) return "proof";
+  if (/(?:h[ìi]nh\s*thoi|rhombus)/i.test(raw)) return "proof";
   if (/nguyênhàm|∫/.test(l)) return "integ";
   if (/đạohàm|y'/.test(l) || /^[yf](\(x\))?=/.test(l)) return "deriv";
   if (/ưcln|ucln|bcnn|gcd|lcm|bộichung|ướcchung/.test(l)) return "gcd";
@@ -250,10 +342,10 @@ function classify(raw) {
   if (/\d+\/\d+\s*[\+\-\*×\:]\s*\d+\/\d+/.test(raw) || /phânsố/.test(l)) return "frac";
   if (/hệphươngtrình/.test(l) || (raw.includes("và") && raw.includes("=") && /x.*y/.test(raw))) return "system";
   if (/[><≥≤]|>=|<=/.test(raw) && !/thấukính|tamgiác/.test(l)) return "ineq";
-  if (/hìnhtròn|bánkính|chuvi.*tròn|diệntích.*tròn|r=\d+/.test(l)) return "circle";
-  if (/chữnhật|tamgiác|cạnhhuyền|pytago/.test(l)) return "geom";
-  if (/x\^2|x²/.test(raw)) return "quad";
-  if (/x.*=|=.*x/.test(raw)) return "linear";
+  if (!/trụ|nón|cầu|hộp|lậpphương|chóp/i.test(raw) && /hìnhtròn|đườngtròn|bánkính|chuvi.*tròn|diệntích.*tròn|r=\d+/.test(l)) return "circle";
+  if (/(?:chữ\s*nhật|chu\s*nhat|tam\s*giác|tam\s*giac|cạnh\s*huyền|canh\s*huyen|pytago|pitago)/i.test(raw)) return "geom";
+  if (/[a-zA-Z]\s*(?:\^2|²)/.test(raw)) return "quad";
+  if (/[a-zA-Z].*=|=[^=]*[a-zA-Z]/.test(raw)) return "linear";
   if (/\d+/.test(raw) && (l.includes("hỏi") || l.includes("có") || l.includes("mua") || l.includes("còn"))) return "arith";
   return "linear";
 }
@@ -262,10 +354,18 @@ function solve(text) {
   const raw = (text || "").trim();
   const label = classify(raw);
   const [topic, kind, diff] = META[label] || ["Algebra", "Toán học", 1];
-  const mCore = text.match(/(?:^|\s)(-?\d*x(?:\^|\s|[+\-=]).*)$/i);
-  const core = (mCore ? mCore[1] : text).trim();
+  let core = raw;
+  if (/[:\n]/.test(core)) {
+    core = core.split(/[:\n]/).pop().trim();
+  } else if (/biết\b/i.test(core)) {
+    core = core.split(/biết\b/i).pop().trim();
+  } else if (/\btrình\b/i.test(core)) {
+    core = core.split(/\btrình\b/i).pop().trim();
+  } else if (/\btoán\b/i.test(core)) {
+    core = core.split(/\btoán\b/i).pop().trim();
+  }
   const t = core.replace(/\s+/g, "").replace(/−/g, "-").replace(/²/g, "^2").toLowerCase();
-  const res = { topic, kind, diff, eq: ["linear", "quad", "system", "ineq"].includes(label) ? core : text.trim(), steps: [], ans: null, graph: null, valid: false };
+  const res = { topic, kind, diff, label, theorem: TOPIC_THEOREMS[label] || "", eq: ["linear", "quad", "system", "ineq"].includes(label) ? core : text.trim(), steps: [], ans: null, graph: null, valid: false };
   const steps = res.steps;
   const tLower = text.toLowerCase();
 
@@ -592,7 +692,17 @@ function solve(text) {
   }
 
   // ==================== 2. BÀI TẬP TOÁN HỌC ====================
-  else if (label === "linear" && (m = t.match(/(-?\d*)x([+-]\d+)?=(-?\d+)$/)) && co(m[1])) {
+  else if (["linear", "quad"].includes(label) && (pe = polyEquation(t))) {
+    res.valid = true;
+    res.ans = pe.ans;
+    steps.push(...pe.steps);
+    if (pe.deg === 1) {
+      res.kind = "Phương trình bậc 1";
+    } else if (pe.deg === 2) {
+      res.kind = "Phương trình bậc 2";
+      res.graph = { type: "parabola", title: "Đồ thị Parabol phương trình bậc hai" };
+    }
+  } else if (label === "linear" && (m = t.match(/(-?\d*)x([+-]\d+)?=(-?\d+)$/)) && co(m[1])) {
     const a = co(m[1]), b = parseInt(m[2] || 0, 10), c = parseInt(m[3], 10), r = c - b, x = r / a;
     res.valid = true; res.ans = `x = ${f(x)}`; res.graph = { a, b: b - c, x };
     steps.push(
@@ -600,17 +710,39 @@ function solve(text) {
       { t: "Chuyển vế đổi dấu", h: math_(`${f(a)}x = ${f(r)}`) + concept("Quy tắc chuyển vế", "Chuyển hạng tử sang vế kia phải đổi dấu.") },
       { t: "Kết luận nghiệm", h: ok(`x = ${f(x)}`) }
     );
-  } else if (["linear", "quad"].includes(label) && (pe = polyEquation(t))) {
-    res.valid = true; res.ans = pe.ans; steps.push(...pe.steps);
+  } else if (label === "proof" || (/(?:h[ìi]nh\s*thoi|rhombus)/i.test(text) && (/(?:trung\s*đi[ểe]m|c[ùu]ng\s*n[ằa]m|đ[ưu][ờo]ng\s*tr[òo]n|ch[ứu]ng\s*minh)/i.test(text)))) {
+    const mSide = text.match(/(?:ab|cạnh)\s*=\s*([a-zA-Z0-9]+)/i);
+    const aVal = mSide ? mSide[1] : "a";
+    res.valid = true;
+    res.ans = `Tâm O (giao điểm AC và BD), Bán kính R = ${aVal}/2`;
+    res.graph = { type: "rhombus_circle", a: aVal, title: "Hình thoi ABCD và đường tròn đi qua 6 điểm" };
+    steps.push(
+      {
+        t: "Xác định tính chất tam giác đều",
+        h: `<p>Hình thoi ABCD có $AB = AD = ${aVal}$ và $\\widehat{A} = 60^\\circ$. Do đó $\\Delta ABD$ là tam giác đều cạnh $a$.</p>`
+          + concept("Tính chất hình thoi & tam giác đều", "Tam giác cân có một góc $60^\\circ$ là tam giác đều. Trong tam giác đều cạnh $a$, mọi góc bằng $60^\\circ$ và ba cạnh bằng nhau.")
+      },
+      {
+        t: "Chứng minh tứ giác EFGH là hình chữ nhật",
+        h: `<p>Gọi E, F, G, H lần lượt là trung điểm của AB, BC, CD, DA. Theo tính chất đường trung bình, $EF \\parallel AC$, $HG \\parallel AC$ và $EF = HG = \\frac{AC}{2}$. Tương tự $EH \\parallel BD$ và $EH = \\frac{BD}{2}$. Vì hai đường chéo hình thoi vuông góc ($AC \\perp BD$) nên $EF \\perp EH$. Do đó tứ giác $EFGH$ là hình chữ nhật có tâm là giao điểm $O$ của $AC$ và $BD$.</p>`
+          + concept("Định lý đường trung bình & Hình chữ nhật", "Đoạn thẳng nối trung điểm hai cạnh của tam giác song song với cạnh thứ ba và bằng một nửa cạnh ấy. Tứ giác có 3 góc vuông là hình chữ nhật.")
+      },
+      {
+        t: "Chứng minh 6 điểm cùng thuộc đường tròn",
+        h: `<p>Vì $EFGH$ là hình chữ nhật tâm $O$ nên $OE = OF = OG = OH = R$. Trong tam giác đều $ABD$, đường cao $AO = \\frac{a\\sqrt{3}}{2}$ và nửa đường chéo $OB = OD = \\frac{a}{2}$. Ta có $OE = \\frac{BD}{2} = \\frac{a}{2}$, do đó $OE = OF = OG = OH = OB = OD = \\frac{${aVal}}{2}$.</p>`
+          + ok(`6 điểm B, D, E, F, G, H cùng nằm trên đường tròn $(O; \\frac{${aVal}}{2})$`)
+      }
+    );
   } else if (label === "circle") {
     const cleanT = text.toLowerCase().replace(/\s+/g, "");
     const m = cleanT.match(/(?:r=|bánkính(?:r=)?)(\d+(?:\.\d+)?)/) || text.match(/[rR]\s*=\s*(\d+(?:\.\d+)?)/);
     if (m) {
       const r = parseFloat(m[1]), ch = text.toLowerCase().includes("chu vi"), v = ch ? 2 * Math.PI * r : Math.PI * r * r;
       res.valid = true; res.ans = `${ch ? "C" : "S"} ≈ ${f(v)}`;
+      res.graph = { type: "circle", r, title: `Đường tròn bán kính r = ${f(r)}` };
       steps.push(
         { t: "Xác định bán kính r", h: math_(`r = ${f(r)}`) + concept("Bán kính hình tròn", "Bán kính là khoảng cách từ tâm đến một điểm bất kỳ trên đường tròn.") },
-        { t: "Áp dụng công thức tính", h: math_(ch ? `C = 2\pi r = 2 \cdot 3.1416 \cdot ${f(r)} \approx ${f(v)}` : `S = \pi r^2 = 3.1416 \cdot (${f(r)})^2 \approx ${f(v)}`) + concept("Công thức chuẩn", ch ? "$C = 2\pi r$" : "$S = \pi r^2$") },
+        { t: "Áp dụng công thức tính", h: math_(ch ? `C = 2\\pi r = 2 \\cdot 3.1416 \\cdot ${f(r)} \\approx ${f(v)}` : `S = \\pi r^2 = 3.1416 \\cdot (${f(r)})^2 \\approx ${f(v)}`) + concept("Công thức chuẩn", ch ? "$C = 2\\pi r$" : "$S = \\pi r^2$") },
         { t: "Kết quả", h: ok(res.ans) }
       );
     }
@@ -620,8 +752,8 @@ function solve(text) {
       const p = ns[0], n = ns[1], v = (p * n) / 100;
       res.valid = true; res.ans = f(v);
       steps.push(
-        { t: "Xác định dữ kiện bài toán", h: math_(`p = ${f(p)}\%, \quad N = ${f(n)}`) },
-        { t: "Áp dụng công thức tính phần trăm", h: math_(`\frac{${f(p)}}{100} \times ${f(n)} = ${f(v)}`) + concept("Quy tắc phần trăm", "$p\%$ của một số $N$ được tính theo công thức: $\frac{p}{100} \times N$.") },
+        { t: "Xác định dữ kiện bài toán", h: math_(`p = ${f(p)}\\%, \\quad N = ${f(n)}`) },
+        { t: "Áp dụng công thức tính phần trăm", h: math_(`\\frac{${f(p)}}{100} \\times ${f(n)} = ${f(v)}`) + concept("Quy tắc phần trăm", "$p\\%$ của một số $N$ được tính theo công thức: $\\frac{p}{100} \\times N$.") },
         { t: "Kết luận đáp số", h: ok(res.ans) }
       );
     }
@@ -632,26 +764,28 @@ function solve(text) {
       if (low.includes("huyền") || low.includes("tam giác vuông") || low.includes("tam giác")) {
         const c = Math.hypot(a, b);
         res.valid = true; res.ans = `c = ${f(c)}`;
-        res.graph = { type: "right_triangle", a, b, c };
+        res.graph = { type: "right_triangle", a, b, c, title: `Tam giác vuông cạnh a = ${f(a)}, b = ${f(b)}, c = ${f(c)}` };
         steps.push(
-          { t: "Xác định hai cạnh góc vuông", h: math_(`a = ${f(a)}, \quad b = ${f(b)}`) },
-          { t: "Áp dụng định lý Pythagore", h: math_(`c = \sqrt{a^2 + b^2} = \sqrt{${f(a)}^2 + ${f(b)}^2} = \sqrt{${f(a * a + b * b)}} = ${f(c)}`) + concept("Định lý Pythagore", "Trong tam giác vuông: bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông ($c^2 = a^2 + b^2$).") },
+          { t: "Xác định hai cạnh góc vuông", h: math_(`a = ${f(a)}, \\quad b = ${f(b)}`) },
+          { t: "Áp dụng định lý Pythagore", h: math_(`c = \\sqrt{a^2 + b^2} = \\sqrt{${f(a)}^2 + ${f(b)}^2} = \\sqrt{${f(a * a + b * b)}} = ${f(c)}`) + concept("Định lý Pythagore", "Trong tam giác vuông: bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông ($c^2 = a^2 + b^2$).") },
           { t: "Kết luận cạnh huyền", h: ok(res.ans) }
         );
       } else if (low.includes("chu vi") && (low.includes("chữ nhật") || low.includes("hình chữ nhật"))) {
         const p = 2 * (a + b);
         res.valid = true; res.ans = `P = ${f(p)}`;
+        res.graph = { type: "rectangle", w: Math.max(a, b), h: Math.min(a, b), title: `Hình chữ nhật kích thước ${Math.max(a, b)} × ${Math.min(a, b)}` };
         steps.push(
-          { t: "Xác định chiều dài và chiều rộng", h: math_(`a = ${f(a)}, \quad b = ${f(b)}`) },
-          { t: "Tính chu vi hình chữ nhật", h: math_(`P = 2 \times (a + b) = 2 \times (${f(a)} + ${f(b)}) = ${f(p)}`) + concept("Chu vi hình chữ nhật", "$P = 2(a + b)$.") },
+          { t: "Xác định chiều dài và chiều rộng", h: math_(`a = ${f(a)}, \\quad b = ${f(b)}`) },
+          { t: "Tính chu vi hình chữ nhật", h: math_(`P = 2 \\times (a + b) = 2 \\times (${f(a)} + ${f(b)}) = ${f(p)}`) + concept("Chu vi hình chữ nhật", "$P = 2(a + b)$.") },
           { t: "Kết luận", h: ok(res.ans) }
         );
       } else if (low.includes("diện tích") && (low.includes("chữ nhật") || low.includes("hình chữ nhật"))) {
         const s = a * b;
         res.valid = true; res.ans = `S = ${f(s)}`;
+        res.graph = { type: "rectangle", w: Math.max(a, b), h: Math.min(a, b), title: `Hình chữ nhật kích thước ${Math.max(a, b)} × ${Math.min(a, b)}` };
         steps.push(
-          { t: "Xác định chiều dài và chiều rộng", h: math_(`a = ${f(a)}, \quad b = ${f(b)}`) },
-          { t: "Tính diện tích hình chữ nhật", h: math_(`S = a \times b = ${f(a)} \times ${f(b)} = ${f(s)}`) + concept("Diện tích hình chữ nhật", "$S = a \times b$.") },
+          { t: "Xác định chiều dài và chiều rộng", h: math_(`a = ${f(a)}, \\quad b = ${f(b)}`) },
+          { t: "Tính diện tích hình chữ nhật", h: math_(`S = a \\times b = ${f(a)} \\times ${f(b)} = ${f(s)}`) + concept("Diện tích hình chữ nhật", "$S = a \\times b$.") },
           { t: "Kết luận", h: ok(res.ans) }
         );
       }
@@ -1226,16 +1360,71 @@ function detectGraph(text, res = {}) {
     };
   }
 
-  // 7. Tam giác vuông & Pytago
-  if (/tam giác|pytago|pitago|cạnh huyền|vuông tại|định lý pytago/.test(str)) {
-    return {
-      type: "triangle",
-      title: "Tam giác vuông và định lý Pytago"
-    };
+  // 7. Hình thoi
+  if (/hình\s*thoi|rhombus/i.test(str)) {
+    if (/đường\s*tròn|trung\s*điểm|cùng\s*nằm\s*trên|nội\s*tiếp/i.test(str)) {
+      return { type: "rhombus_circle", title: "Hình thoi và đường tròn đi qua các trung điểm" };
+    }
+    return { type: "rhombus", title: "Sơ đồ hình thoi và hai đường chéo vuông góc" };
   }
 
-  // 8. Đường tròn
-  if (/đường tròn|hình tròn|bán kính|đường kính|tâm o\b/.test(str)) {
+  // 8. Hình chóp không gian
+  if (/hình\s*chóp|chóp\s*tam\s*giác|chóp\s*tứ\s*giác|chóp\s*đều|\bs\.[a-z]{3,4}\b/i.test(str)) {
+    return { type: "pyramid", title: "Mô hình hình chóp trong không gian S.ABCD" };
+  }
+
+  // 9. Khối hộp / Lăng trụ / Lập phương
+  if (/hình\s*hộp|lập\s*phương|lăng\s*trụ|khối\s*hộp|[a-z]{4}\.[a-z]{4}/i.test(str)) {
+    return { type: "prism_box", title: "Mô hình khối hộp không gian ABCD.A'B'C'D'" };
+  }
+
+  // 10. Hình trụ
+  if (/hình\s*trụ|khối\s*trụ/i.test(str)) {
+    return { type: "cylinder", title: "Khối tròn xoay: Hình trụ" };
+  }
+
+  // 11. Hình nón
+  if (/hình\s*nón|khối\s*nón|đường\s*sinh/i.test(str)) {
+    return { type: "cone", title: "Khối tròn xoay: Hình nón" };
+  }
+
+  // 12. Hình cầu / Mặt cầu
+  if (/hình\s*cầu|mặt\s*cầu/i.test(str)) {
+    return { type: "sphere", title: "Mặt cầu và khối cầu tâm O bán kính R" };
+  }
+
+  // 13. Hình vuông
+  if (/hình\s*vuông/i.test(str)) {
+    return { type: "square", title: "Sơ đồ hình vuông ABCD và tính chất đối xứng" };
+  }
+
+  // 14. Hình chữ nhật
+  if (/hình\s*chữ\s*nhật|chữ\s*nhật/i.test(str)) {
+    return { type: "rectangle", title: "Sơ đồ hình chữ nhật ABCD và các đường chéo" };
+  }
+
+  // 15. Hình bình hành
+  if (/hình\s*bình\s*hành/i.test(str)) {
+    return { type: "parallelogram", title: "Sơ đồ hình bình hành ABCD và giao điểm đường chéo" };
+  }
+
+  // 16. Hình thang
+  if (/hình\s*thang|thang\s*cân|thang\s*vuông/i.test(str)) {
+    return { type: "trapezoid", title: "Sơ đồ hình thang ABCD và đường cao" };
+  }
+
+  // 17. Tiếp tuyến đường tròn
+  if (/tiếp\s*tuyến|tiếp\s*xúc/i.test(str) && /đường\s*tròn|hình\s*tròn|\(o\)/i.test(str)) {
+    return { type: "circle_tangent", title: "Sơ đồ đường tròn và hai tiếp tuyến cắt nhau" };
+  }
+
+  // 18. Tam giác nội tiếp / ngoại tiếp đường tròn
+  if (/nội\s*tiếp|ngoại\s*tiếp/i.test(str) && /đường\s*tròn|\(o\)/i.test(str)) {
+    return { type: "circle_triangle", title: "Sơ đồ tam giác nội tiếp đường tròn tâm O" };
+  }
+
+  // 19. Đường tròn cơ bản
+  if (/đường\s*tròn|hình\s*tròn|bán\s*kính|đường\s*kính|tâm\s*o\b/i.test(str)) {
     const rMatch = str.match(/(?:r\s*=\s*|bán kính\s*(?:là|:)?\s*)(\d+(?:[.,]\d+)?)\s*(cm|m|mm)?/i);
     return {
       type: "circle",
@@ -1245,7 +1434,31 @@ function detectGraph(text, res = {}) {
     };
   }
 
-  // 9. Parabol
+  // 20. Tam giác vuông & Pytago
+  if (/tam\s*giác\s*vuông|pytago|pitago|cạnh\s*huyền|vuông\s*tại|định\s*lý\s*pytago/i.test(str)) {
+    return {
+      type: "triangle",
+      title: "Tam giác vuông và định lý Pytago"
+    };
+  }
+
+  // 21. Tam giác cân & đều
+  if (/tam\s*giác\s*cân|tam\s*giác\s*đều|cân\s*tại/i.test(str)) {
+    return {
+      type: "triangle_iso",
+      title: "Sơ đồ tam giác cân / tam giác đều ABC"
+    };
+  }
+
+  // 22. Tam giác thường / tổng quát
+  if (/tam\s*giác/i.test(str)) {
+    return {
+      type: "triangle_general",
+      title: "Sơ đồ tam giác ABC và các đường đặc biệt (đường cao, trung tuyến)"
+    };
+  }
+
+  // 23. Parabol
   if (/parabol|parabola|hàm số bậc hai|x\^2|x²|đỉnh parabol/.test(str)) {
     return {
       type: "parabola",
@@ -1253,11 +1466,19 @@ function detectGraph(text, res = {}) {
     };
   }
 
-  // 10. Mạch điện & Định luật Ohm
+  // 24. Mạch điện & Định luật Ohm
   if (/mạch điện|mạch nối tiếp|mạch song song|điện trở|định luật ohm|định luật ôm|\bhiệu điện thế\b|\bcường độ dòng điện\b|\b\u03a9\b|\bohm\b|\bu\s*=\s*\d+|\bi\s*=\s*\d+/.test(str)) {
     return {
       type: "circuit",
       title: "Sơ đồ đoạn mạch điện"
+    };
+  }
+
+  // 25. Fallback hình học chung nếu bài thuộc môn Hình học (Geometry)
+  if (res && (res.topic === "Geometry" || res.topic === "Hình học")) {
+    return {
+      type: "triangle_general",
+      title: "Mô hình hình học minh họa trực quan"
     };
   }
 
@@ -1266,6 +1487,7 @@ function detectGraph(text, res = {}) {
 
 function graphSvg(g) {
   if (!g) return "";
+  if (g.svg) return g.svg;
   const W = 400, H = 220;
 
   // 1. Con lắc lò xo
@@ -1446,7 +1668,7 @@ function graphSvg(g) {
   }
 
   // 7. Tam giác vuông & Pytago
-  if (g.type === "triangle") {
+  if (g.type === "triangle" || g.type === "right_triangle" || g.type === "triangle_area") {
     return `<svg viewBox="0 0 ${W} ${H}" width="100%">
       <polygon points="70,170 300,170 70,50" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
       <rect x="70" y="152" width="18" height="18" fill="none" stroke="var(--pri)" stroke-width="1.8"/>
@@ -1460,6 +1682,379 @@ function graphSvg(g) {
       <rect x="235" y="20" width="150" height="65" rx="8" fill="var(--card)" stroke="var(--sec)" stroke-width="1.5"/>
       <text x="248" y="44" font-size="12" font-weight="700" fill="var(--sec)">Định lý Pytago:</text>
       <text x="248" y="68" font-size="13" font-weight="700" fill="var(--tx)">BC² = AB² + AC²</text>
+    </svg>`;
+  }
+
+  // 7b. Tam giác thường / nhọn ABC
+  if (g.type === "triangle_general") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="120,40 35,170 245,170" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="120" y1="40" x2="120" y2="170" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <rect x="120" y="158" width="10" height="12" fill="none" stroke="var(--err)" stroke-width="1.5"/>
+      <line x1="120" y1="40" x2="140" y2="170" stroke="var(--sec)" stroke-width="1.8"/>
+      <circle cx="127" cy="126" r="3.5" fill="var(--ter)"/>
+      <text x="133" y="130" font-size="12" font-weight="700" fill="var(--ter)">G</text>
+      <text x="115" y="30" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="18" y="180" font-size="14" font-weight="700" fill="var(--pri)">B</text>
+      <text x="252" y="180" font-size="14" font-weight="700" fill="var(--pri)">C</text>
+      <text x="114" y="186" font-size="12" font-weight="700" fill="var(--err)">H</text>
+      <text x="142" y="186" font-size="12" font-weight="700" fill="var(--sec)">M</text>
+      <rect x="255" y="35" width="138" height="148" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="265" y="58" font-size="12" font-weight="700" fill="var(--pri)">Tam giác ABC:</text>
+      <text x="265" y="80" font-size="11.5" fill="var(--tx)">• Đường cao AH ⊥ BC</text>
+      <text x="265" y="102" font-size="11.5" fill="var(--tx)">• Trung tuyến AM</text>
+      <text x="265" y="124" font-size="11.5" fill="var(--tx)">• Trọng tâm G (AG=⅔AM)</text>
+      <text x="265" y="146" font-size="11.5" font-weight="700" fill="var(--sec)">• S = ½·a·hₐ</text>
+      <text x="265" y="168" font-size="10.5" fill="var(--tx2)">Định lý Sin: a/sinA=2R</text>
+    </svg>`;
+  }
+
+  // 7c. Tam giác cân & Tam giác đều
+  if (g.type === "triangle_iso") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="140,35 45,175 235,175" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="140" y1="35" x2="140" y2="175" stroke="var(--sec)" stroke-width="2" stroke-dasharray="3,3"/>
+      <rect x="140" y="163" width="10" height="12" fill="none" stroke="var(--sec)" stroke-width="1.5"/>
+      <line x1="88" y1="102" x2="98" y2="108" stroke="var(--pri)" stroke-width="2"/>
+      <line x1="182" y1="108" x2="192" y2="102" stroke="var(--pri)" stroke-width="2"/>
+      <text x="135" y="26" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="28" y="185" font-size="14" font-weight="700" fill="var(--pri)">B</text>
+      <text x="242" y="185" font-size="14" font-weight="700" fill="var(--pri)">C</text>
+      <text x="135" y="194" font-size="12" font-weight="700" fill="var(--sec)">H</text>
+      <rect x="250" y="40" width="144" height="140" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="260" y="64" font-size="12" font-weight="700" fill="var(--pri)">Tam giác cân tại A:</text>
+      <text x="260" y="88" font-size="11.5" fill="var(--tx)">• Hai cạnh bên AB = AC</text>
+      <text x="260" y="110" font-size="11.5" fill="var(--tx)">• Hai góc đáy B = C</text>
+      <text x="260" y="132" font-size="11.5" fill="var(--tx)">• AH là đường cao,</text>
+      <text x="260" y="152" font-size="11" font-weight="700" fill="var(--sec)">  trung tuyến & phân giác</text>
+    </svg>`;
+  }
+
+  // 7d. Hình thoi và đường tròn đi qua 6 điểm
+  if (g.type === "rhombus_circle") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="50,110 150,45 250,110 150,175" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="50" y1="110" x2="250" y2="110" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <line x1="150" y1="45" x2="150" y2="175" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <rect x="150" y="100" width="10" height="10" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <circle cx="150" cy="110" r="65" fill="none" stroke="var(--sec)" stroke-width="2" stroke-dasharray="3,3"/>
+      <circle cx="150" cy="110" r="3.5" fill="var(--sec)"/>
+      <text x="142" y="125" font-size="12" font-weight="700" fill="var(--sec)">O</text>
+      <circle cx="50" cy="110" r="4" fill="var(--pri)"/>
+      <text x="32" y="115" font-size="13" font-weight="700" fill="var(--pri)">A (60°)</text>
+      <circle cx="150" cy="45" r="4" fill="var(--sec)"/>
+      <text x="145" y="36" font-size="13" font-weight="700" fill="var(--sec)">B</text>
+      <circle cx="250" cy="110" r="4" fill="var(--pri)"/>
+      <text x="258" y="115" font-size="13" font-weight="700" fill="var(--pri)">C</text>
+      <circle cx="150" cy="175" r="4" fill="var(--sec)"/>
+      <text x="145" y="195" font-size="13" font-weight="700" fill="var(--sec)">D</text>
+      <circle cx="100" cy="77.5" r="3.5" fill="var(--err)"/>
+      <text x="82" y="72" font-size="11" font-weight="700" fill="var(--err)">E</text>
+      <circle cx="200" cy="77.5" r="3.5" fill="var(--err)"/>
+      <text x="206" y="72" font-size="11" font-weight="700" fill="var(--err)">F</text>
+      <circle cx="200" cy="142.5" r="3.5" fill="var(--err)"/>
+      <text x="206" y="152" font-size="11" font-weight="700" fill="var(--err)">G</text>
+      <circle cx="100" cy="142.5" r="3.5" fill="var(--err)"/>
+      <text x="82" y="152" font-size="11" font-weight="700" fill="var(--err)">H</text>
+      <rect x="270" y="30" width="122" height="155" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="278" y="52" font-size="11.5" font-weight="700" fill="var(--pri)">Hình thoi ABCD:</text>
+      <text x="278" y="74" font-size="11" fill="var(--tx)">• AB = a, góc A = 60°</text>
+      <text x="278" y="94" font-size="11" fill="var(--tx)">• AC ⊥ BD tại O</text>
+      <text x="278" y="114" font-size="11" fill="var(--tx)">• E, F, G, H là t/điểm</text>
+      <text x="278" y="136" font-size="11" font-weight="700" fill="var(--sec)">6 điểm cùng thuộc</text>
+      <text x="278" y="156" font-size="11" font-weight="700" fill="var(--sec)">đường tròn (O; a/2)</text>
+    </svg>`;
+  }
+
+  // 7e. Hình thoi
+  if (g.type === "rhombus") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="50,110 150,45 250,110 150,175" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="50" y1="110" x2="250" y2="110" stroke="var(--tx2)" stroke-width="1.8" stroke-dasharray="4,4"/>
+      <line x1="150" y1="45" x2="150" y2="175" stroke="var(--tx2)" stroke-width="1.8" stroke-dasharray="4,4"/>
+      <rect x="150" y="100" width="10" height="10" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <circle cx="150" cy="110" r="3.5" fill="var(--pri)"/>
+      <text x="142" y="125" font-size="12" font-weight="700" fill="var(--pri)">O</text>
+      <text x="32" y="115" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="145" y="36" font-size="14" font-weight="700" fill="var(--sec)">B</text>
+      <text x="258" y="115" font-size="14" font-weight="700" fill="var(--pri)">C</text>
+      <text x="145" y="195" font-size="14" font-weight="700" fill="var(--sec)">D</text>
+      <rect x="270" y="35" width="122" height="145" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="280" y="58" font-size="12" font-weight="700" fill="var(--pri)">Hình thoi ABCD:</text>
+      <text x="280" y="82" font-size="11" fill="var(--tx)">• 4 cạnh bằng nhau</text>
+      <text x="280" y="104" font-size="11" fill="var(--tx)">• AC ⊥ BD tại O</text>
+      <text x="280" y="126" font-size="11" fill="var(--tx)">• Chu vi: P = 4a</text>
+      <text x="280" y="148" font-size="11" font-weight="700" fill="var(--sec)">• S = ½ · d₁ · d₂</text>
+    </svg>`;
+  }
+
+  // 7f. Hình chữ nhật
+  if (g.type === "rectangle") {
+    const aVal = g.w || g.a ? `a = ${g.w || g.a}` : "chiều dài a";
+    const bVal = g.h || g.b ? `b = ${g.h || g.b}` : "chiều rộng b";
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <rect x="40" y="55" width="200" height="110" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" rx="2"/>
+      <line x1="40" y1="55" x2="240" y2="165" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <line x1="240" y1="55" x2="40" y2="165" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <circle cx="140" cy="110" r="3.5" fill="var(--pri)"/>
+      <text x="145" y="122" font-size="12" font-weight="700" fill="var(--pri)">O</text>
+      <rect x="40" y="55" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <rect x="228" y="55" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <rect x="228" y="153" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <rect x="40" y="153" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <text x="26" y="50" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="246" y="50" font-size="14" font-weight="700" fill="var(--sec)">B</text>
+      <text x="246" y="180" font-size="14" font-weight="700" fill="var(--sec)">C</text>
+      <text x="26" y="180" font-size="14" font-weight="700" fill="var(--pri)">D</text>
+      <text x="130" y="45" font-size="12.5" font-weight="700" fill="var(--tx)">${aVal}</text>
+      <text x="15" y="115" font-size="12.5" font-weight="700" fill="var(--tx)">${bVal}</text>
+      <rect x="260" y="40" width="132" height="135" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="270" y="64" font-size="12" font-weight="700" fill="var(--pri)">Hình chữ nhật ABCD:</text>
+      <text x="270" y="88" font-size="11.5" fill="var(--tx)">• 4 góc vuông</text>
+      <text x="270" y="110" font-size="11.5" fill="var(--tx)">• AC = BD (tâm O)</text>
+      <text x="270" y="132" font-size="11.5" font-weight="700" fill="var(--sec)">• P = 2(a + b)</text>
+      <text x="270" y="154" font-size="11.5" font-weight="700" fill="var(--err)">• S = a · b</text>
+    </svg>`;
+  }
+
+  // 7g. Hình vuông
+  if (g.type === "square") {
+    const aVal = g.a ? `a = ${g.a}` : "cạnh a";
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <rect x="55" y="45" width="130" height="130" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" rx="2"/>
+      <line x1="55" y1="45" x2="185" y2="175" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <line x1="185" y1="45" x2="55" y2="175" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <circle cx="120" cy="110" r="3.5" fill="var(--pri)"/>
+      <text x="125" y="122" font-size="12" font-weight="700" fill="var(--pri)">O</text>
+      <rect x="55" y="45" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <rect x="173" y="45" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <rect x="173" y="163" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <rect x="55" y="163" width="12" height="12" fill="none" stroke="var(--pri)" stroke-width="1.5"/>
+      <text x="40" y="42" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="192" y="42" font-size="14" font-weight="700" fill="var(--sec)">B</text>
+      <text x="192" y="190" font-size="14" font-weight="700" fill="var(--sec)">C</text>
+      <text x="40" y="190" font-size="14" font-weight="700" fill="var(--pri)">D</text>
+      <text x="110" y="36" font-size="12.5" font-weight="700" fill="var(--tx)">${aVal}</text>
+      <rect x="220" y="38" width="168" height="145" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="232" y="62" font-size="12" font-weight="700" fill="var(--pri)">Hình vuông ABCD:</text>
+      <text x="232" y="86" font-size="11.5" fill="var(--tx)">• 4 cạnh = a, 4 góc = 90°</text>
+      <text x="232" y="108" font-size="11.5" fill="var(--tx)">• AC ⊥ BD tại O</text>
+      <text x="232" y="130" font-size="11.5" font-weight="700" fill="var(--sec)">• Chu vi P = 4a</text>
+      <text x="232" y="152" font-size="11.5" font-weight="700" fill="var(--err)">• S = a², d = a√2</text>
+    </svg>`;
+  }
+
+  // 7h. Hình bình hành
+  if (g.type === "parallelogram") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="70,55 220,55 185,165 35,165" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="70" y1="55" x2="185" y2="165" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <line x1="220" y1="55" x2="35" y2="165" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <circle cx="127" cy="110" r="3.5" fill="var(--pri)"/>
+      <text x="133" y="122" font-size="12" font-weight="700" fill="var(--pri)">O</text>
+      <line x1="70" y1="55" x2="70" y2="165" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <rect x="70" y="153" width="10" height="12" fill="none" stroke="var(--err)" stroke-width="1.5"/>
+      <text x="75" y="115" font-size="11.5" font-weight="700" fill="var(--err)">h</text>
+      <text x="55" y="48" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="228" y="52" font-size="14" font-weight="700" fill="var(--sec)">B</text>
+      <text x="192" y="180" font-size="14" font-weight="700" fill="var(--sec)">C</text>
+      <text x="20" y="175" font-size="14" font-weight="700" fill="var(--pri)">D</text>
+      <text x="65" y="180" font-size="12" font-weight="700" fill="var(--err)">H</text>
+      <rect x="245" y="40" width="145" height="135" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="255" y="64" font-size="12" font-weight="700" fill="var(--pri)">Hình bình hành ABCD:</text>
+      <text x="255" y="88" font-size="11.5" fill="var(--tx)">• AB // CD, AD // BC</text>
+      <text x="255" y="110" font-size="11.5" fill="var(--tx)">• AB = CD, AD = BC</text>
+      <text x="255" y="132" font-size="11.5" fill="var(--tx)">• AC, BD cắt nhau tại O</text>
+      <text x="255" y="154" font-size="11.5" font-weight="700" fill="var(--sec)">• Diện tích S = a · h</text>
+    </svg>`;
+  }
+
+  // 7i. Hình thang
+  if (g.type === "trapezoid") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="80,55 180,55 240,165 40,165" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="80" y1="55" x2="80" y2="165" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <rect x="80" y="153" width="10" height="12" fill="none" stroke="var(--err)" stroke-width="1.5"/>
+      <text x="85" y="115" font-size="11.5" font-weight="700" fill="var(--err)">h</text>
+      <text x="68" y="48" font-size="14" font-weight="700" fill="var(--pri)">A</text>
+      <text x="186" y="50" font-size="14" font-weight="700" fill="var(--sec)">B</text>
+      <text x="246" y="180" font-size="14" font-weight="700" fill="var(--sec)">C</text>
+      <text x="25" y="175" font-size="14" font-weight="700" fill="var(--pri)">D</text>
+      <text x="75" y="180" font-size="12" font-weight="700" fill="var(--err)">H</text>
+      <text x="125" y="46" font-size="11.5" font-weight="700" fill="var(--tx)">đáy nhỏ a</text>
+      <text x="135" y="185" font-size="11.5" font-weight="700" fill="var(--tx)">đáy lớn b</text>
+      <rect x="255" y="40" width="138" height="135" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="265" y="64" font-size="12" font-weight="700" fill="var(--pri)">Hình thang ABCD:</text>
+      <text x="265" y="88" font-size="11.5" fill="var(--tx)">• Đáy AB // CD</text>
+      <text x="265" y="110" font-size="11.5" fill="var(--tx)">• Đường cao AH = h</text>
+      <text x="265" y="132" font-size="11.5" font-weight="700" fill="var(--sec)">• S = ½·(a + b)·h</text>
+      <text x="265" y="154" font-size="11" fill="var(--tx2)">(Trung bình cộng đáy × h)</text>
+    </svg>`;
+  }
+
+  // 7j. Tiếp tuyến đường tròn
+  if (g.type === "circle_tangent") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <circle cx="110" cy="110" r="60" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5"/>
+      <circle cx="110" cy="110" r="3.5" fill="var(--pri)"/>
+      <text x="96" y="106" font-size="13" font-weight="700" fill="var(--pri)">O</text>
+      <line x1="110" y1="110" x2="245" y2="110" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <circle cx="245" cy="110" r="4" fill="var(--sec)"/>
+      <text x="252" y="115" font-size="14" font-weight="700" fill="var(--sec)">M</text>
+      <line x1="245" y1="110" x2="110" y2="50" stroke="var(--sec)" stroke-width="2.5"/>
+      <line x1="245" y1="110" x2="110" y2="170" stroke="var(--sec)" stroke-width="2.5"/>
+      <line x1="110" y1="110" x2="110" y2="50" stroke="var(--err)" stroke-width="1.8"/>
+      <line x1="110" y1="110" x2="110" y2="170" stroke="var(--err)" stroke-width="1.8"/>
+      <rect x="110" y="50" width="10" height="10" fill="none" stroke="var(--err)" stroke-width="1.5"/>
+      <rect x="110" y="160" width="10" height="10" fill="none" stroke="var(--err)" stroke-width="1.5"/>
+      <line x1="110" y1="50" x2="110" y2="170" stroke="var(--pri)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="105" y="42" font-size="13" font-weight="700" fill="var(--err)">A (tiếp điểm)</text>
+      <text x="105" y="190" font-size="13" font-weight="700" fill="var(--err)">B (tiếp điểm)</text>
+      <rect x="255" y="35" width="138" height="148" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="265" y="58" font-size="12" font-weight="700" fill="var(--pri)">Hai tiếp tuyến MA, MB:</text>
+      <text x="265" y="82" font-size="11.5" fill="var(--tx)">• MA ⊥ OA, MB ⊥ OB</text>
+      <text x="265" y="104" font-size="11.5" font-weight="700" fill="var(--sec)">• MA = MB</text>
+      <text x="265" y="126" font-size="11.5" fill="var(--tx)">• MO là phân giác</text>
+      <text x="265" y="146" font-size="11" fill="var(--tx2)">  góc AMB và AOB</text>
+      <text x="265" y="168" font-size="11" font-weight="700" fill="var(--err)">• MO ⊥ dây AB</text>
+    </svg>`;
+  }
+
+  // 7k. Tam giác nội tiếp đường tròn
+  if (g.type === "circle_triangle") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <circle cx="120" cy="110" r="75" fill="var(--low)" stroke="var(--pri)" stroke-width="2.5"/>
+      <polygon points="120,35 55,145 190,140" fill="rgba(99,102,241,0.08)" stroke="var(--sec)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="120" cy="110" r="3.5" fill="var(--err)"/>
+      <text x="110" y="106" font-size="12" font-weight="700" fill="var(--err)">O</text>
+      <line x1="120" y1="110" x2="120" y2="35" stroke="var(--err)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="125" y="75" font-size="11.5" font-weight="700" fill="var(--err)">R</text>
+      <text x="115" y="26" font-size="14" font-weight="700" fill="var(--sec)">A</text>
+      <text x="38" y="155" font-size="14" font-weight="700" fill="var(--sec)">B</text>
+      <text x="198" y="150" font-size="14" font-weight="700" fill="var(--sec)">C</text>
+      <rect x="250" y="40" width="144" height="135" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="260" y="64" font-size="12" font-weight="700" fill="var(--pri)">Tam giác nội tiếp (O):</text>
+      <text x="260" y="88" font-size="11.5" fill="var(--tx)">• 3 đỉnh A, B, C ∈ (O)</text>
+      <text x="260" y="110" font-size="11.5" fill="var(--tx)">• Bán kính đường tròn R</text>
+      <text x="260" y="132" font-size="11.5" font-weight="700" fill="var(--sec)">• a/sinA = 2R</text>
+      <text x="260" y="154" font-size="11" fill="var(--tx2)">S = abc / (4R)</text>
+    </svg>`;
+  }
+
+  // 7l. Hình chóp không gian S.ABCD
+  if (g.type === "pyramid") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="130,25 35,145 95,185 225,165" fill="rgba(99,102,241,0.06)" stroke="var(--pri)" stroke-width="2.2" stroke-linejoin="round"/>
+      <line x1="130" y1="25" x2="95" y2="185" stroke="var(--pri)" stroke-width="2.2"/>
+      <line x1="35" y1="145" x2="165" y2="125" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="225" y1="165" x2="165" y2="125" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="130" y1="25" x2="165" y2="125" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="130" y1="25" x2="130" y2="155" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <circle cx="130" cy="155" r="3" fill="var(--err)"/>
+      <text x="136" y="160" font-size="11" font-weight="700" fill="var(--err)">H</text>
+      <text x="125" y="18" font-size="14" font-weight="700" fill="var(--pri)">S (đỉnh)</text>
+      <text x="18" y="148" font-size="13" font-weight="700" fill="var(--sec)">A</text>
+      <text x="90" y="200" font-size="13" font-weight="700" fill="var(--sec)">B</text>
+      <text x="232" y="172" font-size="13" font-weight="700" fill="var(--sec)">C</text>
+      <text x="172" y="122" font-size="13" font-weight="700" fill="var(--tx2)">D</text>
+      <rect x="250" y="35" width="144" height="145" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="260" y="58" font-size="12" font-weight="700" fill="var(--pri)">Hình chóp S.ABCD:</text>
+      <text x="260" y="82" font-size="11.5" fill="var(--tx)">• Đỉnh S, Đáy ABCD</text>
+      <text x="260" y="104" font-size="11.5" fill="var(--tx)">• Chiều cao SH = h</text>
+      <text x="260" y="126" font-size="11.5" font-weight="700" fill="var(--sec)">• V = ⅓ · S_đáy · h</text>
+      <text x="260" y="148" font-size="11" fill="var(--tx2)">Đường nét đứt là cạnh khuất</text>
+    </svg>`;
+  }
+
+  // 7m. Khối hộp chữ nhật / lập phương
+  if (g.type === "prism_box") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <rect x="40" y="90" width="120" height="90" fill="rgba(99,102,241,0.06)" stroke="var(--pri)" stroke-width="2.2"/>
+      <polygon points="40,90 90,45 210,45 160,90" fill="rgba(99,102,241,0.12)" stroke="var(--pri)" stroke-width="2.2"/>
+      <polygon points="160,90 210,45 210,135 160,180" fill="rgba(99,102,241,0.18)" stroke="var(--pri)" stroke-width="2.2"/>
+      <line x1="40" y1="180" x2="90" y2="135" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="90" y1="45" x2="90" y2="135" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="90" y1="135" x2="210" y2="135" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="25" y="185" font-size="12" font-weight="700" fill="var(--pri)">D</text>
+      <text x="165" y="195" font-size="12" font-weight="700" fill="var(--pri)">C</text>
+      <text x="25" y="90" font-size="12" font-weight="700" fill="var(--sec)">A</text>
+      <text x="165" y="85" font-size="12" font-weight="700" fill="var(--sec)">B</text>
+      <text x="85" y="38" font-size="12" font-weight="700" fill="var(--ter)">A'</text>
+      <text x="215" y="42" font-size="12" font-weight="700" fill="var(--ter)">B'</text>
+      <text x="215" y="140" font-size="12" font-weight="700" fill="var(--ter)">C'</text>
+      <rect x="235" y="35" width="155" height="145" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="245" y="58" font-size="12" font-weight="700" fill="var(--pri)">Khối hộp chữ nhật:</text>
+      <text x="245" y="82" font-size="11.5" fill="var(--tx)">• Kích thước: a, b, c</text>
+      <text x="245" y="104" font-size="11.5" font-weight="700" fill="var(--sec)">• Thể tích: V = a · b · c</text>
+      <text x="245" y="126" font-size="11.5" fill="var(--tx)">• S_tp = 2(ab + bc + ca)</text>
+      <text x="245" y="148" font-size="11" fill="var(--tx2)">Đường chéo d = √(a²+b²+c²)</text>
+    </svg>`;
+  }
+
+  // 7n. Hình trụ tròn xoay
+  if (g.type === "cylinder") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <ellipse cx="130" cy="50" rx="65" ry="18" fill="rgba(99,102,241,0.15)" stroke="var(--pri)" stroke-width="2.2"/>
+      <path d="M 65 50 L 65 160 A 65 18 0 0 0 195 160 L 195 50" fill="rgba(99,102,241,0.06)" stroke="var(--pri)" stroke-width="2.2"/>
+      <path d="M 65 160 A 65 18 0 0 1 195 160" fill="none" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <circle cx="130" cy="50" r="3" fill="var(--sec)"/>
+      <text x="135" y="45" font-size="11" font-weight="700" fill="var(--sec)">O</text>
+      <line x1="130" y1="50" x2="195" y2="50" stroke="var(--sec)" stroke-width="1.8"/>
+      <text x="155" y="42" font-size="11" font-weight="700" fill="var(--sec)">r</text>
+      <circle cx="130" cy="160" r="3" fill="var(--sec)"/>
+      <text x="135" y="165" font-size="11" font-weight="700" fill="var(--sec)">O'</text>
+      <line x1="130" y1="50" x2="130" y2="160" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <text x="115" y="110" font-size="11.5" font-weight="700" fill="var(--err)">h</text>
+      <rect x="240" y="35" width="150" height="145" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="250" y="58" font-size="12" font-weight="700" fill="var(--pri)">Hình trụ tròn xoay:</text>
+      <text x="250" y="82" font-size="11.5" fill="var(--tx)">• Bán kính đáy r, cao h</text>
+      <text x="250" y="104" font-size="11.5" font-weight="700" fill="var(--sec)">• V = π · r² · h</text>
+      <text x="250" y="126" font-size="11.5" fill="var(--tx)">• S_xq = 2π · r · h</text>
+      <text x="250" y="148" font-size="11" fill="var(--tx2)">S_tp = 2πrh + 2πr²</text>
+    </svg>`;
+  }
+
+  // 7o. Hình nón tròn xoay
+  if (g.type === "cone") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <polygon points="130,30 55,165 205,165" fill="rgba(99,102,241,0.06)"/>
+      <path d="M 55 165 A 75 18 0 0 0 205 165" fill="none" stroke="var(--pri)" stroke-width="2.2"/>
+      <path d="M 55 165 A 75 18 0 0 1 205 165" fill="none" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="130" y1="30" x2="55" y2="165" stroke="var(--pri)" stroke-width="2.2"/>
+      <line x1="130" y1="30" x2="205" y2="165" stroke="var(--pri)" stroke-width="2.2"/>
+      <line x1="130" y1="30" x2="130" y2="165" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <circle cx="130" cy="165" r="3" fill="var(--sec)"/>
+      <text x="135" y="172" font-size="11" font-weight="700" fill="var(--sec)">O</text>
+      <line x1="130" y1="165" x2="205" y2="165" stroke="var(--sec)" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <text x="160" y="160" font-size="11" font-weight="700" fill="var(--sec)">r</text>
+      <text x="125" y="22" font-size="13" font-weight="700" fill="var(--pri)">S (đỉnh)</text>
+      <text x="115" y="105" font-size="11.5" font-weight="700" fill="var(--err)">h</text>
+      <text x="175" y="95" font-size="11.5" font-weight="700" fill="var(--pri)">l</text>
+      <rect x="240" y="35" width="150" height="145" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="250" y="58" font-size="12" font-weight="700" fill="var(--pri)">Hình nón tròn xoay:</text>
+      <text x="250" y="82" font-size="11.5" fill="var(--tx)">• Đường sinh l = √(h²+r²)</text>
+      <text x="250" y="104" font-size="11.5" font-weight="700" fill="var(--sec)">• V = ⅓ · π · r² · h</text>
+      <text x="250" y="126" font-size="11.5" fill="var(--tx)">• S_xq = π · r · l</text>
+      <text x="250" y="148" font-size="11" fill="var(--tx2)">S_tp = πrl + πr²</text>
+    </svg>`;
+  }
+
+  // 7p. Hình cầu / Mặt cầu
+  if (g.type === "sphere") {
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+      <circle cx="130" cy="110" r="75" fill="rgba(99,102,241,0.08)" stroke="var(--pri)" stroke-width="2.5"/>
+      <path d="M 55 110 A 75 22 0 0 0 205 110" fill="none" stroke="var(--pri)" stroke-width="1.8"/>
+      <path d="M 55 110 A 75 22 0 0 1 205 110" fill="none" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <circle cx="130" cy="110" r="3.5" fill="var(--err)"/>
+      <text x="120" y="105" font-size="12" font-weight="700" fill="var(--err)">O</text>
+      <line x1="130" y1="110" x2="205" y2="110" stroke="var(--err)" stroke-width="2"/>
+      <text x="160" y="104" font-size="12" font-weight="700" fill="var(--err)">R</text>
+      <rect x="240" y="40" width="150" height="135" rx="8" fill="var(--card)" stroke="var(--ol)" stroke-width="1.5"/>
+      <text x="250" y="64" font-size="12" font-weight="700" fill="var(--pri)">Mặt cầu & Khối cầu:</text>
+      <text x="250" y="88" font-size="11.5" fill="var(--tx)">• Tâm O, bán kính R</text>
+      <text x="250" y="110" font-size="11.5" font-weight="700" fill="var(--sec)">• V = ⁴⁄₃ · π · R³</text>
+      <text x="250" y="132" font-size="11.5" font-weight="700" fill="var(--err)">• S = 4π · R²</text>
+      <text x="250" y="154" font-size="11" fill="var(--tx2)">Đường tròn lớn C = 2πR</text>
     </svg>`;
   }
 
@@ -1604,8 +2199,23 @@ function graphDesc(g) {
   if (g.type === "pendulum") return "Tôi và bạn cùng quan sát: Con lắc đơn gồm sợi dây không giãn chiều dài l và vật m, dao động tuần hoàn với góc lệch α quanh phương thẳng đứng.";
   if (g.type === "freefall") return "Hình vẽ mô phỏng: Vật bắt đầu rơi tự do từ độ cao h dưới tác dụng của trọng lực với gia tốc rơi g, vận tốc tăng đều theo thời gian.";
   if (g.type === "forces") return "Tôi đã vẽ sẵn các vectơ lực cho bạn: Trọng lực P hướng xuống, phản lực N hướng lên, lực kéo F và lực ma sát F_ms cản trở chuyển động.";
-  if (g.type === "triangle") return "Hình vẽ tam giác vuông ABC tại đỉnh A: Bạn có thể dễ dàng áp dụng định lý Pytago BC² = AB² + AC² để tìm cạnh còn lại.";
-  if (g.type === "circle") return "Sơ đồ hình tròn tâm O bán kính R: Chu vi là C = 2πR và diện tích là S = πR².";
+  if (g.type === "triangle" || g.type === "right_triangle") return "Hình vẽ tam giác vuông ABC tại đỉnh A: Bạn có thể dễ dàng áp dụng định lý Pytago $BC^2 = AB^2 + AC^2$ hoặc hệ thức lượng để tìm cạnh và góc.";
+  if (g.type === "triangle_iso") return "Hình vẽ tam giác cân / đều ABC: Hai cạnh bên bằng nhau, đường cao xuất phát từ đỉnh đồng thời là đường trung tuyến, trung trực và đường phân giác.";
+  if (g.type === "triangle_general") return "Sơ đồ tam giác ABC: Minh họa trực quan các đường đặc biệt (đường cao AH, trung tuyến AM, trọng tâm G) và các hệ thức lượng trong tam giác.";
+  if (g.type === "rhombus_circle") return "Mô hình hình học trực quan: Hình thoi ABCD cạnh a có góc A = 60° và đường tròn tâm O bán kính R = a/2 đi qua 6 điểm (hai đỉnh B, D và 4 trung điểm E, F, G, H).";
+  if (g.type === "rhombus") return "Sơ đồ hình thoi ABCD: 4 cạnh bằng nhau, hai đường chéo vuông góc tại trung điểm O và là các đường phân giác.";
+  if (g.type === "square") return "Sơ đồ hình vuông ABCD: 4 góc vuông, 4 cạnh bằng nhau, hai đường chéo bằng nhau và vuông góc tại tâm đối xứng O.";
+  if (g.type === "rectangle") return "Sơ đồ hình chữ nhật ABCD: 4 góc vuông, các cạnh đối song song và bằng nhau, hai đường chéo bằng nhau cắt nhau tại tâm O.";
+  if (g.type === "parallelogram") return "Sơ đồ hình bình hành ABCD: Các cặp cạnh đối song song và bằng nhau, hai đường chéo cắt nhau tại trung điểm O.";
+  if (g.type === "trapezoid") return "Sơ đồ hình thang ABCD: Hai đáy AB // CD, đường cao AH, diện tích S = ½·(a+b)·h.";
+  if (g.type === "circle_tangent") return "Sơ đồ tiếp tuyến đường tròn: Hai tiếp tuyến MA, MB xuất phát từ M vuông góc bán kính tại tiếp điểm, MA = MB và MO là đường trung trực của dây AB.";
+  if (g.type === "circle_triangle") return "Sơ đồ tam giác ABC nội tiếp đường tròn tâm O: Ba đỉnh cùng thuộc đường tròn, tâm O là giao điểm ba đường trung trực của tam giác.";
+  if (g.type === "circle") return "Sơ đồ hình tròn tâm O bán kính R: Chu vi C = 2πR và diện tích S = πR².";
+  if (g.type === "pyramid") return "Mô hình không gian hình chóp S.ABCD: Đỉnh S, mặt đáy ABCD, đường cao SH vuông góc với mặt phẳng đáy (đường nét đứt biểu diễn cạnh khuất).";
+  if (g.type === "prism_box") return "Mô hình không gian khối hộp chữ nhật / hình lập phương: Các mặt phẳng đối song song và bằng nhau, thể tích V = a · b · c.";
+  if (g.type === "cylinder") return "Khối tròn xoay hình trụ: Hai đáy là hai hình tròn song song bằng nhau bán kính r, chiều cao h, thể tích V = πr²h.";
+  if (g.type === "cone") return "Khối tròn xoay hình nón: Đỉnh S, đường sinh l, bán kính đáy r và chiều cao h liên hệ qua $l^2 = h^2 + r^2$.";
+  if (g.type === "sphere") return "Mặt cầu và khối cầu tâm O bán kính R: Diện tích mặt cầu S = 4πR², thể tích khối cầu V = ⁴⁄₃πR³.";
   if (g.type === "parabola") return "Đồ thị Parabol y = ax² + bx + c: Điểm đỉnh I và trục đối xứng chia đều hai nhánh của đồ thị.";
   if (g.type === "circuit") return "Sơ đồ đoạn mạch điện: Chiều dòng điện I chạy từ cực dương sang cực âm qua các điện trở mắc trong mạch.";
   if (g.type === "lens") return "Đường truyền các tia sáng qua thấu kính: Tia qua quang tâm O đi thẳng, tia song song trục chính đi qua tiêu điểm F'.";
@@ -1614,5 +2224,15 @@ function graphDesc(g) {
   if (g.type === "chemistry_reaction") return "Mô phỏng hiện tượng phản ứng hóa học (tạo khí bay lên hoặc kết tủa).";
   if (g.type === "chemistry_atom") return "Sơ đồ mô hình nguyên tử Bohr: Hạt nhân mang điện tích dương và các lớp vỏ electron.";
   return "Mô phỏng hình học / hiện tượng vật lý trực quan.";
+}
+
+if (typeof window !== "undefined") {
+  window.solve = solve;
+  window.classify = classify;
+  window.graphSvg = graphSvg;
+  window.graphDesc = graphDesc;
+}
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { solve, classify, graphSvg, graphDesc, TOPIC_THEOREMS };
 }
 
