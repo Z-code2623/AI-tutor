@@ -1,0 +1,60 @@
+# ==============================================================================
+# .gitignore - ADAPTIVETUTOR AI (BẢO VỆ TUYỆT ĐỐI AN TOÀN THÔNG TIN & API KEY)
+# ==============================================================================
+
+# 1. BIẾN MÔI TRƯỜNG CHỨA KHÓA BÍ MẬT (TUYỆT ĐỐI KHÔNG COMMIT LÊN GITHUB)
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+.secret
+**/.secret
+
+# 2. KHÓA MÃ HÓA, CHỨNG CHỈ BẢO MẬT
+*.pem
+*.key
+*.cert
+*.crt
+
+# 3. CƠ SỞ DỮ LIỆU SQLITE NỘI BỘ (Chứa tài khoản học sinh và dữ liệu chạy)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+backend/data/*.db*
+data/*.db*
+
+# 4. PYTHON BYTECODE & CACHE
+__pycache__/
+**/*__pycache__*
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 5. MÔI TRƯỜNG ẢO (VIRTUAL ENVIRONMENT)
+venv/
+env/
+.venv/
+ENV/
+
+# 6. NHẬT KÝ VÀ TẬP TIN TẠM
+*.log
+*.tmp
+*.temp
+*.zip
+*.tar.gz
+
+# 7. CẤU HÌNH HỆ ĐIỀU HÀNH & TRÌNH BIÊN TẬP CODE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

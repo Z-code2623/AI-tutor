@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>AdaptiveTutor AI - Gia Sư Thích Ứng Liên Môn Toán - Lý - Hóa</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+    /* Dự phòng: nếu jsDelivr bị chặn thì tải KaTeX từ cdnjs */
+    window.addEventListener("load", function () {
+        if (window.katex && window.renderMathInElement) return;
+        var base = "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/";
+        var css = document.createElement("link"); css.rel = "stylesheet"; css.href = base + "katex.min.css"; document.head.appendChild(css);
+        var a = document.createElement("script"); a.src = base + "katex.min.js";
+        a.onload = function () { var b = document.createElement("script"); b.src = base + "contrib/auto-render.min.js"; document.head.appendChild(b); };
+        document.head.appendChild(a);
+    });
+    </script>
+    <link rel="stylesheet" href="css/style.css?v=20261028v9">
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="brand" onclick="go('giang-giai')" title="Về trang Giảng giải">
+                <svg width="36" height="36" viewBox="0 0 34 34" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6366f1" />
+                            <stop offset="100%" stop-color="#4338ca" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="34" height="34" rx="10" fill="url(#logoGrad)" />
+                    <text x="17" y="23" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="13.5" fill="#fff">∑⚛🧪</text>
+                </svg>
+                <div class="brand-text">
+                    <h1>AdaptiveTutor AI</h1>
+                    <small id="sub">GIẢNG GIẢI</small>
+                </div>
+            </div>
+
+            <!-- Thanh điều hướng Desktop (Header Pill Tabs) -->
+            <nav id="navDesktop" class="nav-desktop" aria-label="Điều hướng chính (Máy tính)"></nav>
+
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-btn" aria-label="Đổi giao diện Sáng/Tối" title="Chuyển đổi Sáng/Tối">
+                    <span class="ms" id="themeIcon">dark_mode</span>
+                </button>
+                <button id="me" class="av" aria-label="Cấu hình Google Gemini API Key" title="Cấu hình Google Gemini API Key"><span class="ms" style="font-size:18px">vpn_key</span></button>
+            </div>
+        </div>
+    </header>
+
+    <div id="auth" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+        <div class="card auth-card" style="width:min(100%,460px)">
+            <button id="authClose" class="auth-close-btn" aria-label="Đóng cửa sổ"><span class="ms">close</span></button>
+            
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                <div style="width:42px;height:42px;border-radius:12px;background:var(--pc);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(99,102,241,0.35);flex-shrink:0">
+                    <span class="ms" style="font-size:24px">vpn_key</span>
+                </div>
+                <div>
+                    <h2 id="authTitle" style="margin:0;font-size:20px;font-weight:700">Cấu hình Google Gemini API</h2>
+                    <span class="chip p" style="font-size:11px;margin-top:4px"><span class="ms" style="font-size:13px">lock</span> Lưu an toàn trong trình duyệt</span>
+                </div>
+            </div>
+            
+            <!-- Đăng nhập tài khoản: key AI lưu theo từng tài khoản (mã hóa trên máy chủ), đăng nhập là tự dùng AI của tài khoản đó -->
+            <div id="loginBox" style="display:none;margin-bottom:16px;padding:12px;border:1px solid var(--ol);border-radius:10px;gap:10px">
+                <div id="loginOut" style="display:none;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+                    <span style="font-size:13.5px"><span class="ms" style="font-size:18px;vertical-align:middle;color:var(--sec)">account_circle</span> Đã đăng nhập: <b id="loginEmailShow"></b></span>
+                    <button id="logoutBtn" type="button" style="background:var(--low);border:1px solid var(--ol);font-size:13px;padding:6px 12px;border-radius:var(--rd);cursor:pointer">Đăng xuất</button>
+                </div>
+                <div id="loginIn" style="display:grid;gap:8px">
+                    <b style="font-size:13.5px">Đăng nhập bằng email để dùng AI riêng của tài khoản</b>
+                    <label class="inp" style="margin:0"><span class="ms">mail</span><input id="loginEmail" type="email" placeholder="email@cua-ban.com" autocomplete="email" style="font-size:14px"></label>
+                    <button id="sendCode" type="button" class="pr full" style="font-size:13.5px;padding:9px">Gửi mã đăng nhập</button>
+                    <div id="codeRow" style="display:none;gap:8px">
+                        <label class="inp" style="margin:0;flex:1"><span class="ms">pin</span><input id="loginCode" inputmode="numeric" maxlength="6" placeholder="Mã 6 số" autocomplete="one-time-code" style="font-size:14px"></label>
+                        <button id="verifyCode" type="button" class="pr" style="font-size:13.5px;padding:9px 14px">Xác nhận</button>
+                    </div>
+                </div>
+                <div class="tip" id="loginMsg" style="display:none;margin-top:8px" role="status"></div>
+            </div>
+
+            <p class="lbl" style="font-family:'Be Vietnam Pro',sans-serif;font-size:13.5px;line-height:1.6;margin:0 0 16px;color:var(--tx2)">
+                Dán khóa Google Gemini API để kích hoạt AI giải chi tiết bài tập tự luận, chứng minh định lý và trò chuyện hỏi đáp 1:1. Khóa chỉ lưu trong <code>localStorage</code> trình duyệt của bạn, bảo mật tuyệt đối.
+            </p>
+            
+            <div style="display:grid;gap:12px">
+                <div style="position:relative;display:flex;align-items:center">
+                    <label class="inp" style="width:100%;margin:0">
+                        <span class="ms">key</span>
+                        <input id="clientKeyInp" type="password" placeholder="Dán Gemini API Key (AQ... hoặc AIza...)" autocomplete="off" style="font-size:14px;padding-right:40px">
+                    </label>
+                    <button id="toggleKeyVisibility" type="button" aria-label="Hiện/ẩn API Key" title="Hiện/ẩn API Key" style="position:absolute;right:8px;background:none;border:none;color:var(--tx2);cursor:pointer;padding:6px;display:flex;align-items:center">
+                        <span class="ms" id="toggleKeyIcon" style="font-size:20px">visibility</span>
+                    </button>
+                </div>
+
+                <div class="tip" id="amsg" style="min-height:20px;display:none" role="status"></div>
+
+                <button class="pr full" id="saveClientKey" style="font-size:14.5px;padding:11px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px">
+                    <span class="ms" style="font-size:18px">check_circle</span> Lưu & Kích hoạt AI
+                </button>
+
+                <div style="display:flex;gap:8px">
+                    <button id="guest" class="full" style="flex:1;background:var(--low);font-size:13px;padding:9px;color:var(--tx);border:1px solid var(--ol);display:flex;align-items:center;justify-content:center;gap:6px">
+                        <span class="ms" style="font-size:17px">offline_bolt</span> Dùng ngoại tuyến (Không cần API)
+                    </button>
+                    <button id="clearClientKey" style="background:var(--errc);color:var(--err);border:1px solid var(--err);font-size:13px;padding:9px 14px;border-radius:var(--rd);display:none;cursor:pointer;align-items:center;gap:4px" title="Xóa API Key">
+                        <span class="ms" style="font-size:16px">delete</span> Xóa
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top:16px;padding:12px;background:var(--low);border:1px solid var(--ol);border-radius:10px;font-size:12px;color:var(--tx2);line-height:1.55">
+                <div style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--tx);margin-bottom:4px">
+                    <span class="ms" style="font-size:16px;color:var(--pri)">help_outline</span> Hướng dẫn lấy key miễn phí:
+                </div>
+                1. Truy cập <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--pri);font-weight:600;text-decoration:underline">Google AI Studio</a> (Miễn phí 100%, 1.500 lượt/ngày).<br>
+                2. Nhấn <b>Create API key</b> và copy dán vào ô trên.<br>
+                3. Các dạng giải chuẩn (phương trình, đạo hàm, rơi tự do, nhiệt lượng...) vẫn giải bình thường ngoại tuyến mà không cần key.
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- SCREEN 1: GIẢNG GIẢI BÀI TẬP (GIAO DIỆN 2 CỘT HIỆN ĐẠI) -->
+        <section class="scr on" id="giang-giai">
+            <div class="giang-giai-layout">
+                <!-- Cột trái: Bảng điều khiển nhập liệu & chọn môn học -->
+                <aside class="solver-sidebar">
+                    <div class="card solver-input-card">
+                        <!-- Bộ chuyển đổi môn học: Toán học, Vật lý & Hóa học -->
+                        <div class="subject-switcher" role="tablist" aria-label="Chọn môn học">
+                            <button class="subject-btn active" id="btnSubjectMath" role="tab" aria-selected="true" data-subject="math">
+                                <span class="ms">calculate</span> 📐 Toán
+                            </button>
+                            <button class="subject-btn" id="btnSubjectPhysics" role="tab" aria-selected="false" data-subject="physics">
+                                <span class="ms">science</span> ⚛️ Vật lý
+                            </button>
+                            <button class="subject-btn" id="btnSubjectChemistry" role="tab" aria-selected="false" data-subject="chemistry">
+                                <span class="ms">biotech</span> 🧪 Hóa học
+                            </button>
+                        </div>
+
+                        <div class="row" style="margin-top:2px">
+                            <h3 id="subjectTitle">Nhập bài toán</h3><span class="sp"></span><span class="chip p" id="subjectBadge">Đại số · Hình học · Giải tích</span>
+                        </div>
+
+                        <label class="inp" style="align-items:flex-start">
+                            <span class="ms" style="margin-top:4px">functions</span>
+                            <textarea id="q" rows="3" aria-label="Đề bài">Tìm x biết 2x + 5 = 15</textarea>
+                            <button id="clr" aria-label="Xóa" style="padding:4px;background:none;align-self:flex-start"><span class="ms">cancel</span></button>
+                        </label>
+                        
+                        <div class="row" style="gap:8px">
+                            <button class="pr" id="solve" style="flex:1;padding:12px 18px">
+                                Giải ngay <span class="ms">arrow_forward</span>
+                            </button>
+                            <button type="button" id="quickCameraBtn" aria-label="Tải ảnh đề bài lên" title="Chụp ảnh hoặc tải tệp ảnh đề bài" style="padding:12px 14px;background:var(--low);border:1px solid var(--ol);border-radius:var(--rd);color:var(--tx);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s ease">
+                                <span class="ms" style="font-size:20px;color:var(--pri)">photo_camera</span>
+                            </button>
+                        </div>
+
+                        <!-- Tải ảnh đề bài lên để xem giải (AI Vision) -->
+                        <input type="file" id="imageInput" accept="image/*" style="display:none">
+
+                        <div id="imageUploadZone" class="image-upload-zone" tabindex="0" role="button" aria-label="Tải ảnh đề bài lên để giải">
+                            <div class="upload-icon-circle">
+                                <span class="ms">add_photo_alternate</span>
+                            </div>
+                            <div class="upload-text-wrap">
+                                <b>Tải ảnh đề bài lên để AI giải</b>
+                                <small>Chụp ảnh, chọn tệp hoặc dán ảnh (Ctrl + V)</small>
+                            </div>
+                        </div>
+
+                        <!-- Thẻ xem trước ảnh đã tải lên -->
+                        <div id="imagePreviewCard" class="image-preview-card" style="display:none">
+                            <div class="preview-img-container">
+                                <img id="imagePreviewImg" alt="Xem trước ảnh đề bài">
+                            </div>
+                            <div class="preview-meta">
+                                <div class="preview-filename-row">
+                                    <span class="ms" style="font-size:16px;color:var(--pri)">image</span>
+                                    <span id="imagePreviewName" class="preview-filename">de-bai.png</span>
+                                </div>
+                                <div class="preview-size-row">
+                                    <span id="imagePreviewSize" class="preview-filesize">250 KB</span>
+                                    <span class="chip p" style="font-size:10.5px;padding:1px 6px">AI Vision</span>
+                                </div>
+                            </div>
+                            <button id="imageRemoveBtn" type="button" class="preview-remove-btn" aria-label="Xóa ảnh này" title="Xóa ảnh">
+                                <span class="ms">close</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Cột phải: Khu vực hiển thị lời giải, KaTeX, sơ đồ và gia sư AI -->
+                <div class="solver-main">
+                    <div id="out" style="display:grid;gap:14px">
+                        <div class="card empty-state" id="initialPlaceholder">
+                            <div class="empty-icon-wrap">
+                                <span class="ms">auto_stories</span>
+                            </div>
+                            <h3>Gia Sư AI Thích Ứng Liên Môn</h3>
+                            <p class="lbl" style="font-family:'Be Vietnam Pro',sans-serif;font-size:14px;line-height:1.6;max-width:580px;margin:0 auto">
+                                Hệ thống tự động phân loại 36 dạng chuẩn (Toán - Lý - Hóa), giải chi tiết từng bước bằng KaTeX sắc nét, vẽ sơ đồ đồ thị trực quan và hỗ trợ hỏi đáp chuyên sâu cùng Google Gemini AI.
+                            </p>
+                            <div class="features-grid">
+                                <div class="feat-item">
+                                    <span class="ms" style="color:var(--pri)">calculate</span>
+                                    <div>
+                                        <b>12 Dạng Toán học chuẩn</b>
+                                        <small>Phương trình, đạo hàm, nguyên hàm, hình học, số học</small>
+                                    </div>
+                                </div>
+                                <div class="feat-item">
+                                    <span class="ms" style="color:var(--sec)">science</span>
+                                    <div>
+                                        <b>12 Dạng Vật lý chuẩn</b>
+                                        <small>Cơ học, nhiệt học, định luật khí, điện từ, quang hình</small>
+                                    </div>
+                                </div>
+                                <div class="feat-item">
+                                    <span class="ms" style="color:#10b981">biotech</span>
+                                    <div>
+                                        <b>12 Dạng Hóa học chuẩn</b>
+                                        <small>Số mol, nồng độ CM/C%, pH, cân bằng PTHH, kim loại + axit</small>
+                                    </div>
+                                </div>
+                                <div class="feat-item">
+                                    <span class="ms" style="color:var(--ter)">smart_toy</span>
+                                    <div>
+                                        <b>Gia sư AI Gemini</b>
+                                        <small>Phân tích đề bài tự luận, chứng minh và đối thoại Socratic</small>
+                                    </div>
+                                </div>
+                                <div class="feat-item">
+                                    <span class="ms" style="color:var(--pc)">insights</span>
+                                    <div>
+                                        <b>Theo dõi tri thức DKT</b>
+                                        <small>Dự đoán xác suất thành thạo và gợi ý bài tập thích ứng</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tip" style="margin-top:6px;display:flex;align-items:center;gap:8px;text-align:left;width:100%">
+                                <span class="ms" style="font-size:20px;flex-shrink:0">lightbulb</span>
+                                <span><b>Cách bắt đầu:</b> Nhập đề bài ở khung bên trái hoặc tải ảnh đề bài lên (chụp ảnh, chọn tệp, dán <b>Ctrl + V</b>) để xem lời giải chi tiết ngay!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: BÀI TẬP ĐỀ XUẤT THÍCH ỨNG -->
+        <section class="scr" id="bai-tap">
+            <div class="dash-grid-2">
+                <div class="card">
+                    <div class="row">
+                        <h3>Hồ sơ năng lực học sinh</h3><span class="sp"></span><span class="chip g" id="lvchip"></span>
+                    </div>
+                    <div class="inp" style="display:grid;gap:4px">
+                        <div class="row"><span class="chip g"><span class="ms">check_circle</span>Vừa hoàn thành</span><span
+                                class="chip" id="ldiff"></span></div>
+                        <div class="math" id="lprob" style="background:none;text-align:left;padding:0"></div>
+                        <div class="lbl" id="ltopic"></div>
+                    </div>
+                    <div class="two">
+                        <div class="inp" style="display:grid"><span class="lbl">Trình độ hiện tại</span><span class="big"
+                                id="lvl"></span></div>
+                        <div class="inp" style="display:grid"><span class="lbl">Tỷ lệ hoàn thành</span><span class="big"
+                                id="comp" style="color:var(--sec)"></span></div>
+                    </div>
+                </div>
+                <div class="card" style="background:var(--hi)">
+                    <h3>Thuật toán gợi ý lai (Hybrid AI)</h3>
+                    <div class="lbl">TF-IDF + DKT</div>
+                    <p style="font-size:13.5px;line-height:1.6">Kết hợp độ tương đồng cosine về nội dung với bộ lọc độ khó <span
+                            class="mono">|diff − level| ≤ 1</span> để tạo lộ trình thử thách vừa sức nhất.</p>
+                    <div class="tip" style="margin-top:8px">
+                        🎯 <b>Cơ chế thích ứng:</b> Giải đúng bài sẽ tăng xác suất thành thạo và tự động mở rộng bài tập có độ khó cao hơn.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:8px">
+                <h2>Bài tập đề xuất theo trình độ</h2>
+            </div>
+            <div id="recs" class="recs-grid"></div>
+            <button class="full" id="refresh"><span class="ms">refresh</span>Làm mới gợi ý thích ứng</button>
+        </section>
+
+        <!-- SCREEN 3: LỘ TRÌNH DKT -->
+        <section class="scr" id="lo-trinh">
+            <div class="card">
+                <div class="row">
+                    <div>
+                        <div class="lbl">Mô hình trí tuệ nhân tạo</div>
+                        <h2>Theo dõi tri thức DKT</h2>
+                    </div><span class="sp"></span><span class="chip g">DKT-v4 Active</span>
+                </div>
+                <div class="row"><span class="big" style="font-size:40px;color:var(--pri)" id="mast"></span><span
+                        class="chip g" id="wk"></span></div>
+                <div class="lbl">Dự đoán xác suất thành thạo các dạng bài kế tiếp</div>
+                <div class="bar"><i id="mbar"></i></div>
+                <div class="lbl" id="xp"></div>
+            </div>
+
+            <h3>Tiến trình năng lực theo môn</h3>
+            <div class="card" id="topics"></div>
+
+            <div class="dash-grid-2">
+                <div class="card">
+                    <h3>Bản đồ khái niệm trọng tâm</h3>
+                    <div class="inp" style="background:var(--secc);color:var(--sec)"><span
+                            class="ms">check_circle</span><b>Toán học: Phương trình & Đạo hàm</b>&nbsp;y' = n·xⁿ⁻¹ · 100%</div>
+                    <div class="inp" style="background:var(--hi);display:grid"><b>Vật lý: Chuyển động biến đổi đều · đang học</b><span
+                            class="mono">v = v₀ + at · s = v₀t + ½at²</span>
+                        <div class="bar"><i style="width:75%"></i></div>
+                    </div>
+                    <div class="inp" style="opacity:.6"><span class="ms">lock</span>Quang học & Thấu kính mỏng · mở khóa khi đạt 80%</div>
+                </div>
+
+                <div class="card err">
+                    <div class="row"><span class="ms">warning</span>
+                        <h3>Phát hiện lỗi sai phổ biến</h3><span class="sp"></span><span class="chip r">Cần chú ý</span>
+                    </div>
+                    <p>DKT ghi nhận tỷ lệ học sinh hay nhầm lẫn quy tắc đổi đơn vị tốc độ từ km/h sang m/s:</p>
+                    <div class="math" style="font-size:14px;text-align:left">✗ 36 km/h = 36 / 60 = 0.6 m/s (Sai)<br>✓ 36 km/h = 36 / 3.6 = 10 m/s (Đúng)</div>
+                </div>
+            </div>
+
+            <h3>Lịch sử giải bài gần đây</h3>
+            <div class="card" id="hist"></div>
+        </section>
+
+        <!-- SCREEN 4: MÔ HÌNH ML & HỆ THỐNG -->
+        <section class="scr" id="mo-hinh">
+            <div class="row"><span class="chip g">● HỆ THỐNG: SẴN SÀNG (HYBRID AI)</span><span class="lbl">Lat. 38ms</span></div>
+            <div>
+                <h2>Giám sát mô hình &amp; Dữ liệu ML</h2>
+                <p class="lbl" style="font-family:'Be Vietnam Pro';font-size:13px">Hệ thống phân loại 36 dạng bài chuẩn Liên môn Toán học · Vật lý · Hóa học.</p>
+            </div>
+
+            <div class="dash-grid-2">
+                <div>
+                    <h3>1. Kho dữ liệu bài tập chuẩn</h3>
+                    <div class="card"><b>Bộ ngữ liệu liên môn Toán - Lý - Hóa (1.200+ mẫu)</b>
+                        <div class="two">
+                            <div class="inp" style="display:grid"><span class="lbl">Tổng bài tập mẫu</span><span class="big"
+                                    id="nprob"></span></div>
+                            <div class="inp" style="display:grid"><span class="lbl">Trạng thái nhúng</span><b
+                                    style="color:var(--sec)">Vectorized</b></div>
+                        </div>
+                        <div class="two">
+                            <div class="inp" style="display:grid"><span class="lbl">TF-IDF matrix</span><b class="mono"
+                                    id="tfm"></b></div>
+                            <div class="inp" style="display:grid"><span class="lbl">Cosine matrix</span><b class="mono"
+                                    id="csm"></b></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>2. Thước đo hiệu năng phân loại</h3>
+                    <div class="card">
+                        <div class="mrow">
+                            <div class="t"><span>Phân loại dạng bài Toán - Lý - Hóa (F1)</span><span style="color:var(--pri)">95.6%</span>
+                            </div>
+                            <div class="bar"><i style="width:95.6%"></i></div>
+                        </div>
+                        <div class="mrow">
+                            <div class="t"><span>Độ chuẩn xác gợi ý thích ứng</span><span style="color:var(--sec)">93.4%</span></div>
+                            <div class="bar g"><i style="width:93.4%"></i></div>
+                        </div>
+                        <div class="mrow">
+                            <div class="t"><span>Tỷ lệ giải ngoại tuyến thành công</span><span style="color:var(--ter)">99.2%</span></div>
+                            <div class="bar o"><i style="width:99.2%"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>3. Giả lập thuật toán gợi ý</h3>
+            <div class="card">
+                <div class="two"><label class="lbl">Bài gốc (Anchor ID)<select id="sid"></select></label>
+                    <label class="lbl">Trình độ giả lập<select id="ssk">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select></label></div>
+                <button class="pr full" id="run">▶ Chạy mô phỏng gợi ý</button>
+                <div class="code" id="log">&gt; Sẵn sàng chạy mô phỏng.</div>
+                <div id="simout" style="display:grid;gap:8px"></div>
+            </div>
+
+            <div class="dash-grid-2">
+                <div>
+                    <h3>4. Cấu hình giải thuật</h3>
+                    <div class="card">
+                        <label class="sw"><span><b>Sử dụng LLM fine-tuned</b><br><small class="lbl">Sinh lời giải tự nhiên và giải thích chi tiết.</small></span><input type="checkbox" id="llm" checked></label>
+                        <label class="sw" style="margin-top:8px"><span><b>Bật Deep Knowledge Tracing</b><br><small class="lbl">Dự đoán xác suất thành thạo theo chuỗi thời gian.</small></span><input type="checkbox" id="dkt" checked></label>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- MỤC 5: TRẠNG THÁI GIA SƯ AI -->
+                    <h3>5. Trạng thái Gia sư AI (Kiến trúc Hybrid AI)</h3>
+                    <div class="card" id="aicard">
+                        <div class="tip" id="aist" role="status">Đang tải trạng thái AI...</div>
+                        <div style="display:grid;gap:10px;font-size:13.5px;line-height:1.6">
+                            <div class="row">
+                                <span class="chip p"><span class="ms">verified_user</span> Kiến trúc bảo mật</span>
+                                <span style="font-weight:600">Hybrid AI: Local Solver + Google Gemini</span>
+                            </div>
+                            <p style="color:var(--tx2);font-size:13px;margin:0">
+                                36 dạng toán chuẩn giải <b>ngoại tuyến tức thì 100%</b>. Với các dạng tự luận và hỏi đáp chuyên sâu, kết nối trực tiếp Google Gemini qua khóa API cá nhân lưu an toàn trong localStorage hoặc qua máy chủ.
+                            </p>
+                            <div class="mrow" style="background:var(--low);padding:10px;border-radius:10px">
+                                <div class="t"><span>Mô hình AI:</span><b style="color:var(--pri)">Google Gemini Flash</b></div>
+                                <div class="t"><span>Phạm vi hỗ trợ:</span><b>Liên môn Toán học · Vật lý · Hóa học</b></div>
+                                <div class="t"><span>Hạn ngạch Google AI:</span><b style="color:var(--sec)">1.500 yêu cầu / ngày (Free Tier)</b></div>
+                                <div class="t"><span>Bảo mật cá nhân:</span><b style="color:var(--sec)">Lưu trong localStorage trình duyệt</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" hidden style="display:none"></div>
+
+    <!-- Thanh điều hướng cố định dưới đáy màn hình cho Điện thoại (Mobile Bottom Navigation) -->
+    <nav id="navMobile" class="nav-mobile" aria-label="Điều hướng chính (Điện thoại)"></nav>
+
+    <script src="js/data.js?v=20261031v3"></script>
+    <script src="js/config.js?v=20261031v3"></script>
+    <script src="js/api.js?v=20261031v3"></script>
+    <script src="js/recommender.js?v=20261031v3"></script>
+    <script src="js/solver.js?v=20261031v3"></script>
+    <script src="js/explain.js?v=20261031v3"></script>
+    <script src="js/screens.js?v=20261031v3"></script>
+    <script src="js/ml-screen.js?v=20261031v3"></script>
+    <script src="js/auth.js?v=20261031v3"></script>
+    <script src="js/main.js?v=20261031v3"></script>
+</body>
+
+</html>

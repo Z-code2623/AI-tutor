@@ -1,0 +1,930 @@
+problem_id,label,topic,content,difficulty
+1,linear,Algebra,Tìm x biết 2x + 5 = 15,1
+2,quad,Algebra,Giải phương trình bậc hai x^2 - 5x + 6 = 0,2
+3,deriv,Calculus,Tính đạo hàm của hàm số y = x^3 + 2x,3
+4,linear,Algebra,Tìm x biết 3x - 7 = 11,1
+5,circle,Geometry,Tính diện tích hình tròn có bán kính r = 5,2
+6,linear,Algebra,Tìm x biết 4x + 3 = 19,1
+7,quad,Algebra,Giải phương trình bậc hai x^2 - 7x + 12 = 0,2
+8,circle,Geometry,Tính chu vi hình tròn có bán kính r = 3,2
+9,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^3 - x,3
+10,kinematics,Mechanics,"Một ô tô chuyển động thẳng nhanh dần đều với vận tốc ban đầu v0 = 5 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 4 s. Tính vận tốc v và quãng đường s.",1
+11,freefall,Mechanics,"Một vật được thả rơi tự do từ độ cao h = 45 m, lấy g = 10 m/s^2. Tính thời gian rơi t và vận tốc chạm đất.",1
+12,newton2,Mechanics,Tác dụng một lực không đổi F = 20 N vào vật có khối lượng m = 4 kg. Tính gia tốc a của vật.,2
+13,work_power,Mechanics,Lực kéo F = 50 N tác dụng làm vật dịch chuyển quãng đường s = 10 m cùng hướng lực trong thời gian t = 5 s. Tính công A và công suất P.,2
+14,energy,Mechanics,Một vật khối lượng m = 2 kg đang chuyển động với vận tốc v = 6 m/s ở độ cao h = 5 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+15,gas_law,Thermodynamics,Một khối khí lý tưởng có thể tích V1 = 10 lít ở áp suất p1 = 1 atm. Nén đẳng nhiệt đến thể tích V2 = 4 lít. Tính áp suất p2 của khối khí.,2
+16,thermal,Thermodynamics,"Tính nhiệt lượng cần thiết để đun sôi m = 2 kg nước từ nhiệt độ ban đầu t1 = 20 °C đến t2 = 100 °C, biết nhiệt dung riêng c = 4200 J/kg.K.",1
+17,ohm,Electromagnetism,Đặt một hiệu điện thế U = 24 V vào hai đầu điện trở R = 12 Ω. Tính cường độ dòng điện I chạy qua điện trở.,1
+18,elec_power,Electromagnetism,Một bóng đèn điện tiêu thụ công suất P = 100 W thắp sáng liên tục trong thời gian t = 5 giờ. Tính điện năng tiêu thụ A theo đơn vị Jun và kWh.,2
+19,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-6 C và q2 = -4e-6 C đặt cách nhau một khoảng r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông tương tác giữa chúng.,2
+20,lens,Optics,"Vật sáng AB đặt vuông góc với trục chính của thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 30 cm. Xác định vị trí d' và tính chất của ảnh.",3
+21,refraction,Optics,Chiếu một tia sáng đơn sắc từ không khí (n1 = 1) vào một khối nước (n2 = 1.33) dưới góc tới i = 30°. Tính góc khúc xạ r của tia sáng.,2
+22,linear,Algebra,Giải phương trình 3x + 9 = -18,1
+23,linear,Algebra,Cho phương trình 5x - 11 = -21. Tìm x,1
+24,linear,Algebra,Cho phương trình 3x + 9 = 45. Tìm x,1
+25,linear,Algebra,Tìm x biết 3x - 2 = 25,1
+26,linear,Algebra,Tìm x biết 2x - 9 = -23,1
+27,linear,Algebra,Cho phương trình 2x - 9 = 7. Tìm x,1
+28,linear,Algebra,Cho phương trình 8x - 1 = -17. Tìm x,1
+29,linear,Algebra,Tìm x biết 6x + 10 = -44,1
+30,linear,Algebra,Tìm x biết 8x - 7 = 1,1
+31,linear,Algebra,Tìm x biết 5x - 12 = -7,1
+32,linear,Algebra,Giải phương trình 8x - 4 = -52,1
+33,linear,Algebra,Giải phương trình 6x + 9 = -39,1
+34,linear,Algebra,Cho phương trình 3x - 13 = -4. Tìm x,1
+35,linear,Algebra,Giải phương trình 6x + 5 = 71,1
+36,linear,Algebra,Cho phương trình 5x - 14 = -49. Tìm x,1
+37,linear,Algebra,Tìm x biết 5x - 13 = -13,1
+38,linear,Algebra,Giải phương trình 3x - 7 = 2,1
+39,linear,Algebra,Giải phương trình 7x - 4 = -32,1
+40,linear,Algebra,Cho phương trình 5x - 7 = 53. Tìm x,1
+41,linear,Algebra,Tìm x biết 3x + 6 = 36,1
+42,linear,Algebra,Giải phương trình 5x - 1 = -21,1
+43,linear,Algebra,Cho phương trình 6x + 8 = 74. Tìm x,1
+44,linear,Algebra,Tìm x biết 5x - 5 = 55,1
+45,linear,Algebra,Giải phương trình 5x + 11 = -29,1
+46,linear,Algebra,Tìm x biết 8x - 13 = -21,1
+47,linear,Algebra,Giải phương trình 7x + 6 = -15,1
+48,linear,Algebra,Tìm x biết 8x - 1 = 87,1
+49,linear,Algebra,Cho phương trình 6x - 8 = -38. Tìm x,1
+50,linear,Algebra,Cho phương trình 6x - 2 = 52. Tìm x,1
+51,linear,Algebra,Tìm x biết 8x - 8 = 8,1
+52,linear,Algebra,Tìm x biết 9x + 10 = -53,1
+53,linear,Algebra,Tìm x biết 3x + 6 = -9,1
+54,linear,Algebra,Giải phương trình 8x - 13 = 67,1
+55,linear,Algebra,Cho phương trình 8x - 1 = 79. Tìm x,1
+56,linear,Algebra,Tìm x biết 6x + 13 = 61,1
+57,linear,Algebra,Cho phương trình 3x + 14 = 50. Tìm x,1
+58,linear,Algebra,Tìm x biết 6x - 5 = 61,1
+59,linear,Algebra,Giải phương trình 6x - 10 = 14,1
+60,linear,Algebra,Tìm x biết 2x + 2 = 0,1
+61,linear,Algebra,Cho phương trình 3x - 6 = 27. Tìm x,1
+62,linear,Algebra,Tìm x biết 5x - 4 = -29,1
+63,linear,Algebra,Giải phương trình 2x - 5 = 15,1
+64,linear,Algebra,Giải phương trình 2x + 15 = 3,1
+65,linear,Algebra,Tìm x biết 6x - 14 = -26,1
+66,linear,Algebra,Giải phương trình 3x + 9 = -12,1
+67,quad,Algebra,Giải phương trình bậc hai x^2 + 6x + 8 = 0,2
+68,quad,Algebra,Tìm nghiệm của phương trình x^2 - 8x - 9 = 0,2
+69,quad,Algebra,Tìm nghiệm của phương trình x^2 - 11x + 30 = 0,2
+70,quad,Algebra,Giải phương trình bậc hai x^2 - 5x - 24 = 0,2
+71,quad,Algebra,Tìm nghiệm của phương trình x^2 + 3x - 4 = 0,2
+72,quad,Algebra,Giải phương trình bậc hai x^2 + 5x - 6 = 0,2
+73,quad,Algebra,Giải phương trình bậc hai x^2 + 10x + 24 = 0,2
+74,quad,Algebra,Giải phương trình bậc hai x^2 + 3x - 4 = 0,2
+75,quad,Algebra,Tìm nghiệm của phương trình x^2 - 3x + 2 = 0,2
+76,quad,Algebra,Tìm nghiệm của phương trình x^2 - 10x + 9 = 0,2
+77,quad,Algebra,Tìm nghiệm của phương trình x^2 + 6x + 9 = 0,2
+78,quad,Algebra,Tìm nghiệm của phương trình x^2 - 12x + 35 = 0,2
+79,quad,Algebra,Giải phương trình bậc hai x^2 - 3x - 40 = 0,2
+80,quad,Algebra,Tìm nghiệm của phương trình x^2 - x - 30 = 0,2
+81,quad,Algebra,Giải phương trình bậc hai x^2 + 2x - 3 = 0,2
+82,quad,Algebra,Giải phương trình bậc hai x^2 - 5x - 14 = 0,2
+83,quad,Algebra,Giải phương trình bậc hai x^2 - 10x + 16 = 0,2
+84,quad,Algebra,Giải phương trình bậc hai x^2 - 4x - 32 = 0,2
+85,quad,Algebra,Giải phương trình bậc hai x^2 + 11x + 30 = 0,2
+86,quad,Algebra,Tìm nghiệm của phương trình x^2 - 16x + 63 = 0,2
+87,quad,Algebra,Tìm nghiệm của phương trình x^2 + 6x + 5 = 0,2
+88,quad,Algebra,Tìm nghiệm của phương trình x^2 - 10x + 16 = 0,2
+89,quad,Algebra,Giải phương trình bậc hai x^2 - 16x + 63 = 0,2
+90,quad,Algebra,Giải phương trình bậc hai x^2 + x - 20 = 0,2
+91,quad,Algebra,Giải phương trình bậc hai x^2 - 4x - 45 = 0,2
+92,quad,Algebra,Giải phương trình bậc hai x^2 + 9x + 20 = 0,2
+93,quad,Algebra,Giải phương trình bậc hai x^2 + 8x + 16 = 0,2
+94,quad,Algebra,Giải phương trình bậc hai x^2 - 3x - 18 = 0,2
+95,quad,Algebra,Tìm nghiệm của phương trình x^2 + 9x + 20 = 0,2
+96,quad,Algebra,Giải phương trình bậc hai x^2 - 6x + 8 = 0,2
+97,quad,Algebra,Tìm nghiệm của phương trình x^2 - 5x + 4 = 0,2
+98,quad,Algebra,Tìm nghiệm của phương trình x^2 - 4x - 12 = 0,2
+99,quad,Algebra,Giải phương trình bậc hai x^2 - 12x + 32 = 0,2
+100,quad,Algebra,Giải phương trình bậc hai x^2 - 2x - 48 = 0,2
+101,quad,Algebra,Giải phương trình bậc hai x^2 - x - 20 = 0,2
+102,quad,Algebra,Giải phương trình bậc hai x^2 - 8x + 15 = 0,2
+103,quad,Algebra,Giải phương trình bậc hai x^2 - 11x + 24 = 0,2
+104,quad,Algebra,Giải phương trình bậc hai x^2 + 6x + 9 = 0,2
+105,quad,Algebra,Tìm nghiệm của phương trình x^2 - 11x + 18 = 0,2
+106,quad,Algebra,Giải phương trình bậc hai x^2 + 3x - 10 = 0,2
+107,circle,Geometry,Tính diện tích hình tròn có bán kính r = 6,2
+108,circle,Geometry,Tính chu vi hình tròn có bán kính r = 11,2
+109,circle,Geometry,Tính chu vi hình tròn có bán kính r = 9,2
+110,circle,Geometry,Tính diện tích hình tròn có bán kính r = 9,2
+111,circle,Geometry,Tính diện tích hình tròn có bán kính r = 2,2
+112,circle,Geometry,Tính diện tích hình tròn có bán kính r = 15,2
+113,circle,Geometry,Tính chu vi hình tròn có bán kính r = 14,2
+114,circle,Geometry,Tính diện tích hình tròn có bán kính r = 10,2
+115,circle,Geometry,Tính diện tích hình tròn có bán kính r = 7,2
+116,circle,Geometry,Tính chu vi hình tròn có bán kính r = 1,2
+117,circle,Geometry,Tính chu vi hình tròn có bán kính r = 15,2
+118,circle,Geometry,Tính diện tích hình tròn có bán kính r = 4,2
+119,circle,Geometry,Tính diện tích hình tròn có bán kính r = 11,2
+120,circle,Geometry,Tính chu vi hình tròn có bán kính r = 6,2
+121,circle,Geometry,Tính diện tích hình tròn có bán kính r = 14,2
+122,circle,Geometry,Tính diện tích hình tròn có bán kính r = 13,2
+123,circle,Geometry,Tính diện tích hình tròn có bán kính r = 1,2
+124,circle,Geometry,Tính chu vi hình tròn có bán kính r = 12,2
+125,circle,Geometry,Tính chu vi hình tròn có bán kính r = 13,2
+126,circle,Geometry,Tính chu vi hình tròn có bán kính r = 7,2
+127,circle,Geometry,Tính chu vi hình tròn có bán kính r = 10,2
+128,circle,Geometry,Tính chu vi hình tròn có bán kính r = 2,2
+129,circle,Geometry,Tính chu vi hình tròn có bán kính r = 4,2
+130,circle,Geometry,Tính chu vi hình tròn có bán kính r = 5,2
+131,circle,Geometry,Tính chu vi hình tròn có bán kính r = 8,2
+132,circle,Geometry,Tính diện tích hình tròn có bán kính r = 8,2
+133,circle,Geometry,Tính diện tích hình tròn có bán kính r = 3,2
+134,circle,Geometry,Tính diện tích hình tròn có bán kính r = 12,2
+135,deriv,Calculus,Tính đạo hàm của hàm số y = -5x^2 - x,3
+136,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^4 - 3x^2,3
+137,deriv,Calculus,Tính đạo hàm của hàm số y = -2x^4 + 3x,3
+138,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^3 + x^2,3
+139,deriv,Calculus,Tính đạo hàm của hàm số y = -5x^4 + 5x^3,3
+140,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^3 + 4x,3
+141,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^3 - 3x^2,3
+142,deriv,Calculus,Tính đạo hàm của hàm số y = x^2 + 4x,3
+143,deriv,Calculus,Tính đạo hàm của hàm số y = -x^3 - x^2,3
+144,deriv,Calculus,Tính đạo hàm của hàm số y = -5x^4 + x^2,3
+145,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^4 + 5x^2,3
+146,deriv,Calculus,Tính đạo hàm của hàm số y = -x^2 + x,3
+147,deriv,Calculus,Tính đạo hàm của hàm số y = -2x^2 + 4x,3
+148,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^4 + 3x^2,3
+149,deriv,Calculus,Tính đạo hàm của hàm số y = 3x^4 + 5x^3,3
+150,deriv,Calculus,Tính đạo hàm của hàm số y = -5x^3 + 4x,3
+151,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^4 - 3x^2,3
+152,deriv,Calculus,Tính đạo hàm của hàm số y = 3x^2 + 5x,3
+153,deriv,Calculus,Tính đạo hàm của hàm số y = 3x^3 - 4x,3
+154,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^3 + 3x^2,3
+155,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^2 + x,3
+156,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^3 - 5x,3
+157,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^4 - 2x^3,3
+158,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^2 + 4x,3
+159,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^4 + 5x^2,3
+160,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^4 + 3x,3
+161,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^4 + 5x^2,3
+162,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^4 + 2x^3,3
+163,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^4 - x^2,3
+164,deriv,Calculus,Tính đạo hàm của hàm số y = 3x^3 + 5x,3
+165,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^4 - 4x^2,3
+166,deriv,Calculus,Tính đạo hàm của hàm số y = x^4 + 4x,3
+167,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^2 + 5x,3
+168,deriv,Calculus,Tính đạo hàm của hàm số y = 3x^2 + 2x,3
+169,deriv,Calculus,Tính đạo hàm của hàm số y = 2x^3 + 3x,3
+170,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^3 + 4x^2,3
+171,deriv,Calculus,Tính đạo hàm của hàm số y = 3x^4 + 3x,3
+172,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^4 - 4x,3
+173,deriv,Calculus,Tính đạo hàm của hàm số y = 4x^3 + 2x^2,3
+174,deriv,Calculus,Tính đạo hàm của hàm số y = 5x^3 - 2x,3
+175,arith,Arithmetic,"An có 14 viên bi, mua thêm 19 viên bi, rồi cho bạn 2 viên bi. Hỏi An còn bao nhiêu viên bi?",2
+176,arith,Arithmetic,"Minh có 50 quả táo, mua thêm 15 quả táo, rồi cho bạn 7 quả táo. Hỏi Minh còn bao nhiêu quả táo?",2
+177,arith,Arithmetic,"An có 60 viên bi, mua thêm 5 viên bi, rồi cho bạn 7 viên bi. Hỏi An còn bao nhiêu viên bi?",1
+178,arith,Arithmetic,"An có 18 viên bi, mua thêm 4 viên bi, rồi cho bạn 7 viên bi. Hỏi An còn bao nhiêu viên bi?",2
+179,arith,Arithmetic,"Bình có 54 cái kẹo, mua thêm 18 cái kẹo, rồi cho bạn 4 cái kẹo. Hỏi Bình còn bao nhiêu cái kẹo?",1
+180,arith,Arithmetic,"An có 12 cái kẹo, mua thêm 12 cái kẹo, rồi cho bạn 5 cái kẹo. Hỏi An còn bao nhiêu cái kẹo?",1
+181,arith,Arithmetic,"Bình có 30 quả táo, mua thêm 12 quả táo, rồi cho bạn 8 quả táo. Hỏi Bình còn bao nhiêu quả táo?",2
+182,arith,Arithmetic,"Lan có 58 quả táo, mua thêm 9 quả táo, rồi cho bạn 6 quả táo. Hỏi Lan còn bao nhiêu quả táo?",2
+183,arith,Arithmetic,"An có 27 viên bi, mua thêm 6 viên bi, rồi cho bạn 7 viên bi. Hỏi An còn bao nhiêu viên bi?",2
+184,arith,Arithmetic,"Minh có 34 cái kẹo, mua thêm 13 cái kẹo, rồi cho bạn 4 cái kẹo. Hỏi Minh còn bao nhiêu cái kẹo?",2
+185,arith,Arithmetic,"Minh có 43 viên bi, mua thêm 11 viên bi, rồi cho bạn 3 viên bi. Hỏi Minh còn bao nhiêu viên bi?",2
+186,arith,Arithmetic,"An có 48 cái kẹo, mua thêm 8 cái kẹo, rồi cho bạn 6 cái kẹo. Hỏi An còn bao nhiêu cái kẹo?",2
+187,arith,Arithmetic,"An có 30 quả táo, mua thêm 12 quả táo, rồi cho bạn 6 quả táo. Hỏi An còn bao nhiêu quả táo?",2
+188,arith,Arithmetic,"Minh có 54 cuốn vở, mua thêm 17 cuốn vở, rồi cho bạn 7 cuốn vở. Hỏi Minh còn bao nhiêu cuốn vở?",2
+189,arith,Arithmetic,"An có 49 viên bi, mua thêm 16 viên bi, rồi cho bạn 6 viên bi. Hỏi An còn bao nhiêu viên bi?",1
+190,arith,Arithmetic,"An có 33 cái kẹo, mua thêm 19 cái kẹo, rồi cho bạn 4 cái kẹo. Hỏi An còn bao nhiêu cái kẹo?",1
+191,arith,Arithmetic,"Bình có 12 cái kẹo, mua thêm 7 cái kẹo, rồi cho bạn 3 cái kẹo. Hỏi Bình còn bao nhiêu cái kẹo?",1
+192,arith,Arithmetic,"Lan có 34 viên bi, mua thêm 4 viên bi, rồi cho bạn 4 viên bi. Hỏi Lan còn bao nhiêu viên bi?",2
+193,arith,Arithmetic,"Lan có 38 viên bi, mua thêm 5 viên bi, rồi cho bạn 4 viên bi. Hỏi Lan còn bao nhiêu viên bi?",2
+194,arith,Arithmetic,"Minh có 51 viên bi, mua thêm 11 viên bi, rồi cho bạn 5 viên bi. Hỏi Minh còn bao nhiêu viên bi?",1
+195,arith,Arithmetic,"An có 41 cuốn vở, mua thêm 19 cuốn vở, rồi cho bạn 8 cuốn vở. Hỏi An còn bao nhiêu cuốn vở?",1
+196,arith,Arithmetic,"Lan có 55 viên bi, mua thêm 17 viên bi, rồi cho bạn 5 viên bi. Hỏi Lan còn bao nhiêu viên bi?",2
+197,arith,Arithmetic,"Minh có 17 cuốn vở, mua thêm 7 cuốn vở, rồi cho bạn 3 cuốn vở. Hỏi Minh còn bao nhiêu cuốn vở?",2
+198,arith,Arithmetic,"Bình có 15 cái kẹo, mua thêm 13 cái kẹo, rồi cho bạn 7 cái kẹo. Hỏi Bình còn bao nhiêu cái kẹo?",1
+199,arith,Arithmetic,"Lan có 20 viên bi, mua thêm 8 viên bi, rồi cho bạn 7 viên bi. Hỏi Lan còn bao nhiêu viên bi?",1
+200,arith,Arithmetic,"An có 60 cuốn vở, mua thêm 7 cuốn vở, rồi cho bạn 5 cuốn vở. Hỏi An còn bao nhiêu cuốn vở?",2
+201,arith,Arithmetic,"An có 45 viên bi, mua thêm 14 viên bi, rồi cho bạn 9 viên bi. Hỏi An còn bao nhiêu viên bi?",1
+202,arith,Arithmetic,"An có 29 quả táo, mua thêm 15 quả táo, rồi cho bạn 9 quả táo. Hỏi An còn bao nhiêu quả táo?",2
+203,arith,Arithmetic,"Minh có 18 quả táo, mua thêm 13 quả táo, rồi cho bạn 3 quả táo. Hỏi Minh còn bao nhiêu quả táo?",2
+204,arith,Arithmetic,"Minh có 18 viên bi, mua thêm 20 viên bi, rồi cho bạn 4 viên bi. Hỏi Minh còn bao nhiêu viên bi?",1
+205,arith,Arithmetic,"Minh có 17 quả táo, mua thêm 19 quả táo, rồi cho bạn 4 quả táo. Hỏi Minh còn bao nhiêu quả táo?",2
+206,arith,Arithmetic,"Bình có 30 cuốn vở, mua thêm 10 cuốn vở, rồi cho bạn 7 cuốn vở. Hỏi Bình còn bao nhiêu cuốn vở?",2
+207,arith,Arithmetic,"An có 22 viên bi, mua thêm 20 viên bi, rồi cho bạn 6 viên bi. Hỏi An còn bao nhiêu viên bi?",1
+208,arith,Arithmetic,"Lan có 42 quả táo, mua thêm 8 quả táo, rồi cho bạn 4 quả táo. Hỏi Lan còn bao nhiêu quả táo?",1
+209,arith,Arithmetic,"Lan có 11 quả táo, mua thêm 5 quả táo, rồi cho bạn 2 quả táo. Hỏi Lan còn bao nhiêu quả táo?",2
+210,arith,Arithmetic,"Bình có 49 cái kẹo, mua thêm 3 cái kẹo, rồi cho bạn 9 cái kẹo. Hỏi Bình còn bao nhiêu cái kẹo?",2
+211,arith,Arithmetic,"Lan có 25 cái kẹo, mua thêm 15 cái kẹo, rồi cho bạn 6 cái kẹo. Hỏi Lan còn bao nhiêu cái kẹo?",2
+212,arith,Arithmetic,"An có 20 quả táo, mua thêm 17 quả táo, rồi cho bạn 8 quả táo. Hỏi An còn bao nhiêu quả táo?",2
+213,arith,Arithmetic,"Minh có 31 cuốn vở, mua thêm 7 cuốn vở, rồi cho bạn 7 cuốn vở. Hỏi Minh còn bao nhiêu cuốn vở?",2
+214,arith,Arithmetic,"Lan có 18 cái kẹo, mua thêm 14 cái kẹo, rồi cho bạn 3 cái kẹo. Hỏi Lan còn bao nhiêu cái kẹo?",2
+215,system,Algebra,Giải hệ phương trình 2x - 3y = 9 và 4x - y = 13,2
+216,system,Algebra,Giải hệ phương trình 2x - 3y = -11 và x - y = -3,2
+217,system,Algebra,Giải hệ phương trình 3x - 2y = 6 và 2x + y = 11,2
+218,system,Algebra,Giải hệ phương trình 4x + y = -10 và 3x - 3y = -15,2
+219,system,Algebra,Giải hệ phương trình 4x - 2y = 12 và 2x + 2y = -6,2
+220,system,Algebra,Giải hệ phương trình x + y = 12 và 3x + 2y = 30,2
+221,system,Algebra,Giải hệ phương trình 4x + 2y = -8 và 3x - 3y = -15,2
+222,system,Algebra,Giải hệ phương trình 2x + 3y = 22 và 3x - y = 22,2
+223,system,Algebra,Giải hệ phương trình 3x + y = 19 và x - 3y = -7,2
+224,system,Algebra,Giải hệ phương trình 2x + 2y = -2 và 3x - y = -11,2
+225,system,Algebra,Giải hệ phương trình 4x + 2y = 14 và 3x + 3y = 6,2
+226,system,Algebra,Giải hệ phương trình 2x + y = 17 và x - y = 7,2
+227,system,Algebra,Giải hệ phương trình 3x - 2y = 8 và 2x + 2y = 12,2
+228,system,Algebra,Giải hệ phương trình x - 3y = 4 và x - 2y = 5,2
+229,system,Algebra,Giải hệ phương trình 4x - 2y = 20 và 4x + 2y = 12,2
+230,system,Algebra,Giải hệ phương trình 3x - 2y = 1 và 3x + y = 22,2
+231,system,Algebra,Giải hệ phương trình 4x + y = 5 và 3x - 3y = 0,2
+232,system,Algebra,Giải hệ phương trình x + 2y = 22 và 4x - y = 25,2
+233,system,Algebra,Giải hệ phương trình x - y = 0 và 4x + 3y = 56,2
+234,system,Algebra,Giải hệ phương trình 2x - 2y = 6 và 4x + 3y = -16,2
+235,system,Algebra,Giải hệ phương trình x - 3y = -5 và 2x + y = 4,2
+236,system,Algebra,Giải hệ phương trình 2x + 3y = 16 và 4x - 2y = 0,2
+237,system,Algebra,Giải hệ phương trình 4x + 3y = 13 và x - 2y = 6,2
+238,system,Algebra,Giải hệ phương trình 3x + 2y = -1 và 4x + y = 2,2
+239,system,Algebra,Giải hệ phương trình 4x + 2y = 40 và 3x - y = 10,2
+240,system,Algebra,Giải hệ phương trình 3x - 2y = -8 và 4x - 2y = -8,2
+241,system,Algebra,Giải hệ phương trình 3x - y = 22 và 2x - y = 15,2
+242,system,Algebra,Giải hệ phương trình 4x + y = 24 và 3x - y = 4,2
+243,system,Algebra,Giải hệ phương trình 3x - 3y = 6 và 3x + 2y = 26,2
+244,system,Algebra,Giải hệ phương trình 4x - y = 4 và 4x - 2y = 8,2
+245,system,Algebra,Giải hệ phương trình 3x - y = 18 và x + y = 6,2
+246,system,Algebra,Giải hệ phương trình 4x - 2y = -8 và 2x + 2y = 8,2
+247,system,Algebra,Giải hệ phương trình 3x - 3y = 6 và 2x + 2y = 24,2
+248,system,Algebra,Giải hệ phương trình 2x - 3y = 11 và 2x + 3y = 5,2
+249,system,Algebra,Giải hệ phương trình 2x - 3y = -19 và x + y = 8,2
+250,ineq,Algebra,Giải bất phương trình 8x - 9 > -12,2
+251,ineq,Algebra,Giải bất phương trình -4x + 1 <= 10,2
+252,ineq,Algebra,Giải bất phương trình -3x + 12 >= -2,2
+253,ineq,Algebra,Giải bất phương trình 2x + 8 > -17,2
+254,ineq,Algebra,Giải bất phương trình -2x + 5 < -18,2
+255,ineq,Algebra,Giải bất phương trình 6x - 7 <= -18,2
+256,ineq,Algebra,Giải bất phương trình 8x - 7 > -2,2
+257,ineq,Algebra,Giải bất phương trình -9x - 3 > 16,2
+258,ineq,Algebra,Giải bất phương trình 3x - 3 <= 9,2
+259,ineq,Algebra,Giải bất phương trình -5x + 4 >= 9,2
+260,ineq,Algebra,Giải bất phương trình -3x - 9 < 1,2
+261,ineq,Algebra,Giải bất phương trình 7x + 8 < -4,2
+262,ineq,Algebra,Giải bất phương trình -9x + 11 >= 1,2
+263,ineq,Algebra,Giải bất phương trình -3x - 7 <= 19,2
+264,ineq,Algebra,Giải bất phương trình 6x + 4 > 0,2
+265,ineq,Algebra,Giải bất phương trình 5x + 9 < -14,2
+266,ineq,Algebra,Giải bất phương trình -5x + 3 < 0,2
+267,ineq,Algebra,Giải bất phương trình -9x - 4 < 4,2
+268,ineq,Algebra,Giải bất phương trình 7x + 12 >= -3,2
+269,ineq,Algebra,Giải bất phương trình 2x + 6 > 16,2
+270,ineq,Algebra,Giải bất phương trình -1x + 8 < 3,2
+271,ineq,Algebra,Giải bất phương trình -8x + 9 <= -13,2
+272,ineq,Algebra,Giải bất phương trình 2x - 7 >= 5,2
+273,ineq,Algebra,Giải bất phương trình -6x + 8 >= -2,2
+274,ineq,Algebra,Giải bất phương trình -2x - 5 <= -12,2
+275,ineq,Algebra,Giải bất phương trình -5x + 2 >= 18,2
+276,ineq,Algebra,Giải bất phương trình 6x + 10 <= 15,2
+277,ineq,Algebra,Giải bất phương trình -3x + 12 > -5,2
+278,ineq,Algebra,Giải bất phương trình 9x + 2 >= 13,2
+279,ineq,Algebra,Giải bất phương trình -7x + 6 > -13,2
+280,ineq,Algebra,Giải bất phương trình 9x - 6 < 16,2
+281,ineq,Algebra,Giải bất phương trình -4x - 2 <= 13,2
+282,ineq,Algebra,Giải bất phương trình -6x + 9 <= -7,2
+283,ineq,Algebra,Giải bất phương trình -7x + 4 > 8,2
+284,ineq,Algebra,Giải bất phương trình 7x - 8 <= 12,2
+285,percent,Arithmetic,Tính 40% của 760,1
+286,percent,Arithmetic,Tính 5% của 750,1
+287,percent,Arithmetic,Tính 40% của 900,1
+288,percent,Arithmetic,Tính 20% của 960,1
+289,percent,Arithmetic,Tính 5% của 540,1
+290,percent,Arithmetic,Tính 20% của 40,1
+291,percent,Arithmetic,Tính 15% của 780,1
+292,percent,Arithmetic,Tính 10% của 90,1
+293,percent,Arithmetic,Tính 30% của 480,1
+294,percent,Arithmetic,Tính 10% của 730,1
+295,percent,Arithmetic,Tính 5% của 120,1
+296,percent,Arithmetic,Tính 40% của 80,1
+297,percent,Arithmetic,Tính 20% của 560,1
+298,percent,Arithmetic,Tính 12% của 210,1
+299,percent,Arithmetic,Tính 30% của 510,1
+300,percent,Arithmetic,Tính 30% của 610,1
+301,percent,Arithmetic,Tính 30% của 520,1
+302,percent,Arithmetic,Tính 10% của 910,1
+303,percent,Arithmetic,Tính 50% của 210,1
+304,percent,Arithmetic,Tính 25% của 190,1
+305,percent,Arithmetic,Tính 12% của 720,1
+306,percent,Arithmetic,Tính 30% của 710,1
+307,percent,Arithmetic,Tính 12% của 970,1
+308,percent,Arithmetic,Tính 15% của 40,1
+309,percent,Arithmetic,Tính 5% của 420,1
+310,percent,Arithmetic,Tính 50% của 580,1
+311,percent,Arithmetic,Tính 50% của 520,1
+312,percent,Arithmetic,Tính 15% của 350,1
+313,percent,Arithmetic,Tính 40% của 480,1
+314,percent,Arithmetic,Tính 12% của 390,1
+315,percent,Arithmetic,Tính 15% của 960,1
+316,percent,Arithmetic,Tính 10% của 80,1
+317,percent,Arithmetic,Tính 30% của 820,1
+318,percent,Arithmetic,Tính 5% của 340,1
+319,percent,Arithmetic,Tính 15% của 120,1
+320,frac,Arithmetic,Tính 2/2 - 8/2,2
+321,frac,Arithmetic,Tính 1/8 - 8/5,2
+322,frac,Arithmetic,Tính 1/4 - 9/6,2
+323,frac,Arithmetic,Tính 6/7 - 4/6,2
+324,frac,Arithmetic,Tính 9/5 * 7/6,2
+325,frac,Arithmetic,Tính 1/4 + 7/9,2
+326,frac,Arithmetic,Tính 6/8 : 9/7,2
+327,frac,Arithmetic,Tính 7/4 - 5/8,2
+328,frac,Arithmetic,Tính 9/9 * 4/5,2
+329,frac,Arithmetic,Tính 3/9 : 1/8,2
+330,frac,Arithmetic,Tính 9/4 * 7/5,2
+331,frac,Arithmetic,Tính 4/7 * 2/9,2
+332,frac,Arithmetic,Tính 2/5 : 1/6,2
+333,frac,Arithmetic,Tính 1/3 : 4/5,2
+334,frac,Arithmetic,Tính 4/7 - 5/2,2
+335,frac,Arithmetic,Tính 4/3 - 8/5,2
+336,frac,Arithmetic,Tính 7/5 * 9/7,2
+337,frac,Arithmetic,Tính 7/9 * 9/7,2
+338,frac,Arithmetic,Tính 5/7 : 9/9,2
+339,frac,Arithmetic,Tính 2/9 * 6/5,2
+340,frac,Arithmetic,Tính 6/8 - 1/5,2
+341,frac,Arithmetic,Tính 1/6 * 9/8,2
+342,frac,Arithmetic,Tính 3/5 : 6/5,2
+343,frac,Arithmetic,Tính 4/9 * 9/7,2
+344,frac,Arithmetic,Tính 8/9 * 8/4,2
+345,frac,Arithmetic,Tính 3/4 - 9/9,2
+346,frac,Arithmetic,Tính 9/2 + 9/2,2
+347,frac,Arithmetic,Tính 1/2 - 7/4,2
+348,frac,Arithmetic,Tính 2/4 : 1/5,2
+349,frac,Arithmetic,Tính 6/2 + 8/9,2
+350,frac,Arithmetic,Tính 1/8 * 1/2,2
+351,frac,Arithmetic,Tính 9/6 - 1/8,2
+352,frac,Arithmetic,Tính 2/3 - 9/4,2
+353,frac,Arithmetic,Tính 4/6 : 6/6,2
+354,frac,Arithmetic,Tính 2/7 - 7/9,2
+355,gcd,Arithmetic,Tìm ƯCLN của 44 và 16,1
+356,gcd,Arithmetic,Tìm ƯCLN của 17 và 57,1
+357,gcd,Arithmetic,Tìm BCNN của 54 và 76,1
+358,gcd,Arithmetic,Tìm BCNN của 13 và 87,1
+359,gcd,Arithmetic,Tìm ƯCLN của 27 và 16,1
+360,gcd,Arithmetic,Tìm BCNN của 61 và 88,1
+361,gcd,Arithmetic,Tìm BCNN của 78 và 18,1
+362,gcd,Arithmetic,Tìm ƯCLN của 35 và 33,1
+363,gcd,Arithmetic,Tìm BCNN của 40 và 11,1
+364,gcd,Arithmetic,Tìm ƯCLN của 41 và 75,1
+365,gcd,Arithmetic,Tìm ƯCLN của 28 và 46,1
+366,gcd,Arithmetic,Tìm ƯCLN của 32 và 81,1
+367,gcd,Arithmetic,Tìm ƯCLN của 56 và 15,1
+368,gcd,Arithmetic,Tìm BCNN của 26 và 78,1
+369,gcd,Arithmetic,Tìm ƯCLN của 78 và 55,1
+370,gcd,Arithmetic,Tìm BCNN của 55 và 23,1
+371,gcd,Arithmetic,Tìm ƯCLN của 70 và 50,1
+372,gcd,Arithmetic,Tìm ƯCLN của 18 và 61,1
+373,gcd,Arithmetic,Tìm ƯCLN của 15 và 49,1
+374,gcd,Arithmetic,Tìm BCNN của 47 và 9,1
+375,gcd,Arithmetic,Tìm BCNN của 63 và 68,1
+376,gcd,Arithmetic,Tìm ƯCLN của 51 và 76,1
+377,gcd,Arithmetic,Tìm BCNN của 61 và 29,1
+378,gcd,Arithmetic,Tìm BCNN của 16 và 85,1
+379,gcd,Arithmetic,Tìm BCNN của 37 và 15,1
+380,gcd,Arithmetic,Tìm ƯCLN của 40 và 25,1
+381,gcd,Arithmetic,Tìm BCNN của 87 và 25,1
+382,gcd,Arithmetic,Tìm BCNN của 46 và 52,1
+383,gcd,Arithmetic,Tìm ƯCLN của 17 và 6,1
+384,gcd,Arithmetic,Tìm BCNN của 62 và 52,1
+385,gcd,Arithmetic,Tìm BCNN của 19 và 22,1
+386,gcd,Arithmetic,Tìm ƯCLN của 29 và 61,1
+387,gcd,Arithmetic,Tìm BCNN của 77 và 77,1
+388,gcd,Arithmetic,Tìm BCNN của 19 và 9,1
+389,gcd,Arithmetic,Tìm ƯCLN của 82 và 82,1
+390,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 12 và chiều rộng 14,2
+391,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 11 và 15. Tính cạnh huyền,2
+392,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 4 và chiều rộng 19,2
+393,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 20 và chiều rộng 18,2
+394,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 14 và chiều rộng 7,2
+395,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 10 và 11. Tính cạnh huyền,2
+396,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 17 và chiều rộng 6,2
+397,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 7 và 15. Tính cạnh huyền,2
+398,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 15 và 11. Tính cạnh huyền,2
+399,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 4 và 13. Tính cạnh huyền,2
+400,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 9 và chiều rộng 17,2
+401,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 16 và chiều rộng 5,2
+402,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 11 và 2. Tính cạnh huyền,2
+403,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 12 và 14. Tính cạnh huyền,2
+404,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 16 và 12. Tính cạnh huyền,2
+405,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 6 và 11. Tính cạnh huyền,2
+406,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 8 và 17. Tính cạnh huyền,2
+407,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 7 và 14. Tính cạnh huyền,2
+408,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 11 và chiều rộng 17,2
+409,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 14 và chiều rộng 13,2
+410,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 20 và chiều rộng 8,2
+411,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 19 và 2. Tính cạnh huyền,2
+412,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 8 và 16. Tính cạnh huyền,2
+413,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 4 và 15. Tính cạnh huyền,2
+414,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 6 và chiều rộng 11,2
+415,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 10 và 6. Tính cạnh huyền,2
+416,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 14 và 4. Tính cạnh huyền,2
+417,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 17 và 20. Tính cạnh huyền,2
+418,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 19 và 18. Tính cạnh huyền,2
+419,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 19 và 3. Tính cạnh huyền,2
+420,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 19 và chiều rộng 4,2
+421,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 9 và chiều rộng 13,2
+422,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 3 và 20. Tính cạnh huyền,2
+423,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 12 và chiều rộng 15,2
+424,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 2 và 5. Tính cạnh huyền,2
+425,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 9 và chiều rộng 18,2
+426,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 16 và 13. Tính cạnh huyền,2
+427,geom,Geometry,Tính diện tích hình chữ nhật có chiều dài 16 và chiều rộng 20,2
+428,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 13 và 2. Tính cạnh huyền,2
+429,geom,Geometry,Tam giác vuông có hai cạnh góc vuông 5 và 11. Tính cạnh huyền,2
+430,integ,Calculus,Tìm nguyên hàm của hàm số y = 3x^4 + 2x,3
+431,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^4 + 3x,3
+432,integ,Calculus,Tìm nguyên hàm của hàm số y = x^2 + 4x,3
+433,integ,Calculus,Tìm nguyên hàm của hàm số y = -3x^3 + x,3
+434,integ,Calculus,Tìm nguyên hàm của hàm số y = -2x^3 - 2x,3
+435,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^3 + 2x^2,3
+436,integ,Calculus,Tìm nguyên hàm của hàm số y = -4x^4 + 2x,3
+437,integ,Calculus,Tìm nguyên hàm của hàm số y = -x^4 + 5x^2,3
+438,integ,Calculus,Tìm nguyên hàm của hàm số y = 4x^4 - x^3,3
+439,integ,Calculus,Tìm nguyên hàm của hàm số y = -3x^2 - x,3
+440,integ,Calculus,Tìm nguyên hàm của hàm số y = 3x^3 + 2x,3
+441,integ,Calculus,Tìm nguyên hàm của hàm số y = -3x^4 - 4x,3
+442,integ,Calculus,Tìm nguyên hàm của hàm số y = -4x^4 - 4x^3,3
+443,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^2 + 3x,3
+444,integ,Calculus,Tìm nguyên hàm của hàm số y = 2x^4 + 5x^3,3
+445,integ,Calculus,Tìm nguyên hàm của hàm số y = 2x^4 + 3x,3
+446,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^3 + 4x^2,3
+447,integ,Calculus,Tìm nguyên hàm của hàm số y = 2x^4 - 5x^2,3
+448,integ,Calculus,Tìm nguyên hàm của hàm số y = 3x^3 + 2x^2,3
+449,integ,Calculus,Tìm nguyên hàm của hàm số y = x^4 - 4x^2,3
+450,integ,Calculus,Tìm nguyên hàm của hàm số y = -4x^2 + 2x,3
+451,integ,Calculus,Tìm nguyên hàm của hàm số y = 4x^4 + 4x^2,3
+452,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^2 + 2x,3
+453,integ,Calculus,Tìm nguyên hàm của hàm số y = 3x^2 - 2x,3
+454,integ,Calculus,Tìm nguyên hàm của hàm số y = -4x^4 + 5x^3,3
+455,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^2 + 5x,3
+456,integ,Calculus,Tìm nguyên hàm của hàm số y = 2x^4 - x^3,3
+457,integ,Calculus,Tìm nguyên hàm của hàm số y = 3x^4 + x^2,3
+458,integ,Calculus,Tìm nguyên hàm của hàm số y = -2x^2 + x,3
+459,integ,Calculus,Tìm nguyên hàm của hàm số y = 4x^4 - 5x^3,3
+460,integ,Calculus,Tìm nguyên hàm của hàm số y = 2x^2 + 5x,3
+461,integ,Calculus,Tìm nguyên hàm của hàm số y = -3x^4 + 5x^3,3
+462,integ,Calculus,Tìm nguyên hàm của hàm số y = 5x^3 - 5x^2,3
+463,integ,Calculus,Tìm nguyên hàm của hàm số y = -3x^4 + 4x,3
+464,integ,Calculus,Tìm nguyên hàm của hàm số y = -2x^3 + 2x^2,3
+465,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 10 m/s, gia tốc a = 4 m/s^2 trong thời gian t = 14 s. Tính vận tốc v và quãng đường s.",1
+466,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 15 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 20 s. Tính vận tốc v và quãng đường s.",1
+467,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 20 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 15 s. Tính vận tốc v và quãng đường s.",1
+468,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 12 m/s, gia tốc a = 8 m/s^2 trong thời gian t = 4 s. Tính vận tốc v và quãng đường s.",1
+469,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 20 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 14 s. Tính vận tốc v và quãng đường s.",1
+470,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 16 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 13 s. Tính vận tốc v và quãng đường s.",1
+471,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 14 m/s, gia tốc a = 8 m/s^2 trong thời gian t = 12 s. Tính vận tốc v và quãng đường s.",1
+472,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 18 m/s, gia tốc a = 1 m/s^2 trong thời gian t = 4 s. Tính vận tốc v và quãng đường s.",1
+473,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 23 m/s, gia tốc a = 8 m/s^2 trong thời gian t = 13 s. Tính vận tốc v và quãng đường s.",1
+474,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 2 m/s, gia tốc a = 7 m/s^2 trong thời gian t = 8 s. Tính vận tốc v và quãng đường s.",1
+475,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 13 m/s, gia tốc a = 4 m/s^2 trong thời gian t = 17 s. Tính vận tốc v và quãng đường s.",1
+476,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 8 m/s, gia tốc a = 6 m/s^2 trong thời gian t = 11 s. Tính vận tốc v và quãng đường s.",1
+477,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 10 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 20 s. Tính vận tốc v và quãng đường s.",1
+478,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 15 m/s, gia tốc a = 6 m/s^2 trong thời gian t = 3 s. Tính vận tốc v và quãng đường s.",1
+479,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 1 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 16 s. Tính vận tốc v và quãng đường s.",1
+480,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 0 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 7 s. Tính vận tốc v và quãng đường s.",1
+481,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 14 m/s, gia tốc a = 8 m/s^2 trong thời gian t = 2 s. Tính vận tốc v và quãng đường s.",1
+482,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 13 m/s, gia tốc a = 4 m/s^2 trong thời gian t = 6 s. Tính vận tốc v và quãng đường s.",1
+483,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 20 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 7 s. Tính vận tốc v và quãng đường s.",1
+484,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 8 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 13 s. Tính vận tốc v và quãng đường s.",1
+485,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 21 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 3 s. Tính vận tốc v và quãng đường s.",1
+486,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 12 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 9 s. Tính vận tốc v và quãng đường s.",1
+487,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 13 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 5 s. Tính vận tốc v và quãng đường s.",1
+488,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 0 m/s, gia tốc a = 4 m/s^2 trong thời gian t = 17 s. Tính vận tốc v và quãng đường s.",1
+489,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 2 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 20 s. Tính vận tốc v và quãng đường s.",1
+490,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 7 m/s, gia tốc a = 8 m/s^2 trong thời gian t = 2 s. Tính vận tốc v và quãng đường s.",1
+491,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 0 m/s, gia tốc a = 6 m/s^2 trong thời gian t = 5 s. Tính vận tốc v và quãng đường s.",1
+492,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 13 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 17 s. Tính vận tốc v và quãng đường s.",1
+493,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 2 m/s, gia tốc a = 4 m/s^2 trong thời gian t = 14 s. Tính vận tốc v và quãng đường s.",1
+494,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 2 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 5 s. Tính vận tốc v và quãng đường s.",1
+495,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 10 m/s, gia tốc a = 6 m/s^2 trong thời gian t = 11 s. Tính vận tốc v và quãng đường s.",1
+496,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 4 m/s, gia tốc a = 7 m/s^2 trong thời gian t = 6 s. Tính vận tốc v và quãng đường s.",1
+497,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 20 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 4 s. Tính vận tốc v và quãng đường s.",1
+498,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 16 m/s, gia tốc a = 1 m/s^2 trong thời gian t = 7 s. Tính vận tốc v và quãng đường s.",1
+499,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 14 m/s, gia tốc a = 6 m/s^2 trong thời gian t = 8 s. Tính vận tốc v và quãng đường s.",1
+500,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 20 m/s, gia tốc a = 3 m/s^2 trong thời gian t = 15 s. Tính vận tốc v và quãng đường s.",1
+501,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 19 m/s, gia tốc a = 8 m/s^2 trong thời gian t = 8 s. Tính vận tốc v và quãng đường s.",1
+502,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 2 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 6 s. Tính vận tốc v và quãng đường s.",1
+503,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 24 m/s, gia tốc a = 2 m/s^2 trong thời gian t = 20 s. Tính vận tốc v và quãng đường s.",1
+504,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 23 m/s, gia tốc a = 7 m/s^2 trong thời gian t = 13 s. Tính vận tốc v và quãng đường s.",1
+505,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 13 m/s, gia tốc a = 6 m/s^2 trong thời gian t = 6 s. Tính vận tốc v và quãng đường s.",1
+506,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 7 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 4 s. Tính vận tốc v và quãng đường s.",1
+507,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 7 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 2 s. Tính vận tốc v và quãng đường s.",1
+508,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 21 m/s, gia tốc a = 5 m/s^2 trong thời gian t = 8 s. Tính vận tốc v và quãng đường s.",1
+509,kinematics,Mechanics,"Một vật chuyển động nhanh dần đều với v0 = 16 m/s, gia tốc a = 4 m/s^2 trong thời gian t = 14 s. Tính vận tốc v và quãng đường s.",1
+510,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 122.5 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+511,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 80 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+512,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 240.1 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+513,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 490.0 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+514,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 396.9 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+515,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 180 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+516,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 45 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+517,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 500 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+518,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 176.4 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+519,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 313.6 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+520,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 4.9 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+521,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 5 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+522,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 78.4 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+523,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 405 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+524,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 245 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+525,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 19.6 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+526,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 125 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+527,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 44.1 m với g = 9.8 m/s^2. Tính thời gian chạm đất t.,1
+528,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 320 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+529,freefall,Mechanics,Thả rơi tự do một vật từ độ cao h = 20 m với g = 10 m/s^2. Tính thời gian chạm đất t.,1
+530,newton2,Mechanics,Tác dụng lực F = 88 N vào vật có khối lượng m = 22 kg. Tính gia tốc a của vật.,2
+531,newton2,Mechanics,Tác dụng lực F = 196 N vào vật có khối lượng m = 28 kg. Tính gia tốc a của vật.,2
+532,newton2,Mechanics,Tác dụng lực F = 54 N vào vật có khối lượng m = 27 kg. Tính gia tốc a của vật.,2
+533,newton2,Mechanics,Tác dụng lực F = 63 N vào vật có khối lượng m = 7 kg. Tính gia tốc a của vật.,2
+534,newton2,Mechanics,Tác dụng lực F = 189 N vào vật có khối lượng m = 27 kg. Tính gia tốc a của vật.,2
+535,newton2,Mechanics,Tác dụng lực F = 42 N vào vật có khối lượng m = 21 kg. Tính gia tốc a của vật.,2
+536,newton2,Mechanics,Tác dụng lực F = 72 N vào vật có khối lượng m = 24 kg. Tính gia tốc a của vật.,2
+537,newton2,Mechanics,Tác dụng lực F = 8 N vào vật có khối lượng m = 1 kg. Tính gia tốc a của vật.,2
+538,newton2,Mechanics,Tác dụng lực F = 138 N vào vật có khối lượng m = 23 kg. Tính gia tốc a của vật.,2
+539,newton2,Mechanics,Tác dụng lực F = 4 N vào vật có khối lượng m = 2 kg. Tính gia tốc a của vật.,2
+540,newton2,Mechanics,Tác dụng lực F = 3 N vào vật có khối lượng m = 3 kg. Tính gia tốc a của vật.,2
+541,newton2,Mechanics,Tác dụng lực F = 30 N vào vật có khối lượng m = 6 kg. Tính gia tốc a của vật.,2
+542,newton2,Mechanics,Tác dụng lực F = 36 N vào vật có khối lượng m = 18 kg. Tính gia tốc a của vật.,2
+543,newton2,Mechanics,Tác dụng lực F = 76 N vào vật có khối lượng m = 19 kg. Tính gia tốc a của vật.,2
+544,newton2,Mechanics,Tác dụng lực F = 150 N vào vật có khối lượng m = 30 kg. Tính gia tốc a của vật.,2
+545,newton2,Mechanics,Tác dụng lực F = 98 N vào vật có khối lượng m = 14 kg. Tính gia tốc a của vật.,2
+546,newton2,Mechanics,Tác dụng lực F = 105 N vào vật có khối lượng m = 15 kg. Tính gia tốc a của vật.,2
+547,newton2,Mechanics,Tác dụng lực F = 84 N vào vật có khối lượng m = 14 kg. Tính gia tốc a của vật.,2
+548,newton2,Mechanics,Tác dụng lực F = 7 N vào vật có khối lượng m = 1 kg. Tính gia tốc a của vật.,2
+549,newton2,Mechanics,Tác dụng lực F = 44 N vào vật có khối lượng m = 22 kg. Tính gia tốc a của vật.,2
+550,newton2,Mechanics,Tác dụng lực F = 18 N vào vật có khối lượng m = 18 kg. Tính gia tốc a của vật.,2
+551,newton2,Mechanics,Tác dụng lực F = 210 N vào vật có khối lượng m = 21 kg. Tính gia tốc a của vật.,2
+552,newton2,Mechanics,Tác dụng lực F = 30 N vào vật có khối lượng m = 3 kg. Tính gia tốc a của vật.,2
+553,newton2,Mechanics,Tác dụng lực F = 108 N vào vật có khối lượng m = 12 kg. Tính gia tốc a của vật.,2
+554,newton2,Mechanics,Tác dụng lực F = 20 N vào vật có khối lượng m = 4 kg. Tính gia tốc a của vật.,2
+555,newton2,Mechanics,Tác dụng lực F = 130 N vào vật có khối lượng m = 26 kg. Tính gia tốc a của vật.,2
+556,newton2,Mechanics,Tác dụng lực F = 40 N vào vật có khối lượng m = 20 kg. Tính gia tốc a của vật.,2
+557,newton2,Mechanics,Tác dụng lực F = 80 N vào vật có khối lượng m = 10 kg. Tính gia tốc a của vật.,2
+558,newton2,Mechanics,Tác dụng lực F = 91 N vào vật có khối lượng m = 13 kg. Tính gia tốc a của vật.,2
+559,newton2,Mechanics,Tác dụng lực F = 27 N vào vật có khối lượng m = 27 kg. Tính gia tốc a của vật.,2
+560,newton2,Mechanics,Tác dụng lực F = 48 N vào vật có khối lượng m = 16 kg. Tính gia tốc a của vật.,2
+561,newton2,Mechanics,Tác dụng lực F = 72 N vào vật có khối lượng m = 18 kg. Tính gia tốc a của vật.,2
+562,newton2,Mechanics,Tác dụng lực F = 35 N vào vật có khối lượng m = 5 kg. Tính gia tốc a của vật.,2
+563,newton2,Mechanics,Tác dụng lực F = 234 N vào vật có khối lượng m = 26 kg. Tính gia tốc a của vật.,2
+564,newton2,Mechanics,Tác dụng lực F = 30 N vào vật có khối lượng m = 10 kg. Tính gia tốc a của vật.,2
+565,newton2,Mechanics,Tác dụng lực F = 60 N vào vật có khối lượng m = 10 kg. Tính gia tốc a của vật.,2
+566,newton2,Mechanics,Tác dụng lực F = 9 N vào vật có khối lượng m = 1 kg. Tính gia tốc a của vật.,2
+567,newton2,Mechanics,Tác dụng lực F = 252 N vào vật có khối lượng m = 28 kg. Tính gia tốc a của vật.,2
+568,newton2,Mechanics,Tác dụng lực F = 10 N vào vật có khối lượng m = 5 kg. Tính gia tốc a của vật.,2
+569,newton2,Mechanics,Tác dụng lực F = 2 N vào vật có khối lượng m = 2 kg. Tính gia tốc a của vật.,2
+570,work_power,Mechanics,Lực kéo F = 211 N kéo vật dịch chuyển s = 36 m trong thời gian t = 18 s. Tính công A và công suất P.,2
+571,work_power,Mechanics,Lực kéo F = 53 N kéo vật dịch chuyển s = 21 m trong thời gian t = 7 s. Tính công A và công suất P.,2
+572,work_power,Mechanics,Lực kéo F = 186 N kéo vật dịch chuyển s = 15 m trong thời gian t = 14 s. Tính công A và công suất P.,2
+573,work_power,Mechanics,Lực kéo F = 272 N kéo vật dịch chuyển s = 11 m trong thời gian t = 6 s. Tính công A và công suất P.,2
+574,work_power,Mechanics,Lực kéo F = 104 N kéo vật dịch chuyển s = 16 m trong thời gian t = 20 s. Tính công A và công suất P.,2
+575,work_power,Mechanics,Lực kéo F = 139 N kéo vật dịch chuyển s = 14 m trong thời gian t = 4 s. Tính công A và công suất P.,2
+576,work_power,Mechanics,Lực kéo F = 102 N kéo vật dịch chuyển s = 44 m trong thời gian t = 26 s. Tính công A và công suất P.,2
+577,work_power,Mechanics,Lực kéo F = 300 N kéo vật dịch chuyển s = 5 m trong thời gian t = 28 s. Tính công A và công suất P.,2
+578,work_power,Mechanics,Lực kéo F = 291 N kéo vật dịch chuyển s = 31 m trong thời gian t = 21 s. Tính công A và công suất P.,2
+579,work_power,Mechanics,Lực kéo F = 291 N kéo vật dịch chuyển s = 6 m trong thời gian t = 10 s. Tính công A và công suất P.,2
+580,work_power,Mechanics,Lực kéo F = 44 N kéo vật dịch chuyển s = 18 m trong thời gian t = 4 s. Tính công A và công suất P.,2
+581,work_power,Mechanics,Lực kéo F = 111 N kéo vật dịch chuyển s = 48 m trong thời gian t = 19 s. Tính công A và công suất P.,2
+582,work_power,Mechanics,Lực kéo F = 259 N kéo vật dịch chuyển s = 23 m trong thời gian t = 12 s. Tính công A và công suất P.,2
+583,work_power,Mechanics,Lực kéo F = 75 N kéo vật dịch chuyển s = 44 m trong thời gian t = 21 s. Tính công A và công suất P.,2
+584,work_power,Mechanics,Lực kéo F = 130 N kéo vật dịch chuyển s = 8 m trong thời gian t = 10 s. Tính công A và công suất P.,2
+585,work_power,Mechanics,Lực kéo F = 45 N kéo vật dịch chuyển s = 14 m trong thời gian t = 11 s. Tính công A và công suất P.,2
+586,work_power,Mechanics,Lực kéo F = 258 N kéo vật dịch chuyển s = 30 m trong thời gian t = 11 s. Tính công A và công suất P.,2
+587,work_power,Mechanics,Lực kéo F = 166 N kéo vật dịch chuyển s = 46 m trong thời gian t = 19 s. Tính công A và công suất P.,2
+588,work_power,Mechanics,Lực kéo F = 88 N kéo vật dịch chuyển s = 38 m trong thời gian t = 19 s. Tính công A và công suất P.,2
+589,work_power,Mechanics,Lực kéo F = 196 N kéo vật dịch chuyển s = 22 m trong thời gian t = 14 s. Tính công A và công suất P.,2
+590,work_power,Mechanics,Lực kéo F = 96 N kéo vật dịch chuyển s = 2 m trong thời gian t = 11 s. Tính công A và công suất P.,2
+591,work_power,Mechanics,Lực kéo F = 136 N kéo vật dịch chuyển s = 16 m trong thời gian t = 23 s. Tính công A và công suất P.,2
+592,work_power,Mechanics,Lực kéo F = 233 N kéo vật dịch chuyển s = 19 m trong thời gian t = 27 s. Tính công A và công suất P.,2
+593,work_power,Mechanics,Lực kéo F = 194 N kéo vật dịch chuyển s = 10 m trong thời gian t = 22 s. Tính công A và công suất P.,2
+594,work_power,Mechanics,Lực kéo F = 179 N kéo vật dịch chuyển s = 32 m trong thời gian t = 15 s. Tính công A và công suất P.,2
+595,work_power,Mechanics,Lực kéo F = 238 N kéo vật dịch chuyển s = 24 m trong thời gian t = 25 s. Tính công A và công suất P.,2
+596,work_power,Mechanics,Lực kéo F = 166 N kéo vật dịch chuyển s = 33 m trong thời gian t = 18 s. Tính công A và công suất P.,2
+597,work_power,Mechanics,Lực kéo F = 65 N kéo vật dịch chuyển s = 13 m trong thời gian t = 21 s. Tính công A và công suất P.,2
+598,work_power,Mechanics,Lực kéo F = 51 N kéo vật dịch chuyển s = 19 m trong thời gian t = 28 s. Tính công A và công suất P.,2
+599,work_power,Mechanics,Lực kéo F = 81 N kéo vật dịch chuyển s = 36 m trong thời gian t = 7 s. Tính công A và công suất P.,2
+600,work_power,Mechanics,Lực kéo F = 144 N kéo vật dịch chuyển s = 48 m trong thời gian t = 29 s. Tính công A và công suất P.,2
+601,work_power,Mechanics,Lực kéo F = 49 N kéo vật dịch chuyển s = 48 m trong thời gian t = 3 s. Tính công A và công suất P.,2
+602,work_power,Mechanics,Lực kéo F = 19 N kéo vật dịch chuyển s = 34 m trong thời gian t = 21 s. Tính công A và công suất P.,2
+603,work_power,Mechanics,Lực kéo F = 25 N kéo vật dịch chuyển s = 39 m trong thời gian t = 19 s. Tính công A và công suất P.,2
+604,work_power,Mechanics,Lực kéo F = 217 N kéo vật dịch chuyển s = 39 m trong thời gian t = 7 s. Tính công A và công suất P.,2
+605,work_power,Mechanics,Lực kéo F = 28 N kéo vật dịch chuyển s = 37 m trong thời gian t = 9 s. Tính công A và công suất P.,2
+606,work_power,Mechanics,Lực kéo F = 288 N kéo vật dịch chuyển s = 36 m trong thời gian t = 16 s. Tính công A và công suất P.,2
+607,work_power,Mechanics,Lực kéo F = 86 N kéo vật dịch chuyển s = 25 m trong thời gian t = 13 s. Tính công A và công suất P.,2
+608,work_power,Mechanics,Lực kéo F = 124 N kéo vật dịch chuyển s = 39 m trong thời gian t = 24 s. Tính công A và công suất P.,2
+609,work_power,Mechanics,Lực kéo F = 158 N kéo vật dịch chuyển s = 10 m trong thời gian t = 15 s. Tính công A và công suất P.,2
+610,energy,Mechanics,Vật m = 17 kg chuyển động với vận tốc v = 9 m/s ở độ cao h = 3 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+611,energy,Mechanics,Vật m = 13 kg chuyển động với vận tốc v = 6 m/s ở độ cao h = 17 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+612,energy,Mechanics,Vật m = 1 kg chuyển động với vận tốc v = 11 m/s ở độ cao h = 8 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+613,energy,Mechanics,Vật m = 20 kg chuyển động với vận tốc v = 11 m/s ở độ cao h = 6 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+614,energy,Mechanics,Vật m = 17 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 15 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+615,energy,Mechanics,Vật m = 6 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 19 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+616,energy,Mechanics,Vật m = 19 kg chuyển động với vận tốc v = 11 m/s ở độ cao h = 28 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+617,energy,Mechanics,Vật m = 5 kg chuyển động với vận tốc v = 12 m/s ở độ cao h = 24 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+618,energy,Mechanics,Vật m = 16 kg chuyển động với vận tốc v = 6 m/s ở độ cao h = 2 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+619,energy,Mechanics,Vật m = 8 kg chuyển động với vận tốc v = 13 m/s ở độ cao h = 16 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+620,energy,Mechanics,Vật m = 8 kg chuyển động với vận tốc v = 2 m/s ở độ cao h = 9 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+621,energy,Mechanics,Vật m = 12 kg chuyển động với vận tốc v = 4 m/s ở độ cao h = 2 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+622,energy,Mechanics,Vật m = 7 kg chuyển động với vận tốc v = 9 m/s ở độ cao h = 30 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+623,energy,Mechanics,Vật m = 12 kg chuyển động với vận tốc v = 7 m/s ở độ cao h = 16 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+624,energy,Mechanics,Vật m = 15 kg chuyển động với vận tốc v = 15 m/s ở độ cao h = 2 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+625,energy,Mechanics,Vật m = 2 kg chuyển động với vận tốc v = 11 m/s ở độ cao h = 11 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+626,energy,Mechanics,Vật m = 4 kg chuyển động với vận tốc v = 12 m/s ở độ cao h = 17 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+627,energy,Mechanics,Vật m = 9 kg chuyển động với vận tốc v = 14 m/s ở độ cao h = 24 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+628,energy,Mechanics,Vật m = 9 kg chuyển động với vận tốc v = 10 m/s ở độ cao h = 18 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+629,energy,Mechanics,Vật m = 19 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 13 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+630,energy,Mechanics,Vật m = 13 kg chuyển động với vận tốc v = 6 m/s ở độ cao h = 19 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+631,energy,Mechanics,Vật m = 3 kg chuyển động với vận tốc v = 9 m/s ở độ cao h = 9 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+632,energy,Mechanics,Vật m = 13 kg chuyển động với vận tốc v = 15 m/s ở độ cao h = 8 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+633,energy,Mechanics,Vật m = 17 kg chuyển động với vận tốc v = 7 m/s ở độ cao h = 12 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+634,energy,Mechanics,Vật m = 12 kg chuyển động với vận tốc v = 8 m/s ở độ cao h = 26 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+635,energy,Mechanics,Vật m = 16 kg chuyển động với vận tốc v = 15 m/s ở độ cao h = 20 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+636,energy,Mechanics,Vật m = 1 kg chuyển động với vận tốc v = 9 m/s ở độ cao h = 29 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+637,energy,Mechanics,Vật m = 5 kg chuyển động với vận tốc v = 8 m/s ở độ cao h = 6 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+638,energy,Mechanics,Vật m = 8 kg chuyển động với vận tốc v = 2 m/s ở độ cao h = 17 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+639,energy,Mechanics,Vật m = 9 kg chuyển động với vận tốc v = 4 m/s ở độ cao h = 5 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+640,energy,Mechanics,Vật m = 6 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 12 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+641,energy,Mechanics,Vật m = 20 kg chuyển động với vận tốc v = 12 m/s ở độ cao h = 27 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+642,energy,Mechanics,Vật m = 4 kg chuyển động với vận tốc v = 11 m/s ở độ cao h = 8 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+643,energy,Mechanics,Vật m = 14 kg chuyển động với vận tốc v = 13 m/s ở độ cao h = 11 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+644,energy,Mechanics,Vật m = 4 kg chuyển động với vận tốc v = 8 m/s ở độ cao h = 22 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+645,energy,Mechanics,Vật m = 16 kg chuyển động với vận tốc v = 8 m/s ở độ cao h = 7 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+646,energy,Mechanics,Vật m = 19 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 21 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+647,energy,Mechanics,Vật m = 14 kg chuyển động với vận tốc v = 1 m/s ở độ cao h = 8 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+648,energy,Mechanics,Vật m = 2 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 19 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+649,energy,Mechanics,Vật m = 19 kg chuyển động với vận tốc v = 3 m/s ở độ cao h = 5 m (lấy g = 10 m/s^2). Tính động năng Wđ và thế năng Wt.,2
+650,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 1 atm có thể tích V1 = 30 lít. Nén đẳng nhiệt đến thể tích V2 = 7 lít. Tính áp suất p2.,2
+651,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 3 atm có thể tích V1 = 3 lít. Nén đẳng nhiệt đến thể tích V2 = 1 lít. Tính áp suất p2.,2
+652,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 5 atm có thể tích V1 = 7 lít. Nén đẳng nhiệt đến thể tích V2 = 1 lít. Tính áp suất p2.,2
+653,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 21 lít. Nén đẳng nhiệt đến thể tích V2 = 5 lít. Tính áp suất p2.,2
+654,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 5 atm có thể tích V1 = 4 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+655,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 8 atm có thể tích V1 = 21 lít. Nén đẳng nhiệt đến thể tích V2 = 7 lít. Tính áp suất p2.,2
+656,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 8 atm có thể tích V1 = 7 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+657,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 21 lít. Nén đẳng nhiệt đến thể tích V2 = 10 lít. Tính áp suất p2.,2
+658,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 3 atm có thể tích V1 = 21 lít. Nén đẳng nhiệt đến thể tích V2 = 5 lít. Tính áp suất p2.,2
+659,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 6 atm có thể tích V1 = 16 lít. Nén đẳng nhiệt đến thể tích V2 = 4 lít. Tính áp suất p2.,2
+660,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 9 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+661,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 6 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+662,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 1 atm có thể tích V1 = 8 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+663,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 28 lít. Nén đẳng nhiệt đến thể tích V2 = 14 lít. Tính áp suất p2.,2
+664,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 7 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+665,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 4 lít. Nén đẳng nhiệt đến thể tích V2 = 1 lít. Tính áp suất p2.,2
+666,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 3 atm có thể tích V1 = 30 lít. Nén đẳng nhiệt đến thể tích V2 = 7 lít. Tính áp suất p2.,2
+667,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 18 lít. Nén đẳng nhiệt đến thể tích V2 = 6 lít. Tính áp suất p2.,2
+668,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 6 atm có thể tích V1 = 29 lít. Nén đẳng nhiệt đến thể tích V2 = 14 lít. Tính áp suất p2.,2
+669,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 9 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+670,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 13 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+671,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 15 lít. Nén đẳng nhiệt đến thể tích V2 = 7 lít. Tính áp suất p2.,2
+672,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 5 atm có thể tích V1 = 17 lít. Nén đẳng nhiệt đến thể tích V2 = 8 lít. Tính áp suất p2.,2
+673,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 11 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+674,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 10 lít. Nén đẳng nhiệt đến thể tích V2 = 5 lít. Tính áp suất p2.,2
+675,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 1 atm có thể tích V1 = 24 lít. Nén đẳng nhiệt đến thể tích V2 = 6 lít. Tính áp suất p2.,2
+676,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 1 atm có thể tích V1 = 20 lít. Nén đẳng nhiệt đến thể tích V2 = 5 lít. Tính áp suất p2.,2
+677,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 18 lít. Nén đẳng nhiệt đến thể tích V2 = 9 lít. Tính áp suất p2.,2
+678,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 22 lít. Nén đẳng nhiệt đến thể tích V2 = 11 lít. Tính áp suất p2.,2
+679,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 6 atm có thể tích V1 = 15 lít. Nén đẳng nhiệt đến thể tích V2 = 5 lít. Tính áp suất p2.,2
+680,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 6 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+681,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 5 atm có thể tích V1 = 10 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+682,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 20 lít. Nén đẳng nhiệt đến thể tích V2 = 6 lít. Tính áp suất p2.,2
+683,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 5 atm có thể tích V1 = 23 lít. Nén đẳng nhiệt đến thể tích V2 = 7 lít. Tính áp suất p2.,2
+684,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 4 atm có thể tích V1 = 15 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+685,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 8 atm có thể tích V1 = 7 lít. Nén đẳng nhiệt đến thể tích V2 = 2 lít. Tính áp suất p2.,2
+686,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 8 atm có thể tích V1 = 10 lít. Nén đẳng nhiệt đến thể tích V2 = 3 lít. Tính áp suất p2.,2
+687,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 6 atm có thể tích V1 = 26 lít. Nén đẳng nhiệt đến thể tích V2 = 6 lít. Tính áp suất p2.,2
+688,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 7 atm có thể tích V1 = 25 lít. Nén đẳng nhiệt đến thể tích V2 = 12 lít. Tính áp suất p2.,2
+689,gas_law,Thermodynamics,Khí lý tưởng ở áp suất p1 = 2 atm có thể tích V1 = 25 lít. Nén đẳng nhiệt đến thể tích V2 = 12 lít. Tính áp suất p2.,2
+690,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg đồng từ t1 = 20 °C lên t2 = 66 °C, biết c = 380 J/kg.K.",1
+691,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 9 kg nước từ t1 = 27 °C lên t2 = 81 °C, biết c = 4200 J/kg.K.",1
+692,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 3 kg nước từ t1 = 27 °C lên t2 = 100 °C, biết c = 4200 J/kg.K.",1
+693,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 2 kg sắt từ t1 = 19 °C lên t2 = 90 °C, biết c = 460 J/kg.K.",1
+694,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 2 kg đồng từ t1 = 17 °C lên t2 = 76 °C, biết c = 380 J/kg.K.",1
+695,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 6 kg nước từ t1 = 17 °C lên t2 = 98 °C, biết c = 4200 J/kg.K.",1
+696,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 7 kg nhôm từ t1 = 27 °C lên t2 = 99 °C, biết c = 880 J/kg.K.",1
+697,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 10 kg sắt từ t1 = 16 °C lên t2 = 71 °C, biết c = 460 J/kg.K.",1
+698,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg nhôm từ t1 = 15 °C lên t2 = 72 °C, biết c = 880 J/kg.K.",1
+699,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 4 kg đồng từ t1 = 16 °C lên t2 = 98 °C, biết c = 380 J/kg.K.",1
+700,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 10 kg nhôm từ t1 = 20 °C lên t2 = 62 °C, biết c = 880 J/kg.K.",1
+701,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 4 kg đồng từ t1 = 35 °C lên t2 = 60 °C, biết c = 380 J/kg.K.",1
+702,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 2 kg nhôm từ t1 = 23 °C lên t2 = 85 °C, biết c = 880 J/kg.K.",1
+703,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 7 kg đồng từ t1 = 27 °C lên t2 = 97 °C, biết c = 380 J/kg.K.",1
+704,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 9 kg nước từ t1 = 15 °C lên t2 = 64 °C, biết c = 4200 J/kg.K.",1
+705,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 9 kg nhôm từ t1 = 24 °C lên t2 = 95 °C, biết c = 880 J/kg.K.",1
+706,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 6 kg đồng từ t1 = 23 °C lên t2 = 74 °C, biết c = 380 J/kg.K.",1
+707,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg nước từ t1 = 27 °C lên t2 = 96 °C, biết c = 4200 J/kg.K.",1
+708,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 5 kg nước từ t1 = 20 °C lên t2 = 86 °C, biết c = 4200 J/kg.K.",1
+709,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 9 kg nhôm từ t1 = 17 °C lên t2 = 92 °C, biết c = 880 J/kg.K.",1
+710,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 6 kg nhôm từ t1 = 18 °C lên t2 = 92 °C, biết c = 880 J/kg.K.",1
+711,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 9 kg sắt từ t1 = 33 °C lên t2 = 76 °C, biết c = 460 J/kg.K.",1
+712,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 7 kg đồng từ t1 = 33 °C lên t2 = 90 °C, biết c = 380 J/kg.K.",1
+713,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 6 kg nước từ t1 = 29 °C lên t2 = 89 °C, biết c = 4200 J/kg.K.",1
+714,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg nước từ t1 = 18 °C lên t2 = 76 °C, biết c = 4200 J/kg.K.",1
+715,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 7 kg đồng từ t1 = 35 °C lên t2 = 74 °C, biết c = 380 J/kg.K.",1
+716,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 6 kg nước từ t1 = 28 °C lên t2 = 82 °C, biết c = 4200 J/kg.K.",1
+717,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 5 kg nước từ t1 = 22 °C lên t2 = 78 °C, biết c = 4200 J/kg.K.",1
+718,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 7 kg đồng từ t1 = 25 °C lên t2 = 64 °C, biết c = 380 J/kg.K.",1
+719,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg đồng từ t1 = 25 °C lên t2 = 82 °C, biết c = 380 J/kg.K.",1
+720,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 10 kg đồng từ t1 = 23 °C lên t2 = 71 °C, biết c = 380 J/kg.K.",1
+721,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg đồng từ t1 = 21 °C lên t2 = 75 °C, biết c = 380 J/kg.K.",1
+722,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 5 kg đồng từ t1 = 21 °C lên t2 = 74 °C, biết c = 380 J/kg.K.",1
+723,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 4 kg đồng từ t1 = 34 °C lên t2 = 82 °C, biết c = 380 J/kg.K.",1
+724,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 2 kg sắt từ t1 = 18 °C lên t2 = 65 °C, biết c = 460 J/kg.K.",1
+725,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 10 kg nước từ t1 = 15 °C lên t2 = 94 °C, biết c = 4200 J/kg.K.",1
+726,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg nhôm từ t1 = 26 °C lên t2 = 99 °C, biết c = 880 J/kg.K.",1
+727,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 8 kg sắt từ t1 = 33 °C lên t2 = 77 °C, biết c = 460 J/kg.K.",1
+728,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 3 kg sắt từ t1 = 31 °C lên t2 = 77 °C, biết c = 460 J/kg.K.",1
+729,thermal,Thermodynamics,"Tính nhiệt lượng Q cần cung cấp để đun nóng m = 4 kg nước từ t1 = 33 °C lên t2 = 68 °C, biết c = 4200 J/kg.K.",1
+730,ohm,Electromagnetism,Đặt hiệu điện thế U = 140 V vào hai đầu điện trở R = 56 Ω. Tính cường độ dòng điện I qua điện trở.,1
+731,ohm,Electromagnetism,Đặt hiệu điện thế U = 128 V vào hai đầu điện trở R = 71 Ω. Tính cường độ dòng điện I qua điện trở.,1
+732,ohm,Electromagnetism,Đặt hiệu điện thế U = 14 V vào hai đầu điện trở R = 66 Ω. Tính cường độ dòng điện I qua điện trở.,1
+733,ohm,Electromagnetism,Đặt hiệu điện thế U = 94 V vào hai đầu điện trở R = 52 Ω. Tính cường độ dòng điện I qua điện trở.,1
+734,ohm,Electromagnetism,Đặt hiệu điện thế U = 181 V vào hai đầu điện trở R = 24 Ω. Tính cường độ dòng điện I qua điện trở.,1
+735,ohm,Electromagnetism,Đặt hiệu điện thế U = 123 V vào hai đầu điện trở R = 17 Ω. Tính cường độ dòng điện I qua điện trở.,1
+736,ohm,Electromagnetism,Đặt hiệu điện thế U = 184 V vào hai đầu điện trở R = 68 Ω. Tính cường độ dòng điện I qua điện trở.,1
+737,ohm,Electromagnetism,Đặt hiệu điện thế U = 123 V vào hai đầu điện trở R = 42 Ω. Tính cường độ dòng điện I qua điện trở.,1
+738,ohm,Electromagnetism,Đặt hiệu điện thế U = 182 V vào hai đầu điện trở R = 3 Ω. Tính cường độ dòng điện I qua điện trở.,1
+739,ohm,Electromagnetism,Đặt hiệu điện thế U = 9 V vào hai đầu điện trở R = 28 Ω. Tính cường độ dòng điện I qua điện trở.,1
+740,ohm,Electromagnetism,Đặt hiệu điện thế U = 103 V vào hai đầu điện trở R = 76 Ω. Tính cường độ dòng điện I qua điện trở.,1
+741,ohm,Electromagnetism,Đặt hiệu điện thế U = 31 V vào hai đầu điện trở R = 43 Ω. Tính cường độ dòng điện I qua điện trở.,1
+742,ohm,Electromagnetism,Đặt hiệu điện thế U = 98 V vào hai đầu điện trở R = 80 Ω. Tính cường độ dòng điện I qua điện trở.,1
+743,ohm,Electromagnetism,Đặt hiệu điện thế U = 72 V vào hai đầu điện trở R = 25 Ω. Tính cường độ dòng điện I qua điện trở.,1
+744,ohm,Electromagnetism,Đặt hiệu điện thế U = 146 V vào hai đầu điện trở R = 35 Ω. Tính cường độ dòng điện I qua điện trở.,1
+745,ohm,Electromagnetism,Đặt hiệu điện thế U = 66 V vào hai đầu điện trở R = 36 Ω. Tính cường độ dòng điện I qua điện trở.,1
+746,ohm,Electromagnetism,Đặt hiệu điện thế U = 126 V vào hai đầu điện trở R = 80 Ω. Tính cường độ dòng điện I qua điện trở.,1
+747,ohm,Electromagnetism,Đặt hiệu điện thế U = 93 V vào hai đầu điện trở R = 48 Ω. Tính cường độ dòng điện I qua điện trở.,1
+748,ohm,Electromagnetism,Đặt hiệu điện thế U = 53 V vào hai đầu điện trở R = 65 Ω. Tính cường độ dòng điện I qua điện trở.,1
+749,ohm,Electromagnetism,Đặt hiệu điện thế U = 114 V vào hai đầu điện trở R = 28 Ω. Tính cường độ dòng điện I qua điện trở.,1
+750,ohm,Electromagnetism,Đặt hiệu điện thế U = 113 V vào hai đầu điện trở R = 49 Ω. Tính cường độ dòng điện I qua điện trở.,1
+751,ohm,Electromagnetism,Đặt hiệu điện thế U = 99 V vào hai đầu điện trở R = 53 Ω. Tính cường độ dòng điện I qua điện trở.,1
+752,ohm,Electromagnetism,Đặt hiệu điện thế U = 77 V vào hai đầu điện trở R = 59 Ω. Tính cường độ dòng điện I qua điện trở.,1
+753,ohm,Electromagnetism,Đặt hiệu điện thế U = 52 V vào hai đầu điện trở R = 75 Ω. Tính cường độ dòng điện I qua điện trở.,1
+754,ohm,Electromagnetism,Đặt hiệu điện thế U = 39 V vào hai đầu điện trở R = 75 Ω. Tính cường độ dòng điện I qua điện trở.,1
+755,ohm,Electromagnetism,Đặt hiệu điện thế U = 181 V vào hai đầu điện trở R = 31 Ω. Tính cường độ dòng điện I qua điện trở.,1
+756,ohm,Electromagnetism,Đặt hiệu điện thế U = 214 V vào hai đầu điện trở R = 14 Ω. Tính cường độ dòng điện I qua điện trở.,1
+757,ohm,Electromagnetism,Đặt hiệu điện thế U = 190 V vào hai đầu điện trở R = 36 Ω. Tính cường độ dòng điện I qua điện trở.,1
+758,ohm,Electromagnetism,Đặt hiệu điện thế U = 211 V vào hai đầu điện trở R = 32 Ω. Tính cường độ dòng điện I qua điện trở.,1
+759,ohm,Electromagnetism,Đặt hiệu điện thế U = 148 V vào hai đầu điện trở R = 57 Ω. Tính cường độ dòng điện I qua điện trở.,1
+760,ohm,Electromagnetism,Đặt hiệu điện thế U = 103 V vào hai đầu điện trở R = 27 Ω. Tính cường độ dòng điện I qua điện trở.,1
+761,ohm,Electromagnetism,Đặt hiệu điện thế U = 43 V vào hai đầu điện trở R = 21 Ω. Tính cường độ dòng điện I qua điện trở.,1
+762,ohm,Electromagnetism,Đặt hiệu điện thế U = 127 V vào hai đầu điện trở R = 3 Ω. Tính cường độ dòng điện I qua điện trở.,1
+763,ohm,Electromagnetism,Đặt hiệu điện thế U = 51 V vào hai đầu điện trở R = 55 Ω. Tính cường độ dòng điện I qua điện trở.,1
+764,ohm,Electromagnetism,Đặt hiệu điện thế U = 133 V vào hai đầu điện trở R = 19 Ω. Tính cường độ dòng điện I qua điện trở.,1
+765,ohm,Electromagnetism,Đặt hiệu điện thế U = 167 V vào hai đầu điện trở R = 68 Ω. Tính cường độ dòng điện I qua điện trở.,1
+766,ohm,Electromagnetism,Đặt hiệu điện thế U = 142 V vào hai đầu điện trở R = 42 Ω. Tính cường độ dòng điện I qua điện trở.,1
+767,ohm,Electromagnetism,Đặt hiệu điện thế U = 207 V vào hai đầu điện trở R = 64 Ω. Tính cường độ dòng điện I qua điện trở.,1
+768,ohm,Electromagnetism,Đặt hiệu điện thế U = 82 V vào hai đầu điện trở R = 34 Ω. Tính cường độ dòng điện I qua điện trở.,1
+769,ohm,Electromagnetism,Đặt hiệu điện thế U = 149 V vào hai đầu điện trở R = 74 Ω. Tính cường độ dòng điện I qua điện trở.,1
+770,ohm,Electromagnetism,Đặt hiệu điện thế U = 18 V vào hai đầu điện trở R = 52 Ω. Tính cường độ dòng điện I qua điện trở.,1
+771,ohm,Electromagnetism,Đặt hiệu điện thế U = 31 V vào hai đầu điện trở R = 22 Ω. Tính cường độ dòng điện I qua điện trở.,1
+772,ohm,Electromagnetism,Đặt hiệu điện thế U = 21 V vào hai đầu điện trở R = 29 Ω. Tính cường độ dòng điện I qua điện trở.,1
+773,ohm,Electromagnetism,Đặt hiệu điện thế U = 214 V vào hai đầu điện trở R = 34 Ω. Tính cường độ dòng điện I qua điện trở.,1
+774,ohm,Electromagnetism,Đặt hiệu điện thế U = 127 V vào hai đầu điện trở R = 14 Ω. Tính cường độ dòng điện I qua điện trở.,1
+775,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 24 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+776,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 9 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+777,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 12 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+778,elec_power,Electromagnetism,Bóng đèn công suất P = 200 W thắp sáng liên tục trong thời gian t = 18 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+779,elec_power,Electromagnetism,Bóng đèn công suất P = 1000 W thắp sáng liên tục trong thời gian t = 9 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+780,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 1 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+781,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 4 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+782,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 22 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+783,elec_power,Electromagnetism,Bóng đèn công suất P = 200 W thắp sáng liên tục trong thời gian t = 7 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+784,elec_power,Electromagnetism,Bóng đèn công suất P = 200 W thắp sáng liên tục trong thời gian t = 19 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+785,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 21 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+786,elec_power,Electromagnetism,Bóng đèn công suất P = 200 W thắp sáng liên tục trong thời gian t = 6 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+787,elec_power,Electromagnetism,Bóng đèn công suất P = 1000 W thắp sáng liên tục trong thời gian t = 10 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+788,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 11 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+789,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 17 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+790,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 3 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+791,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 20 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+792,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 15 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+793,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 5 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+794,elec_power,Electromagnetism,Bóng đèn công suất P = 1000 W thắp sáng liên tục trong thời gian t = 6 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+795,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 11 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+796,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 21 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+797,elec_power,Electromagnetism,Bóng đèn công suất P = 40 W thắp sáng liên tục trong thời gian t = 6 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+798,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 8 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+799,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 10 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+800,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 9 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+801,elec_power,Electromagnetism,Bóng đèn công suất P = 200 W thắp sáng liên tục trong thời gian t = 21 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+802,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 9 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+803,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 12 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+804,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 19 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+805,elec_power,Electromagnetism,Bóng đèn công suất P = 200 W thắp sáng liên tục trong thời gian t = 15 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+806,elec_power,Electromagnetism,Bóng đèn công suất P = 100 W thắp sáng liên tục trong thời gian t = 6 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+807,elec_power,Electromagnetism,Bóng đèn công suất P = 60 W thắp sáng liên tục trong thời gian t = 1 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+808,elec_power,Electromagnetism,Bóng đèn công suất P = 60 W thắp sáng liên tục trong thời gian t = 24 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+809,elec_power,Electromagnetism,Bóng đèn công suất P = 60 W thắp sáng liên tục trong thời gian t = 22 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+810,elec_power,Electromagnetism,Bóng đèn công suất P = 75 W thắp sáng liên tục trong thời gian t = 24 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+811,elec_power,Electromagnetism,Bóng đèn công suất P = 500 W thắp sáng liên tục trong thời gian t = 24 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+812,elec_power,Electromagnetism,Bóng đèn công suất P = 40 W thắp sáng liên tục trong thời gian t = 7 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+813,elec_power,Electromagnetism,Bóng đèn công suất P = 60 W thắp sáng liên tục trong thời gian t = 13 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+814,elec_power,Electromagnetism,Bóng đèn công suất P = 40 W thắp sáng liên tục trong thời gian t = 4 giờ. Tính điện năng tiêu thụ A theo J và kWh.,2
+815,coulomb,Electromagnetism,Hai điện tích điểm q1 = 1e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.1 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+816,coulomb,Electromagnetism,Hai điện tích điểm q1 = 1e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+817,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.02 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+818,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+819,coulomb,Electromagnetism,Hai điện tích điểm q1 = 1e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.04 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+820,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = -2e-06 C đặt cách nhau r = 0.2 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+821,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.2 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+822,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = -2e-06 C đặt cách nhau r = 0.1 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+823,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.02 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+824,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = -3e-06 C đặt cách nhau r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+825,coulomb,Electromagnetism,Hai điện tích điểm q1 = 4e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.04 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+826,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+827,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -2e-06 C đặt cách nhau r = 0.1 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+828,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.2 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+829,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.1 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+830,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -3e-06 C đặt cách nhau r = 0.04 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+831,coulomb,Electromagnetism,Hai điện tích điểm q1 = 4e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+832,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.04 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+833,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = -3e-06 C đặt cách nhau r = 0.02 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+834,coulomb,Electromagnetism,Hai điện tích điểm q1 = 1e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+835,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.2 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+836,coulomb,Electromagnetism,Hai điện tích điểm q1 = 4e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.04 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+837,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -2e-06 C đặt cách nhau r = 0.02 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+838,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -3e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+839,coulomb,Electromagnetism,Hai điện tích điểm q1 = 4e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+840,coulomb,Electromagnetism,Hai điện tích điểm q1 = 4e-06 C và q2 = -2e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+841,coulomb,Electromagnetism,Hai điện tích điểm q1 = 4e-06 C và q2 = 2e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+842,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+843,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.1 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+844,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = -3e-06 C đặt cách nhau r = 0.2 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+845,coulomb,Electromagnetism,Hai điện tích điểm q1 = 5e-06 C và q2 = -3e-06 C đặt cách nhau r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+846,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.03 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+847,coulomb,Electromagnetism,Hai điện tích điểm q1 = 3e-06 C và q2 = 4e-06 C đặt cách nhau r = 0.05 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+848,coulomb,Electromagnetism,Hai điện tích điểm q1 = 2e-06 C và q2 = -1e-06 C đặt cách nhau r = 0.1 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+849,coulomb,Electromagnetism,Hai điện tích điểm q1 = 1e-06 C và q2 = -2e-06 C đặt cách nhau r = 0.02 m trong chân không. Tính độ lớn lực Cu-lông F.,2
+850,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 22 cm. Xác định vị trí d' của ảnh.",3
+851,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 50 cm. Xác định vị trí d' của ảnh.",3
+852,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 51 cm. Xác định vị trí d' của ảnh.",3
+853,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 19 cm. Xác định vị trí d' của ảnh.",3
+854,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 14 cm. Xác định vị trí d' của ảnh.",3
+855,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 36 cm. Xác định vị trí d' của ảnh.",3
+856,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 26 cm. Xác định vị trí d' của ảnh.",3
+857,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 24 cm. Xác định vị trí d' của ảnh.",3
+858,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 28 cm. Xác định vị trí d' của ảnh.",3
+859,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 49 cm. Xác định vị trí d' của ảnh.",3
+860,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 26 cm. Xác định vị trí d' của ảnh.",3
+861,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 58 cm. Xác định vị trí d' của ảnh.",3
+862,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 8 cm. Xác định vị trí d' của ảnh.",3
+863,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 54 cm. Xác định vị trí d' của ảnh.",3
+864,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 9 cm. Xác định vị trí d' của ảnh.",3
+865,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 30 cm, cách thấu kính d = 35 cm. Xác định vị trí d' của ảnh.",3
+866,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 17 cm. Xác định vị trí d' của ảnh.",3
+867,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 57 cm. Xác định vị trí d' của ảnh.",3
+868,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 58 cm. Xác định vị trí d' của ảnh.",3
+869,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 12 cm. Xác định vị trí d' của ảnh.",3
+870,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 29 cm. Xác định vị trí d' của ảnh.",3
+871,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 20 cm. Xác định vị trí d' của ảnh.",3
+872,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 17 cm. Xác định vị trí d' của ảnh.",3
+873,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 52 cm. Xác định vị trí d' của ảnh.",3
+874,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 38 cm. Xác định vị trí d' của ảnh.",3
+875,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 35 cm. Xác định vị trí d' của ảnh.",3
+876,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 48 cm. Xác định vị trí d' của ảnh.",3
+877,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 25 cm. Xác định vị trí d' của ảnh.",3
+878,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 45 cm. Xác định vị trí d' của ảnh.",3
+879,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 52 cm. Xác định vị trí d' của ảnh.",3
+880,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 30 cm, cách thấu kính d = 38 cm. Xác định vị trí d' của ảnh.",3
+881,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 21 cm. Xác định vị trí d' của ảnh.",3
+882,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 45 cm. Xác định vị trí d' của ảnh.",3
+883,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 17 cm. Xác định vị trí d' của ảnh.",3
+884,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 8 cm. Xác định vị trí d' của ảnh.",3
+885,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 15 cm, cách thấu kính d = 12 cm. Xác định vị trí d' của ảnh.",3
+886,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 25 cm, cách thấu kính d = 30 cm. Xác định vị trí d' của ảnh.",3
+887,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 15 cm. Xác định vị trí d' của ảnh.",3
+888,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 20 cm, cách thấu kính d = 42 cm. Xác định vị trí d' của ảnh.",3
+889,lens,Optics,"Vật sáng đặt trước thấu kính hội tụ có tiêu cự f = 10 cm, cách thấu kính d = 30 cm. Xác định vị trí d' của ảnh.",3
+890,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.41 với góc tới i = 20°. Tính góc khúc xạ r.,2
+891,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.33 với góc tới i = 60°. Tính góc khúc xạ r.,2
+892,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.41 với góc tới i = 45°. Tính góc khúc xạ r.,2
+893,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.33 với góc tới i = 30°. Tính góc khúc xạ r.,2
+894,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.41 với góc tới i = 60°. Tính góc khúc xạ r.,2
+895,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.33 với góc tới i = 45°. Tính góc khúc xạ r.,2
+896,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.33 với góc tới i = 20°. Tính góc khúc xạ r.,2
+897,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.5 với góc tới i = 30°. Tính góc khúc xạ r.,2
+898,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.6 với góc tới i = 30°. Tính góc khúc xạ r.,2
+899,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.5 với góc tới i = 45°. Tính góc khúc xạ r.,2
+900,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.5 với góc tới i = 20°. Tính góc khúc xạ r.,2
+901,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.6 với góc tới i = 60°. Tính góc khúc xạ r.,2
+902,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.5 với góc tới i = 60°. Tính góc khúc xạ r.,2
+903,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.41 với góc tới i = 30°. Tính góc khúc xạ r.,2
+904,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.6 với góc tới i = 45°. Tính góc khúc xạ r.,2
+905,refraction,Optics,Chiếu tia sáng từ không khí n1 = 1 vào môi trường chiết suất n2 = 1.6 với góc tới i = 20°. Tính góc khúc xạ r.,2
+906,chem_mol,GeneralChem,Tính số mol của 5.4 gam Al biết khối lượng mol M = 27 g/mol.,1
+907,chem_mol,GeneralChem,Tính khối lượng của 0.2 mol Fe biết khối lượng mol của sắt M = 56 g/mol.,1
+908,chem_mol,GeneralChem,Tính số mol của 8 gam NaOH biết khối lượng mol M = 40 g/mol.,1
+909,chem_mol,GeneralChem,Tính số mol của 10 gam CaCO3 biết M = 100 g/mol.,1
+910,chem_gas,GeneralChem,Tính thể tích của 0.25 mol khí H2 ở điều kiện tiêu chuẩn (đktc).,1
+911,chem_gas,GeneralChem,Tính số mol của 4.48 lít khí CO2 ở điều kiện tiêu chuẩn (đktc).,1
+912,chem_gas,GeneralChem,Tính thể tích của 0.5 mol khí O2 ở điều kiện tiêu chuẩn đktc.,1
+913,chem_conc_mol,SolutionChem,Hòa tan 0.2 mol NaCl vào nước để được 500 ml dung dịch. Tính nồng độ mol CM.,2
+914,chem_conc_mol,SolutionChem,Tính số mol chất tan HCl có trong 200 ml dung dịch HCl nồng độ 1M.,1
+915,chem_conc_mol,SolutionChem,Hòa tan 0.4 mol NaOH vào nước thu được 2 lít dung dịch. Tính nồng độ mol CM.,2
+916,chem_conc_pct,SolutionChem,Hòa tan 20 gam đường vào 180 gam nước. Tính nồng độ phần trăm C% của dung dịch.,1
+917,chem_conc_pct,SolutionChem,Tính khối lượng chất tan NaOH có trong 200 gam dung dịch NaOH nồng độ 10%.,1
+918,chem_ph,SolutionChem,Tính pH của dung dịch axit có nồng độ ion [H+] = 0.001 M.,2
+919,chem_ph,SolutionChem,Tính pH của dung dịch bazơ có nồng độ ion [OH-] = 10^-4 M.,2
+920,chem_ph,SolutionChem,Tính pH của dung dịch axit HCl có nồng độ [H+] = 0.01 M.,1
+921,chem_metal_acid,InorganicChem,Cho 5.4 gam Al tác dụng hoàn toàn với dung dịch HCl dư. Tính thể tích khí H2 đktc.,2
+922,chem_metal_acid,InorganicChem,Cho 5.6 gam Fe tác dụng với dung dịch HCl dư. Tính thể tích khí H2 thu được ở đktc.,2
+923,chem_metal_acid,InorganicChem,Cho 6.5 gam Zn tác dụng với dung dịch HCl dư. Tính thể tích khí H2 sinh ra ở đktc.,2
+924,chem_mass_cons,GeneralChem,Đốt cháy 2.4 gam Mg trong khí oxi thu được 4.0 gam MgO. Tính khối lượng O2 phản ứng.,1
+925,chem_yield,InorganicChem,Lý thuyết thu được 10 gam sản phẩm nhưng thực tế chỉ thu được 8 gam. Tính hiệu suất H%.,2
+926,chem_precip,InorganicChem,Cho 0.1 mol BaCl2 tác dụng vừa đủ với H2SO4. Tính khối lượng kết tủa BaSO4 biết M = 233.,2
+927,chem_elem_pct,GeneralChem,Tính phần trăm khối lượng của Cu trong hợp chất CuO biết Cu = 64 và O = 16.,2
+928,chem_molar_mass,GeneralChem,Biết 0.15 mol một kim loại có khối lượng là 8.4 gam. Xác định khối lượng mol M.,1
+929,chem_eq,InorganicChem,Cân bằng phương trình hóa học: Al + O2 -> Al2O3,2
